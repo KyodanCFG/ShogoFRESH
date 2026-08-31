@@ -52,9 +52,9 @@ The parts of ShogoFRESH that are **entirely original work**:
 | `Tools/` | the checks that run before every release |
 
 Building things for Shogo — maps, textures, mods, translations — has its own
-home: the **Shogo Creative Kit**, released separately. It carries the editor
-configuration, the format documentation, the tools, worked examples and
-tutorials.
+home: **[ShogoMAKE](https://github.com/KyodanCFG/ShogoMAKE)**. It carries the
+editor configuration, the format documentation, the tools, worked examples
+and tutorials.
 | `CHANGELOG.md` | release history; recent releases carry their notes on the [Releases](../../releases) page |
 
 ## Building the launcher
