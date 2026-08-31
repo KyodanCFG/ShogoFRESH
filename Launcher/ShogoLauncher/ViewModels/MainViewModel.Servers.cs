@@ -333,6 +333,11 @@ public partial class MainViewModel
         Status = $"Removed {label} from the list.";
     }
 
+    // The join-anyway arm: which dead-probed server the player was warned
+    // about, and when - a second press inside the window overrides the probe.
+    private string? _sJoinAnywayAddress;
+    private DateTime _tJoinAnywayAt;
+
     public async Task JoinSelectedAsync()
     {
         if (!GameFound || SelectedServer is null) return;
@@ -358,9 +363,48 @@ public partial class MainViewModel
 
         if (probe.PingMs < 0)
         {
-            Warn($"{target.DisplayAddress} did not answer - not launching. " +
-                 "The server may be down, or a firewall is eating the query.");
-            return;
+            // A dead probe is NOT a dead server. The probe speaks GameSpy v1
+            // over UDP; the game joins over TCP; and the flagship community
+            // servers (NetworkDLS, 104.58.181.127) forward ONLY the game
+            // port - so they are joinable and permanently query-deaf, which
+            // was measured 2026-07-26 (Launcher/README.md) and then proven
+            // in play 2026-08-30: three successful connects the same evening
+            // every query verb timed out. shogoservers.com knows they are
+            // alive because the server PUSHES heartbeats (srv_send.txt);
+            // nobody queries anything.
+            //
+            // So the master listing is a VOUCH: a row with Source == Master
+            // was on the site during THIS refresh, meaning a heartbeat
+            // arrived minutes ago, which is better liveness evidence than
+            // our probe can ever collect against a firewalled server. Join
+            // straight through. (Cache rows deliberately do not count - that
+            // is last session's site, and the heartbeat may be days stale.)
+
+            if (target.Source == ServerSource.Master)
+            {
+                Status = $"Joining {target.DisplayAddress} (master-listed, no query answer)...";
+            }
+            // SOFT gate for everything unvouched - manual entries, favorites,
+            // seeds, cache. First press warns; a second press on the SAME
+            // server inside ten seconds says "you know better than the probe"
+            // and launches. The ten-second engine freeze it risks (JoinSession
+            // blocks, 300ms resends, 10s give-up) is the informed player's to
+            // spend.
+            else if (_sJoinAnywayAddress == target.DisplayAddress &&
+                (DateTime.UtcNow - _tJoinAnywayAt).TotalSeconds < 10)
+            {
+                Status = $"Joining {target.DisplayAddress} without an answer...";
+            }
+            else
+            {
+                _sJoinAnywayAddress = target.DisplayAddress;
+                _tJoinAnywayAt = DateTime.UtcNow;
+
+                Warn($"{target.DisplayAddress} did not answer - it may be down, " +
+                     "or a stock server not answering queries. Join again within " +
+                     "10s to try anyway (the game freezes ~10s if nothing is there).");
+                return;
+            }
         }
 
         var launcher = new GameLaunchService(GameDir!)
