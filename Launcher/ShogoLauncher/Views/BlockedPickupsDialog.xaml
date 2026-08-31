@@ -1,0 +1,55 @@
+<Window x:Class="ShogoLauncher.Views.BlockedPickupsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Blocked Pickups" Height="640" Width="460"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="#FF1B1D24">
+    <DockPanel Margin="14">
+        <TextBlock DockPanel.Dock="Top" Foreground="#FF9A9891" TextWrapping="Wrap" Margin="0,0,0,4"
+                   Text="Ticked pickups never spawn on this server. Each blocked pickup is replaced with a random legal one of the same kind and tier, so the level keeps the same number of pickups. Players already holding a blocked weapon keep it."/>
+
+        <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+            <TextBlock x:Name="WarningText" Foreground="#FFE0532F" TextWrapping="Wrap" Margin="0,0,0,8"
+                       Visibility="Collapsed"/>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                    <Button Content="Block all" Width="80" Click="BlockAll_Click"/>
+                    <Button Content="Clear" Width="80" Margin="8,0,0,0" Click="Clear_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="OK" Width="80" Margin="0,0,8,0" Click="Ok_Click"/>
+                    <Button Content="Cancel" Width="80" Click="Cancel_Click"/>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="PickupList">
+                <ItemsControl.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Foreground="#FFE0532F" FontWeight="Bold"
+                                           Margin="0,12,0,4"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ItemsControl.GroupStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding Blocked}"
+                                      VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Note}" Foreground="#FF9A9891"
+                                       VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

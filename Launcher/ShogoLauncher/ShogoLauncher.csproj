@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ShogoLauncher</RootNamespace>
+    <AssemblyName>ShogoFRESH</AssemblyName>
+    <Version>0.10.85</Version>
+    <Description>Modern launcher for Shogo: Mobile Armor Division</Description>
+
+    <!-- Regenerate with Tools/makeicon.py, which is also where the design and
+         the reasoning behind it live. Original artwork: none of Monolith's
+         marks or assets are used. -->
+    <ApplicationIcon>ShogoFRESH.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Also as a Resource, so the WPF window can show it as well as the
+         taskbar/Explorer entry that ApplicationIcon covers. -->
+    <Resource Include="ShogoFRESH.ico"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Shipped defaults (keybind layouts incl. localized variants, curated
+         defkeybd.cfg, recommended client/server settings). Copied beside the
+         exe; the publish/zip pipeline picks them up automatically. -->
+    <None Include="Defaults\**" CopyToOutputDirectory="PreserveNewest" TargetPath="Defaults\%(RecursiveDir)%(Filename)%(Extension)"/>
+  </ItemGroup>
+
+</Project>

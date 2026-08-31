@@ -1,0 +1,16 @@
+# Build output
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Redistributable payloads - third-party binaries, shipped in releases only
+Launcher/Redist/
+
+# Python
+__pycache__/
+*.pyc
+
+# Maintainer-local leak patterns - the needles must never live in the repo
+Tools/leakcheck.private.re

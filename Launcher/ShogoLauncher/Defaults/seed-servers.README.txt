@@ -1,0 +1,52 @@
+seed-servers.json - bootstrap addresses for the server browser
+==============================================================
+
+Why this exists
+---------------
+Shogo has already outlived one master server (shogo-mad.com) and currently
+depends on a second (shogoservers.com). If discovery goes through one site,
+then the day that site stops answering, every server still running becomes
+unfindable - even though nothing is actually wrong with them.
+
+So the launcher does not have a master server. It has SOURCES, and it merges
+all of them on every refresh: shogoservers.com, this seed file, an optional
+remote seed list, everything it has seen before, and anything you saved or
+typed in yourself. Any one of them going away costs you that one source.
+
+This file is the part that survives a completely cold start - a fresh install,
+empty cache, master site gone. It only has to contain ONE reachable address
+for the browser to have somewhere to begin.
+
+Format
+------
+A JSON array. Address and Port are required, Name is optional and is only
+used until the server answers for itself.
+
+[
+  { "Address": "203.0.113.10", "Port": 27888, "Name": "Example DM server" },
+  { "Address": "shogo.example.org", "Port": 27888 }
+]
+
+Hostnames work as well as IP addresses, and are the better choice if you have
+one: a DNS name can be repointed at new hardware without anybody needing a new
+launcher build.
+
+Shipped empty
+-------------
+It ships as an empty array on purpose. Inventing plausible-looking addresses
+would mean every player's first refresh spends UDP timeouts on servers that
+never existed. Add real ones as the community settles on them.
+
+Remote seed list
+----------------
+Settings has a "Seed list URL" that points at a JSON file in this same format,
+merged with this one. That is the way to publish new entry points without
+shipping a launcher release - and it can be repointed if whoever hosts it goes
+away, which is the entire reason discovery has more than one source.
+
+Peer exchange
+-------------
+Each ShogoFRESH dedicated server answers with the peers IT knows about, and
+the browser asks every server that responded after each refresh - so reaching
+any one live server discovers the whole network. This file is only needed for
+first contact.

@@ -1,0 +1,1070 @@
+﻿<Window x:Class="ShogoLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ShogoFRESH" Height="640" Width="960"
+        Icon="ShogoFRESH.ico"
+        Background="{StaticResource BgBrush}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+    <DockPanel>
+        <!-- Update banner: only present when there is genuinely a newer
+             release. Docked above the tabs so it is visible from any tab,
+             and dismissible, because a nag that cannot be closed is worse
+             than no notice at all. -->
+        <Border DockPanel.Dock="Top" Background="{StaticResource PanelBrush}"
+                BorderBrush="{StaticResource AccentBrush}" BorderThickness="0,0,0,2"
+                Padding="12,8" Margin="4,4,4,0"
+                Visibility="{Binding UpdateAvailable, Converter={StaticResource BoolToVis}}">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="Dismiss" Width="80" Margin="8,0,0,0"
+                        Click="DismissUpdate_Click"/>
+                <Button DockPanel.Dock="Right" Content="View release" Width="110"
+                        Style="{StaticResource AccentButton}" Click="OpenUpdate_Click"/>
+                <TextBlock Text="{Binding UpdateBannerText}" VerticalAlignment="Center"
+                           Foreground="{StaticResource TextBrush}" TextWrapping="Wrap"/>
+            </DockPanel>
+        </Border>
+
+        <!-- Status bar -->
+        <Border DockPanel.Dock="Bottom" Background="{StaticResource PanelBrush}" Padding="8,4">
+            <TextBlock Text="{Binding Status}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="{StaticResource DimTextBrush}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding StatusIsError}" Value="True">
+                                <Setter Property="Foreground" Value="#FFE06A6A"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Border>
+
+        <TabControl x:Name="MainTabs" Background="{StaticResource BgBrush}" BorderThickness="0" Margin="4"
+                    SelectionChanged="MainTabs_SelectionChanged">
+
+            <!-- ==================== PLAY ==================== -->
+            <TabItem Header="Play">
+                <DockPanel Margin="8">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Content="Refresh" Width="90" Margin="0,0,8,0" Click="Refresh_Click"/>
+                        <Button Content="Join Server" Width="110" Margin="0,0,8,0" Click="Join_Click"/>
+                        <Button Content="Launch Campaign" Width="120" Margin="0,0,24,0" Click="LaunchOnly_Click"
+                                ToolTip="Starts the game at its main menu (campaign and multiplayer both live there)."/>
+                        <TextBlock Text="Server IP:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        <TextBox x:Name="AddAddressBox" Width="150" VerticalAlignment="Center"
+                                 ToolTip="Hostname or IP. A pasted ip:port still works - the port is split out into the field beside this one."/>
+                        <TextBlock Text="Port:" VerticalAlignment="Center" Margin="10,0,6,0"/>
+                        <TextBox x:Name="AddPortBox" Text="27888" Width="60" VerticalAlignment="Center"
+                                 ToolTip="Shogo's default is 27888."/>
+                        <Button Content="Add Server" Width="90" Margin="6,0,0,0" Click="AddServer_Click"
+                                ToolTip="Adds the address to the list (persists). Pin it with the Fav checkbox."/>
+                        <Button Content="Remove" Width="80" Margin="6,0,0,0" Click="RemoveServer_Click"
+                                ToolTip="Removes the selected server. Only works on servers you added by hand - master-list entries come back on the next refresh."/>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="Show:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <ComboBox ItemsSource="{Binding BotFilterLabels}" SelectedItem="{Binding SelectedBotFilter}"
+                                  Width="200" VerticalAlignment="Center"
+                                  ToolTip="Bot-filled servers look busy. Use this to find games with real people in them, or to find a populated server to warm up on."/>
+                    </StackPanel>
+
+                    <DataGrid x:Name="ServerGrid" ItemsSource="{Binding ServersView}" SelectedItem="{Binding SelectedServer}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserSortColumns="True" Sorting="ServerGrid_Sorting"
+                              MouseDoubleClick="ServerGrid_DoubleClick">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Server" Binding="{Binding Name}" Width="*" SortMemberPath="Name"/>
+                            <DataGridTextColumn Header="Address" Binding="{Binding DisplayAddress}" Width="160" SortMemberPath="DisplayAddress"/>
+                            <DataGridTextColumn Header="Map" Binding="{Binding Map}" Width="120" SortMemberPath="Map"/>
+                            <DataGridTextColumn Header="Type" Binding="{Binding GameType}" Width="90" SortMemberPath="GameType"/>
+                            <!-- Everyone in the game, bot count in brackets when the server
+                                 reports one. Sorts on the total, not the human count. -->
+                            <DataGridTextColumn Header="Players" Binding="{Binding PlayerSummary}" Width="110" SortMemberPath="TotalPlayers"/>
+                            <DataGridTextColumn Header="Ping" Binding="{Binding PingMs}" Width="60" SortMemberPath="PingMs"/>
+                            <!-- Where the address came from. Discovery is a union of
+                                 independent sources so no single one is load bearing;
+                                 this is what makes that visible. -->
+                            <DataGridTextColumn Header="Source" Binding="{Binding SourceLabel}" Width="70" SortMemberPath="Source"/>
+                            <DataGridTemplateColumn Header="Fav" Width="40" SortMemberPath="IsFavorite">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <!-- Click (user action only), NOT Checked/Unchecked: those also fire
+                                             when bindings re-apply during row regeneration, and saving +
+                                             refreshing from them caused an event storm (UI lag, rows vanishing). -->
+                                        <CheckBox IsChecked="{Binding IsFavorite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  HorizontalAlignment="Center"
+                                                  Click="Favorite_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <!-- ==================== HOST ==================== -->
+            <TabItem Header="Host">
+                <DockPanel>
+                <Border DockPanel.Dock="Bottom" Background="{StaticResource PanelBrush}" Padding="12,8">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="{Binding HostStartButtonText}" Width="120" Margin="0,0,8,0" Click="StartHost_Click"
+                                Style="{StaticResource AccentButton}"
+                                ToolTip="Writes ShogoSrv.cfg, then starts the server: FreshSrv.exe -config -go for a dedicated server, or the game itself already hosting for a listen server. Forward the UDP port on your router to be reachable from the internet."/>
+                        <Button Width="130" Click="SaveHost_Click">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="Content" Value="Save Settings"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HostDirty}" Value="True">
+                                            <Setter Property="Content" Value="Save Settings *"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <TextBlock Text="Unsaved changes" VerticalAlignment="Center" Margin="12,0,0,0"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Visibility="{Binding HostDirty, Converter={StaticResource BoolToVis}}"/>
+                    </StackPanel>
+                </Border>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="16" MaxWidth="680" HorizontalAlignment="Left">
+                    <GroupBox Header="Server type" Padding="10" Margin="0,0,0,10">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton Content="Dedicated (FreshSrv.exe)" IsChecked="{Binding HostIsDedicated}"
+                                             GroupName="HostKind" VerticalAlignment="Center"
+                                             ToolTip="A separate server process, no game window. Runs unattended, registers with the server browser, and keeps going after you quit playing. Join your own server from the Play tab."/>
+                                <RadioButton Content="Listen (host while playing)" IsChecked="{Binding HostIsListen}"
+                                             GroupName="HostKind" VerticalAlignment="Center" Margin="24,0,0,0"
+                                             ToolTip="The game itself hosts: Play + Host starts Shogo already running this server, and you play in it. The server lives and dies with your game - quitting ends the match for everyone. Join is by IP address only; a listen server is not announced to the server browser."/>
+                            </StackPanel>
+                            <TextBlock TextWrapping="Wrap" Foreground="{StaticResource DimTextBrush}" Margin="0,6,0,0"
+                                       Visibility="{Binding HostIsListen, Converter={StaticResource BoolToVis}}"
+                                       Text="Every gameplay setting below applies to a listen server too - same config, same rules, including the remote console password: set one and you (or a trusted player) can Mute, Kick and change any server setting from the in-game console with the Rcon variable. Greyed-out fields are the exceptions: browser registration and peer exchange live in the dedicated server process, so a listen game is joined by IP. Archives ticked in 'Server archives' are switched on before launch if they are not already - the game and the server are one process, so they load together."/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Server" Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Server name:"/>
+                            <TextBox Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding HostName}" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Column="3" Content="List publicly" IsChecked="{Binding HostListPublicly}"
+                                      IsEnabled="{Binding HostIsDedicated}"
+                                      VerticalAlignment="Center" HorizontalAlignment="Left" Margin="12,0,0,0"
+                                      ToolTip="Announce this server to the community browser (ServerReg). Uncheck for LAN or private games - people can still join by typing your IP. Dedicated only: the announcer lives in FreshSrv.exe, so a listen server is join-by-IP regardless."/>
+                            <Label Grid.Row="1" Content="Port (UDP):"/>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <TextBox Text="{Binding HostPort}" VerticalAlignment="Center" Width="80"/>
+                                <Button Content="Allow in Firewall" Width="110" Margin="8,0,0,0" Click="FirewallRule_Click"
+                                        ToolTip="Adds an inbound Windows Firewall rule for this UDP port and the query port (port + 149). UAC prompt; re-running updates the rule."/>
+                            </StackPanel>
+                            <Label Grid.Row="2" Content="Max players:"/>
+                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                <TextBox Text="{Binding HostMaxPlayers}" VerticalAlignment="Center" Width="60"
+                                         ToolTip="2-128 (game-code cap; the community runs up to 120)."/>
+                            </StackPanel>
+                            <Label Grid.Row="2" Grid.Column="2" Content="Bot fill:"/>
+                            <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Horizontal">
+                                <TextBox Text="{Binding HostBotFill}" VerticalAlignment="Center" Width="60"
+                                         ToolTip="Keep this many bots in the game so the server is never empty. They hot-seat: a bot stands down whenever a real player needs the slot, and comes back when one leaves. 0 turns it off and leaves BotAdd/BotRemove to you. Max 48."/>
+                            </StackPanel>
+                            <Label Grid.Row="3" Content="Remote console:"/>
+                            <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal">
+                                <!-- Two controls, one value. WPF's PasswordBox cannot be data-bound
+                                     (its Password is deliberately not a DependencyProperty), so the
+                                     masked and revealed states are separate controls kept in step in
+                                     code-behind. Masked is the one that starts visible. -->
+                                <PasswordBox x:Name="RconPasswordMasked" VerticalAlignment="Center" Width="180"
+                                             PasswordChanged="RconPasswordMasked_Changed"
+                                             ToolTip="Password for admin commands. LEAVE BLANK unless you need it: blank switches remote console off in the server entirely, so an rcon attempt gets no answer at all. With a password set, any ShogoFRESH player in the match can admin with the in-game Rcon variable (Mute, Kick, any server setting) - including the host of a listen server, which is how a listen host mutes. Dedicated servers also answer rcon on the query port for external tools. The password travels in the clear either way, so use one you do not use anywhere else."/>
+                                <TextBox x:Name="RconPasswordPlain" Visibility="Collapsed"
+                                         Text="{Binding HostRconPassword, UpdateSourceTrigger=PropertyChanged}"
+                                         VerticalAlignment="Center" Width="180"
+                                         ToolTip="Password for admin commands. LEAVE BLANK unless you need it: blank switches remote console off in the server entirely, so an rcon attempt gets no answer at all. With a password set, any ShogoFRESH player in the match can admin with the in-game Rcon variable (Mute, Kick, any server setting) - including the host of a listen server, which is how a listen host mutes. Dedicated servers also answer rcon on the query port for external tools. The password travels in the clear either way, so use one you do not use anywhere else."/>
+                                <Button x:Name="RconRevealButton" Content="Show" Width="52" Margin="6,0,0,0"
+                                        Click="ToggleRconPassword_Click"
+                                        ToolTip="Show the password in clear text so you can check what you typed. It is stored and sent in the clear regardless - this only decides whether it is on your screen."/>
+                                <TextBlock Text="blank = off; sent in plaintext, so use a throwaway password"
+                                           Foreground="{StaticResource DimTextBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="4" Grid.ColumnSpan="4" Orientation="Horizontal">
+                                <CheckBox Content="Require ShogoFRESH clients" IsChecked="{Binding HostRequireFresh}"
+                                          VerticalAlignment="Center"
+                                          ToolTip="Refuse players who are not running ShogoFRESH. This is the only reliable way to make Quick turn and 1st person view only bind EVERYONE - a stock client has never heard of those rules and keeps both. It is also the only setting here that turns people away, so leave it off unless you are running organised matches. Players are kicked about 20 seconds after joining, with a message saying why."/>
+                                <TextBlock Text="off = anyone can join (recommended)"
+                                           Foreground="{StaticResource DimTextBrush}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Two rows, aligned as a grid rather than one long horizontal
+                         run: four labelled fields on one line ran past the width of
+                         the tab and the last of them clipped. The two ROUND limits
+                         (what ends a match) are on the top row and the two DURATIONS
+                         (what happens around it) below, which is also the more
+                         readable grouping. Column 1 and 3 are fixed so both rows'
+                         boxes line up under each other. -->
+                    <GroupBox Header="Game limits" Padding="10" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="Auto" MinWidth="150"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <CheckBox Grid.Row="0" Grid.Column="0" Content="Frag limit:"
+                                      IsChecked="{Binding HostFragLimitOn}" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding HostFragLimit}"
+                                     Width="50" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Center"/>
+
+                            <CheckBox Grid.Row="0" Grid.Column="2" Content="Time limit (min):"
+                                      IsChecked="{Binding HostTimeLimitOn}" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding HostTimeLimit}"
+                                     Width="50" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Center"/>
+
+                            <CheckBox Grid.Row="1" Grid.Column="0" Content="Intermission (sec):"
+                                      IsChecked="{Binding HostIntermissionOn}" VerticalAlignment="Center" Margin="0,8,0,0"
+                                      ToolTip="The scoreboard hold between the match ending and the next map loading. Unticking sets it to 0, which is the stock 1998 behaviour: the map switches the instant the last frag lands."/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding HostIntermission}"
+                                     Width="50" HorizontalAlignment="Left" Margin="6,8,0,0" VerticalAlignment="Center"
+                                     ToolTip="How long the end-of-match scoreboard holds before the next map loads. The next map is announced on it and chat stays live. 0 = the stock instant switch; capped at 60 - beyond that it is dead air."/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="Bodies linger (sec):"
+                                       VerticalAlignment="Center" Margin="0,8,0,0"/>
+                            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding HostBodyLifetime}"
+                                     Width="50" HorizontalAlignment="Left" Margin="6,8,0,0" VerticalAlignment="Center"
+                                     ToolTip="How long a dead body lies on the map before it is removed. 120 is the ShogoFRESH default (Monolith's own original value; their 2.2 patch cut it to 10 for 1998 hardware). 0 removes bodies instantly; capped at 300. Takes effect live, no map change needed."/>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Game variables" Padding="10" Margin="0,10,0,0">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="Game mode:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <ComboBox ItemsSource="{Binding GameModes}" SelectedItem="{Binding HostGameMode}"
+                                          Width="190" VerticalAlignment="Center"
+                                          ToolTip="Deathmatch is the normal game. TOWs Out turns every weapon pickup into a rocket launcher and spawns everyone with one. Squishie lets players type !squish in chat to respawn on foot at a fifth scale on MCA maps, and !mech to climb back in - it travels over stock wires, so a 1998 client can play it. Squishie War pits a few mechs against everyone else on foot: squishies spawn with the full on-foot arsenal, a mech kill pays 10 frags, and !mech queues for a cockpit (MCA maps only - other maps fall back to deathmatch). Squad Deathmatch makes your PLAYER COLOUR your team - pick the same colour as your friends and you cannot hurt each other, the board adds up by squad, and the map ends when a squad reaches the frag limit; a room where everyone picked the same colour plays as deathmatch until somebody changes. The two reserved entries are mode numbers held for Duel and Headcount and behave as deathmatch. A rotation entry written 'world:mode' overrides this for that map, which is what makes one setting cover an all-arena server, a mixed rotation and a one-off."/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="Ruleset:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <ComboBox ItemsSource="{Binding Rulesets}" SelectedItem="{Binding HostRuleset}"
+                                          Width="190" VerticalAlignment="Center"
+                                          ToolTip="FRESH is the rebalance: ammo economy, magazine sizes, fire rates, and the weapon reworks built on top of them. Classic keeps the 1998 weapon balance exactly as shipped, for anyone who wants the original numbers. Everything else the mod adds - randomised pickups, blocklists, the HUD, the reload key, anti-cheat - applies under both, so this dial is about weapon feel and nothing else."/>
+                            </StackPanel>
+                            <!-- A Grid rather than a UniformGrid so the one row that is not a
+                                 checkbox can have the width it needs. In four equal columns the
+                                 infinite ammo dropdown got a quarter of the group and clipped its
+                                 own options; here it takes the whole of the second row after Quick
+                                 turn, and Critical hits moves up into the slot it vacated. -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <CheckBox Grid.Row="0" Grid.Column="0" Content="Grappling beam" IsChecked="{Binding HostTractorBeam}" Margin="0,3"
+                                          ToolTip="The tractor beam. Community wisdom: leave on, or 'people will hate your server'."/>
+                                <CheckBox Grid.Row="0" Grid.Column="1" Content="Ramming damage" IsChecked="{Binding HostRamming}" Margin="0,3"
+                                          ToolTip="Lets a mech in vehicle mode crush what it runs into. Works by scaling the mech's mass, so the victim is hurt by the collision itself - the same code path as fall damage below."/>
+                                <CheckBox Grid.Row="0" Grid.Column="2" Content="1st person view only" IsChecked="{Binding HostFirstPersonOnly}" Margin="0,3"
+                                          ToolTip="Forbids the chase camera, including the automatic switch when transforming to vehicle mode. ShogoFRESH clients simply cannot leave first person here; a stock client can, but firing from chase view is refused and it is told why. Turn the FirstPersonCheck server var off to go back to letting stock clients shoot from chase."/>
+                                <CheckBox Grid.Row="0" Grid.Column="3" Content="Critical hits" IsChecked="{Binding HostCriticalHits}" Margin="0,3"
+                                          ToolTip="Default off. A 5% roll that doubles a hit, with no tell and nothing either player can do about it - it decides duels invisibly, which is a poor fit for a competitive match. It was always live in deathmatch before ShogoFRESH turned it off."/>
+
+                                <CheckBox Grid.Row="1" Grid.Column="0" Content="Quick turn" IsChecked="{Binding HostQuickTurn}" Margin="0,3"
+                                          ToolTip="Default off. Writes the QuickTurn server var. ShogoFRESH clients honor it; the turn executes client-side, so a stock client keeps it. Two levers close that gap: Require ShogoFRESH clients (reliable, but turns people away) and the QuickTurnCheck server var, which spots the turn in the rotation stream and takes away the shot that followed it - off by default, and it reports what it WOULD have done under WeaponDebug 1 so you can watch it first."/>
+                            </Grid>
+                            <Grid Margin="0,6,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="Run speed:"/>
+                                <TextBox Grid.Column="1" Text="{Binding HostRunSpeed, StringFormat=F2}" Width="60" VerticalAlignment="Center"
+                                         ToolTip="Multiplier, default 1.3. Above 1.5 'people start to gib on walls' (Monolith's words)."/>
+                                <Label Grid.Column="2" Content="Missile speed:"/>
+                                <TextBox Grid.Column="3" Text="{Binding HostMissileSpeed, StringFormat=F2}" Width="60" VerticalAlignment="Center"
+                                         ToolTip="TOW missile speed multiplier (1.0 = normal). Slower missiles are easier to dodge and to see coming."/>
+                                <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" Margin="16,0,0,0">
+                                    <TextBlock Text="Night color:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                    <Border Width="26" Height="20" CornerRadius="3" VerticalAlignment="Center"
+                                            BorderBrush="{StaticResource BorderBrushDim}" BorderThickness="1">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{Binding HostNightColorSwatch}"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <Button Content="Choose…" Width="80" Margin="8,0,0,0" Click="PickNightColor_Click"
+                                            ToolTip="World tint during the night phase (only visible when the day/night cycle is on)."/>
+                                </StackPanel>
+                                <Label Grid.Row="1" Content="Respawn scale:"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding HostRespawnScale, StringFormat=F2}" Width="60" VerticalAlignment="Center"
+                                         ToolTip="Divides the respawn wait, so HIGHER is faster. Most pickups are authored at 10 seconds, so 1.0 is 10s, 2.0 is 5s, and 0.5 is 20s. Individual pickups can carry their own delay from the level, in which case this scales that instead."/>
+                                <Label Grid.Row="1" Grid.Column="2" Content="Heal scale:"/>
+                                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding HostHealScale, StringFormat=F2}" Width="60" VerticalAlignment="Center"
+                                         ToolTip="Multiplies what a health pickup gives. The four sizes in the levels are 10, 15, 25 and 50 health, so at 1.0 a large one restores 50 and at 2.0 it restores 100. Armour pickups (100/250/500) are not affected by this."/>
+                                <Label Grid.Row="2" Content="Day/night (sec):"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding HostTimeSpeed, StringFormat=F2}" Width="60" VerticalAlignment="Center"
+                                         ToolTip="Seconds per full day/night cycle; -1 disables."/>
+                                <!-- Gravity sits with the other numeric world settings rather than
+                                     on the Ruleset row, where it was the only value among dropdowns.
+                                     No checkbox: HostGravityOn was pure derivation - its getter is
+                                     "gravity > 0" and its setter wrote 0 - so the tick and the value
+                                     could never disagree, and the box was a second way to say what the
+                                     number already said. 0 means "leave the engine alone", which the
+                                     tooltip now states. -->
+                                <Label Grid.Row="2" Grid.Column="2" Content="Gravity:"/>
+                                <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding HostGravity}" Width="60" VerticalAlignment="Center"
+                                         ToolTip="Downward acceleration for everything in the world. 2000 is the engine's own value, which is what every Shogo server has always used - setting it to 2000 and leaving it unset produce the same world. Lower makes grenades carry further and players fall more slowly; it is the one setting that changes weapon arcs and movement together. Range 200-6000. Setting 0 means &quot;do not touch gravity at all&quot;, which is identical to 2000 in practice and only worth using if you want the server to leave the value alone on principle. Takes effect without a map change."/>
+                                <!-- Directly above Randomize pickups, and shaped the same way: the two
+                                     are the pair of "what the map hands out" dropdowns, and infinite ammo
+                                     was previously stranded among the checkboxes. -->
+                                <Label Grid.Row="3" Content="Infinite ammo:" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,10,0"
+                                          ItemsSource="{Binding InfiniteAmmoModes}" SelectedItem="{Binding HostInfiniteAmmo}"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                          ToolTip="Sidearms only: the pulse rifle and the .45s never run dry, so nobody is caught in the open with an empty gun - every other scarcity the map is balanced around stays. All weapons: endless reserve on everything, so magazine size and reload time become the only limits (Laser Cannon, Juggernaut and Shredder have no magazine and fire without any limit at all)."/>
+                                <Label Grid.Row="4" Content="Randomize pickups:" VerticalAlignment="Center"/>
+                                <!-- Stretched to its two columns rather than given a fixed 185, so its
+                                     right edge lands on the column boundary the button starts from and
+                                     the two controls read as one row instead of two loose ones. -->
+                                <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,10,0"
+                                          ItemsSource="{Binding RandomPickupModes}" SelectedItem="{Binding HostRandomPickups}"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                          ToolTip="Reroll pickups at level start. Rerolls stay in tier - mech spots stay mech-scale, on-foot spots stay on-foot. 'Weapons + items (together)' pools both, so a health pack can appear where a rifle was."/>
+                                <StackPanel Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button Content="Blocked pickups…" Width="140" Click="EditBlocklist_Click"
+                                            ToolTip="Ban individual weapons and items from spawning. Banned pickups are replaced with a random legal one of the same kind and tier."/>
+                                    <TextBlock Text="{Binding HostBlockedSummary}" VerticalAlignment="Center" Margin="8,0,0,0"
+                                               Foreground="{StaticResource DimTextBrush}"/>
+                                </StackPanel>
+
+                                <!-- Fall damage sits on the numeric grid rather than beside Ramming
+                                     damage because it is two values, not a tick - but it belongs to
+                                     the same collision system, and the ramming tooltip says so. The
+                                     two are the only weapon-adjacent tuning exposed here: the rest of
+                                     FreshTuning.h is per-weapon FEEL, which is deliberately NOT a
+                                     server setting (a shotgun that pumps at a different speed on
+                                     every server is a shotgun nobody can learn). -->
+                                <Label Grid.Row="5" Content="Fall damage:"/>
+                                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding HostFallDamage, StringFormat=F2}" Width="60" VerticalAlignment="Center"
+                                         ToolTip="What a hard landing costs once past the threshold. Default 5.00, range 0.05-50.00. To turn fall damage OFF, use the threshold instead - this cannot be set to zero. Also affects being shoved into a wall, which the engine counts as the same collision."/>
+                                <Label Grid.Row="5" Grid.Column="2" Content="Fall threshold:"/>
+                                <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding HostFallThreshold, StringFormat=F2}" Width="60" VerticalAlignment="Center"
+                                         ToolTip="How far you may drop for free. Default 15.00, range 1.00-1000.00. Set it to 1000 for no fall damage at all - this is the off switch. Lower it and short drops start to hurt."/>
+
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Map rotation" Padding="10" Margin="0,10,0,0">
+                        <DockPanel>
+                            <Grid>
+                                <Grid.Resources>
+                                    <DataTemplate x:Key="MapItemTemplate">
+                                        <TextBlock Text="{Binding Converter={StaticResource MapDisplay}}"/>
+                                    </DataTemplate>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- Top, not the default Stretch. Both columns share a row, and the
+                                     right one is taller because of the Order row; stretching left the
+                                     Order combo floating at the bottom of that extra height instead of
+                                     sitting under the list it belongs to. -->
+                                <DockPanel VerticalAlignment="Top">
+                                    <TextBlock DockPanel.Dock="Top" Text="Available (retail + Custom)" Foreground="{StaticResource DimTextBrush}" Margin="0,0,0,4"
+                                               ToolTip="Every map the server could load. A * marks a retail map - one that shipped with the game, so every player already has it. Anything unmarked came from Custom\, and a player who does not have that file cannot join while it is running."/>
+                                    <!-- Same Dock and the same 0,12,0,0 margin as the Order row
+                                         opposite, so the two sit on one line across the group. -->
+                                    <StackPanel DockPanel.Dock="Bottom" Margin="0,12,0,0">
+                                      <StackPanel Orientation="Horizontal">
+                                        <Button Content="Refresh" Width="95" Click="RefreshMaps_Click"
+                                                ToolTip="Re-scan for maps: retail, Custom\maps\mp, loose Custom\*.dat, and the levels inside any Custom\*.rez. Build a map while the launcher is open and this is how it appears - the rotation you have arranged is left exactly as it is."/>
+                                        <Button Content="Open folder" Width="95" Margin="6,0,0,0" Click="OpenMapsFolder_Click"
+                                                ToolTip="Open Custom\maps\mp in Explorer - where multiplayer maps go. Drop a .dat there, press Refresh, and it appears in the list. The folder is created if it does not exist yet."/>
+                                      </StackPanel>
+                                      <!-- Under the buttons, not beside them: it grows with the
+                                           wording and pushing the row wider moved the buttons out
+                                           of line with the Order row opposite. -->
+                                      <TextBlock Text="{Binding MapScanSummary}" Margin="0,5,0,0" FontSize="11"
+                                                 Foreground="{StaticResource DimTextBrush}"/>
+                                    </StackPanel>
+                                    <ListBox x:Name="AvailableMapsList" ItemsSource="{Binding AvailableMaps}" Height="160"
+                                             Background="{StaticResource FieldBrush}" Foreground="{StaticResource TextBrush}"
+                                             ItemTemplate="{StaticResource MapItemTemplate}"
+                                             SelectionMode="Extended"
+                                             ToolTip="Ctrl-click or shift-click to pick several, then Add."
+                                             MouseDoubleClick="AddMap_Click"/>
+                                </DockPanel>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="8,0">
+                                    <Button Content="Add →" Width="95" Margin="0,2" Click="AddMap_Click"/>
+                                    <Button Content="← Remove" Width="95" Margin="0,2" Click="RemoveMap_Click"/>
+                                    <Button Content="Top" Width="95" Margin="0,10,0,2" Click="MapTop_Click"/>
+                                    <Button Content="Up" Width="95" Margin="0,2" Click="MapUp_Click"/>
+                                    <Button Content="Down" Width="95" Margin="0,2" Click="MapDown_Click"/>
+                                    <Button Content="Bottom" Width="95" Margin="0,2" Click="MapBottom_Click"/>
+                                </StackPanel>
+                                <DockPanel Grid.Column="2" VerticalAlignment="Top">
+                                    <!-- Order sits UNDER the rotation, so the two headings and the
+                                         two lists line up across the group. -->
+                                    <TextBlock DockPanel.Dock="Top" Text="{Binding RotationLabel}" Foreground="{StaticResource DimTextBrush}" Margin="0,0,0,4"
+                                               ToolTip="How many maps are in the rotation, against what the game can carry. Beyond the limit the extra maps are dropped on save. A * marks a retail map, same as the list opposite."/>
+                                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,12,0,0">
+                                        <TextBlock Text="Order:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        <ComboBox ItemsSource="{Binding MapOrders}" SelectedItem="{Binding HostMapOrder}"
+                                                  Width="230" VerticalAlignment="Center"
+                                                  ToolTip="How the rotation advances. Random never repeats the map just played. Alternating additionally flips between mech (MCA_) and on-foot (OF_) maps, falling back to any other map when no partner of the opposite kind is in the rotation."/>
+                                    </StackPanel>
+                                    <ListBox x:Name="RotationList" ItemsSource="{Binding MapRotation}" Height="160"
+                                             Background="{StaticResource FieldBrush}" Foreground="{StaticResource TextBrush}"
+                                             ItemTemplate="{StaticResource MapItemTemplate}"
+                                             SelectionMode="Extended"
+                                             ToolTip="Ctrl-click or shift-click to pick several, then Remove. Up/Down move the first selected entry."
+                                             MouseDoubleClick="RemoveMap_Click"/>
+                                </DockPanel>
+                            </Grid>
+                        </DockPanel>
+                    </GroupBox>
+
+                    <!-- "Server archives", not "Server mods": the Mods tab already says
+                         mods, and the same word in two places read as one feature
+                         duplicated. This list is a SERVER decision (what the server
+                         loads); the Mods tab's on/off is a CLIENT one. -->
+                    <GroupBox Header="Server archives (Custom rez files)" Padding="10" Margin="0,10,0,0"
+                              ToolTip="Which Custom archives the server loads. Independent of the Mods tab: that governs your own game, this governs the server - which is usually another machine entirely. On a LISTEN server they are one process, so starting it switches on any ticked archive that is off, and says so.">
+                        <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Foreground="{StaticResource DimTextBrush}" Margin="0,0,0,6"
+                                   Visibility="{Binding HostIsListen, Converter={StaticResource BoolToVis}}"
+                                   Text="Listen server: your game and the server are one process, so every archive ENABLED on the Mods tab loads too. Ticking one here makes sure it is on before launch; manage the full set from the Mods tab."/>
+                        <ItemsControl ItemsSource="{Binding AvailableRez}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="3"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <!-- The name goes in a TextBlock rather than in Content,
+                                         because a ContentPresenter treats "_" as an access-key
+                                         marker and EATS it: MP_RETAILMAPFIXES.REZ displayed as
+                                         MPRETAILMAPFIXES.REZ. Display only - the bound Name is
+                                         what reaches ShogoSrv.cfg and was always correct - but
+                                         it makes the launcher disagree with the filename on
+                                         disk, which is exactly the kind of thing someone
+                                         debugging a load order should not have to discount. -->
+                                    <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" Margin="0,2">
+                                        <TextBlock Text="{Binding DisplayName}"/>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        </StackPanel>
+                    </GroupBox>
+
+
+                    <!-- Hidden outright in listen mode rather than greyed: a greyed
+                         group invites reading, and everything it says is about a
+                         process a listen server does not run. The radio pair's own
+                         caption covers "how do people find me" for listen. -->
+                    <GroupBox Header="Discovery (how players find this server)" Padding="10" Margin="0,10,0,0"
+                              Visibility="{Binding HostIsDedicated, Converter={StaticResource BoolToVis}}">
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap" Foreground="{StaticResource DimTextBrush}" Margin="0,0,0,6"
+                                       Text="Players find your server three ways: through a master site it registers with, through other servers that know about it (they trade address lists, so being known to ONE is enough), or by typing your address in. New server? Click Fill from browser so the servers that are up right now learn yours exists, and share your address wherever the community talks. Both boxes can stay empty - manual joins always work."/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Registration URL:" Width="110"/>
+                                <TextBox Text="{Binding HostWebRegUrl}" Width="300" VerticalAlignment="Center"
+                                         ToolTip="Master server registration endpoint. Blank posts nowhere. The stock default pointed at shogo-mad.com, which has not answered for years - so ShogoFRESH ships it blank rather than spending a request per cycle on a dead host. srv_send.txt in the game folder still works alongside this."/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                <Label Content="Peer servers:" Width="110"/>
+                                <TextBox Text="{Binding HostPeers}" Width="300" VerticalAlignment="Center"
+                                         ToolTip="Space separated address:port list, e.g. 203.0.113.10:27888 shogo.example.org:27888. Hostnames are better than IPs - DNS can be repointed without anyone editing files. peers.txt beside FreshSrv.exe also works and merges with this."/>
+                                <Button Content="Fill from browser" Width="120" Margin="8,0,0,0" Click="SeedPeers_Click"
+                                        ToolTip="Fills the box with the servers currently responding in the Play tab, so a new server joins the existing peer network without you hunting for addresses."/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+
+
+                    <GroupBox Header="Server profiles" Padding="10" Margin="0,10,0,0">
+                        <StackPanel>
+                            <TextBlock Text="A profile is a saved copy of ShogoSrv.cfg, so anything hand-edited into it survives too."
+                                       Foreground="{StaticResource DimTextBrush}" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding ServerProfileNames}" SelectedItem="{Binding SelectedServerProfile}"
+                                          Width="180" VerticalAlignment="Center"/>
+                                <Button Content="Load" Width="70" Margin="8,0,0,0" Click="LoadProfile_Click"
+                                        ToolTip="Replaces the current server settings with this profile."/>
+                                <Button Content="Delete" Width="70" Margin="6,0,0,0" Click="DeleteProfile_Click"/>
+                                <Button Content="Export…" Width="80" Margin="6,0,0,0" Click="ExportProfile_Click"/>
+                                <Button Content="Import…" Width="80" Margin="6,0,0,0" Click="ImportProfile_Click"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                <TextBlock Text="Save current as:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <TextBox Text="{Binding NewProfileName, UpdateSourceTrigger=PropertyChanged}" Width="180" VerticalAlignment="Center"/>
+                                <Button Content="Save" Width="70" Margin="8,0,0,0" Click="SaveProfile_Click"
+                                        ToolTip="Writes the Host tab to ShogoSrv.cfg, then files a copy under this name."/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+
+                </StackPanel>
+                </ScrollViewer>
+                </DockPanel>
+            </TabItem>
+
+            <!-- ==================== MODS ==================== -->
+            <TabItem Header="Mods">
+                <DockPanel Margin="8">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button Content="Refresh" Width="80" Margin="0,0,8,0" Click="RefreshMods_Click"
+                                ToolTip="Re-scan the Custom folder. Use after dropping a .rez in without closing the launcher."/>
+                        <Button Content="View Contents" Width="110" Margin="0,0,8,0" Click="ViewRez_Click"
+                                ToolTip="List the files inside the selected .rez - what it holds, what it replaces, and whether it carries game code. Read-only."/>
+                        <Button Content="Open Mod Folder" Width="130" Margin="0,0,8,0" Click="OpenCustom_Click"/>
+                        <Button Content="Open Archive…" Width="120" Margin="0,0,8,0" Click="OpenArchive_Click"
+                                ToolTip="Browse and extract from ANY .rez, including the game's own SHOGO.REZ and SOUND.REZ - which is where a texture or sound mod starts. Read-only; nothing is written to the archive."/>
+                        <TextBlock Text="Click a mod's Enabled checkbox to toggle it, or double-click a row to see inside." VerticalAlignment="Center"
+                                   Foreground="{StaticResource DimTextBrush}"/>
+                    </StackPanel>
+                    <CheckBox DockPanel.Dock="Top" Margin="0,0,0,8"
+                              IsChecked="{Binding FreshTakesPriority, Mode=TwoWay}"
+                              Content="ShogoFRESH takes priority over mods (recommended)"
+                              ToolTip="Mods load last and win any file they share with ShogoFRESH. Asset mods - skins, models, map packs - are unaffected either way, because ShogoFRESH ships only game code. Turn this off only to let a mod replace ShogoFRESH entirely."/>
+                    <DataGrid x:Name="ModsGrid" ItemsSource="{Binding Mods}" AutoGenerateColumns="False" IsReadOnly="True"
+                              MouseDoubleClick="ModsGrid_MouseDoubleClick">
+                        <!-- A mod that ships a ShogoFRESH manifest can say what it is;
+                             the rez format itself has no field for a name or an author,
+                             so this column is empty for everything else. -->
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                                <Setter Property="ToolTip" Value="{Binding RowDetail}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RowDetail}" Value="">
+                                        <Setter Property="ToolTip" Value="{x:Null}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Client mods" Binding="{Binding DisplayName}" Width="*"/>
+                            <DataGridTextColumn Header="Describes itself as" Binding="{Binding ManifestHeadline}" Width="1.2*"/>
+                            <DataGridTextColumn Header="Size" Binding="{Binding SizeText}" Width="110"/>
+                            <DataGridTextColumn Header="Notes" Binding="{Binding NotesText}" Width="2*"
+                                                FontStyle="Italic"/>
+                            <DataGridTemplateColumn Header="Enabled" Width="70">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <!-- ==================== KEYBINDS ==================== -->
+            <TabItem Header="Keybinds">
+                <DockPanel Margin="8">
+                    <!-- Save bar: same pattern as Settings (docked, accent when dirty). -->
+                    <Border DockPanel.Dock="Bottom" Background="{StaticResource PanelBrush}" Padding="12,8" Margin="0,8,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Width="130" Margin="0,0,8,0" Click="SaveBindings_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                        <Setter Property="Content" Value="Save Bindings"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding BindingsDirty}" Value="True">
+                                                <Setter Property="Content" Value="Save Bindings *"/>
+                                                <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+                                                <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="FontWeight" Value="Bold"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Content="Restore Defaults" Width="130" Click="RestoreDefaults_Click"
+                                    ToolTip="Reset live bindings to the ShogoFRESH defaults (applies on Save)."/>
+                            <TextBlock Text="Unsaved changes" VerticalAlignment="Center" Margin="12,0,0,0"
+                                       Foreground="{StaticResource AccentBrush}"
+                                       Visibility="{Binding BindingsDirty, Converter={StaticResource BoolToVis}}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                        <CheckBox Content="Show advanced options" IsChecked="{Binding ShowBindAdvanced}"/>
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8"
+                                Visibility="{Binding ShowBindAdvanced, Converter={StaticResource BoolToVis}}">
+                        <ComboBox ItemsSource="{Binding BindTargets}" SelectedItem="{Binding SelectedBindTarget}"
+                                  Width="210" Margin="0,0,12,0"/>
+                        <CheckBox Content="Show hidden actions" IsChecked="{Binding ShowHiddenBinds}" Margin="0,0,12,0"/>
+                        <Button Content="Edit Labels/Layout…" Width="140" Margin="0,0,8,0" Click="EditLayout_Click"
+                                ToolTip="Opens keybind-layout.json: per-action labels (localizable), row order, and hidden actions."/>
+                        <Button Content="Reload Layout" Width="110" Margin="0,0,8,0" Click="ReloadLayout_Click"/>
+                        <Button Content="Reload Bindings" Width="115" Click="ReloadBindings_Click"/>
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8"
+                                Visibility="{Binding ShowBindAdvanced, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="Keybind layout:" VerticalAlignment="Center" Margin="0,0,8,0"
+                                   Foreground="{StaticResource DimTextBrush}"/>
+                        <ComboBox ItemsSource="{Binding BindLayouts}" SelectedItem="{Binding SelectedBindLayout}"
+                                  DisplayMemberPath="Title" Width="210" Margin="0,0,8,0"
+                                  ToolTip="Shipped keybind layouts, including the default. Applies on top of what you are editing; nothing is written until you click Save Bindings."/>
+                        <Button Content="Apply Layout" Width="110" Click="ApplyBindLayout_Click"
+                                ToolTip="Replace the current bindings with this layout (applies on Save)."/>
+                    </StackPanel>
+                    <TextBlock DockPanel.Dock="Top" Margin="4,0,0,8" Foreground="{StaticResource DimTextBrush}" TextWrapping="Wrap"
+                               Text="Click a Primary or Secondary cell to rebind it — keys, mouse buttons (incl. side buttons), and wheel up/down all work; clear a bind from inside the capture dialog. No modifier combos (engine limitation)."/>
+                    <DataGrid x:Name="KeybindsGrid" ItemsSource="{Binding Keybinds}" AutoGenerateColumns="False" IsReadOnly="True"
+                              SelectionMode="Single">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="KeybindCell_Click"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Action" Binding="{Binding Label}" Width="*"/>
+                            <DataGridTextColumn Header="Primary" Binding="{Binding Primary}" Width="170"/>
+                            <DataGridTextColumn Header="Secondary" Binding="{Binding Secondary}" Width="170"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+
+            <!-- ==================== SETTINGS ==================== -->
+            <TabItem Header="Settings">
+                <DockPanel>
+                <!-- Save bar stays visible while scrolling; turns into an
+                     accent call-to-action when there are unsaved changes. -->
+                <Border DockPanel.Dock="Bottom" Background="{StaticResource PanelBrush}" Padding="12,8">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="130" Click="SaveSettings_Click">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="Content" Value="Save Settings"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SettingsDirty}" Value="True">
+                                            <Setter Property="Content" Value="Save Settings *"/>
+                                            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Content="Restore Defaults" Width="130" Margin="8,0,0,0" Click="RestoreSettingsDefaults_Click"
+                                ToolTip="Load ShogoFRESH's recommended settings (native resolution, Ultra detail, 40/40 volumes, borderless). Applies on Save."/>
+                        <CheckBox Content="Check for updates" IsChecked="{Binding CheckForUpdates}" Margin="20,0,0,0"
+                                  VerticalAlignment="Center"
+                                  ToolTip="Asks GitHub once a day whether a newer ShogoFRESH has been released. Nothing is ever downloaded or installed without you asking."/>
+                        <Button Content="Check now" Width="90" Margin="8,0,0,0" Click="CheckUpdatesNow_Click"/>
+                        <TextBlock Text="Unsaved changes" VerticalAlignment="Center" Margin="12,0,0,0"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Visibility="{Binding SettingsDirty, Converter={StaticResource BoolToVis}}"/>
+                    </StackPanel>
+                </Border>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="16" MaxWidth="560" HorizontalAlignment="Left">
+                    <GroupBox Header="Player" Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Player name:"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <TextBox Text="{Binding PlayerName, UpdateSourceTrigger=PropertyChanged}" Width="145" MaxLength="20"
+                                         VerticalAlignment="Center"
+                                         ToolTip="Up to 20 characters, so names fit the scoreboard and kill feed without wrapping."/>
+                                <Button Content="Randomize" Width="85" Margin="8,0,0,0" Click="RandomName_Click"
+                                        ToolTip="Generate a random pilot name (the stock default makes every unnamed player 'Sanjuro')."/>
+                            </StackPanel>
+                            <Label Grid.Row="1" Content="Color / Mech:"/>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding PlayerColors}" SelectedItem="{Binding SelectedPlayerColor}"
+                                          Width="120" VerticalAlignment="Center"
+                                          ToolTip="Multiplayer tint color (the stock 8; a true color picker comes with RGB support in a later ShogoFRESH update).">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="14" Height="14" CornerRadius="2" Margin="0,0,7,0"
+                                                        BorderBrush="{StaticResource BorderBrushDim}" BorderThickness="1">
+                                                    <Border.Background>
+                                                        <SolidColorBrush Color="{Binding Swatch}"/>
+                                                    </Border.Background>
+                                                </Border>
+                                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <ComboBox ItemsSource="{Binding Mechs}" SelectedItem="{Binding SelectedMech}"
+                                          Width="110" Margin="8,0,0,0" VerticalAlignment="Center"
+                                          ToolTip="Default multiplayer mech."/>
+                                <!-- On-foot body picker: HIDDEN, not deleted (0.10.23).
+
+                                     Sanjuro is the only entry. The Trooper row came
+                                     out because its .abc shipped nowhere, and one
+                                     entry is not a picker - it offers a choice that
+                                     does not exist.
+
+                                     Restoring it is a CONTENT job, not a code one:
+                                     a body has to be retargeted onto Sanjuro's 64
+                                     animations and then actually shipped in
+                                     Launcher/Redist/shogofresh. The binding, the
+                                     prefs round-trip and the server-side index are
+                                     all still here and still work, so this becomes
+                                     one Visibility change the day a second body
+                                     exists. -->
+                                <ComboBox ItemsSource="{Binding OnFootModels}" SelectedItem="{Binding SelectedOnFootModel}"
+                                          Visibility="Collapsed"
+                                          Width="110" Margin="8,0,0,0" VerticalAlignment="Center"
+                                          ToolTip="Multiplayer on-foot body. The server decides what it can offer, so an unknown one comes back as Sanjuro."/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Input" Padding="10" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="Auto" MinHeight="32"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Mouse sensitivity:"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Slider Value="{Binding MouseSensitivity}" Minimum="0" Maximum="10"
+                                        SmallChange="0.1" LargeChange="1" Width="220" VerticalAlignment="Center"
+                                        ToolTip="The in-game menu offers 0-10 in whole steps; the engine var is a float, so decimals work fine."/>
+                                <TextBlock Text="{Binding MouseSensitivity, StringFormat={}{0:0.0}}"
+                                           VerticalAlignment="Center" Margin="10,0,0,0" MinWidth="30"/>
+                            </StackPanel>
+                            <Label Grid.Row="1" Content="Zoom sensitivity:"/>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <CheckBox Content="Match FOV" IsChecked="{Binding ZoomMatchFov}"
+                                          VerticalAlignment="Center" Margin="0,0,12,0"
+                                          ToolTip="Scale zoomed aim by how much the weapon actually magnifies, so every scope feels like the same mouse. 1998 used one fixed penalty for all of them - right for the sniper rifle, far too slow for the assault rifle."/>
+                                <StackPanel Orientation="Horizontal"
+                                            Visibility="{Binding ShowZoomSlider, Converter={StaticResource BoolToVis}}">
+                                    <Slider Value="{Binding ZoomSensitivity}" Minimum="1" Maximum="100"
+                                            SmallChange="1" LargeChange="10" Width="150" VerticalAlignment="Center"
+                                            ToolTip="Percentage of your normal sensitivity while zoomed. 100 moves exactly as fast as hip aim; 10 is the 1998 behaviour."/>
+                                    <TextBlock Text="{Binding ZoomSensitivity, StringFormat={}{0:0}%}"
+                                               VerticalAlignment="Center" Margin="8,0,0,0" MinWidth="34"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Label Grid.Row="2" Content="Invert mouse Y:"/>
+                            <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding MouseInvertY}" VerticalAlignment="Center"/>
+                            <Label Grid.Row="3" Content="Mouse smoothness:"/>
+                            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical" Margin="0,4,0,4">
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider Value="{Binding MouseSmoothness}" Minimum="10" Maximum="40"
+                                            SmallChange="1" LargeChange="5" Width="150" VerticalAlignment="Center"
+                                            ToolTip="The engine's 'smoothness' (inputrate), in milliseconds. It is the shortest gap the engine will believe between two mouse reports, and that gap divides your movement to make a turn rate - so a low value lets a 1000 Hz mouse divide by almost nothing and the view goes spiky. 10 is the floor for that reason; Monolith shipped 30. Higher is steadier and slightly less immediate."/>
+                                    <TextBlock Text="{Binding MouseSmoothness, StringFormat={}{0:0} ms}"
+                                               VerticalAlignment="Center" Margin="8,0,0,0" MinWidth="40"/>
+                                </StackPanel>
+                                <TextBlock Text="Lower = more responsive. Floored so a high-polling-rate mouse can't jitter."
+                                           FontSize="10" FontStyle="Italic" Opacity="0.65"
+                                           Margin="2,2,0,0" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Audio" Padding="10" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Master:"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Slider Value="{Binding MasterVolume}" Minimum="0" Maximum="100"
+                                        ToolTip="Multiplies the two below without moving them. Sound 50% and music 80% under a master of 50% reach the game as 25% and 40%."
+                                        Width="200" VerticalAlignment="Center" Margin="26,0,0,0"/>
+                                <TextBlock Text="{Binding MasterVolume, StringFormat={}{0:0}%}" VerticalAlignment="Center" Margin="10,0,0,0" MinWidth="40"/>
+                            </StackPanel>
+                            <Label Grid.Row="1" Content="Sound effects:"/>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding SoundEnabled}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <Slider Value="{Binding SoundVolumePercent}" Minimum="0" Maximum="100"
+                                        Width="200" VerticalAlignment="Center" IsEnabled="{Binding SoundEnabled}"
+                                        ToolTip="100% is as loud as the game goes. The engine clamps its own volume at 90 of 100 internally - stock 1998 code, guarding its mixer against clipping - so the slider shows a percentage of what is actually reachable rather than a number that does nothing past 90."/>
+                                <TextBlock Text="{Binding SoundVolumePercent, StringFormat={}{0:0}%}" VerticalAlignment="Center" Margin="10,0,0,0" MinWidth="40"/>
+                                <TextBlock Text="{Binding EffectiveSoundText}" VerticalAlignment="Center" Margin="4,0,0,0" MinWidth="52" Foreground="{StaticResource DimTextBrush}" ToolTip="What the game is given once the master multiplier is applied."/>
+                            </StackPanel>
+                            <Label Grid.Row="2" Content="Music:"/>
+                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding MusicEnabled}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <Slider Value="{Binding MusicVolumePercent}" Minimum="0" Maximum="100"
+                                        Width="200" VerticalAlignment="Center" IsEnabled="{Binding MusicEnabled}"/>
+                                <TextBlock Text="{Binding MusicVolumePercent, StringFormat={}{0:0}%}" VerticalAlignment="Center" Margin="10,0,0,0" MinWidth="40"/>
+                                <TextBlock Text="{Binding EffectiveMusicText}" VerticalAlignment="Center" Margin="4,0,0,0" MinWidth="52" Foreground="{StaticResource DimTextBrush}" ToolTip="What the game is given once the master multiplier is applied."/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Gameplay" Padding="10" Margin="0,10,0,0">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Gore:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <ComboBox ItemsSource="{Binding GoreModes}" SelectedItem="{Binding Gore}"
+                                          Width="130" VerticalAlignment="Center" Margin="0,0,24,0"
+                                          ToolTip="Off removes blood and gibs entirely. Realistic keeps blood for people but gives machines sparks and smoke instead - mechs, vehicles and the shock troopers, which are armoured shells however human-shaped they are. Full is the original 1998 behaviour, where everything bleeds."/>
+                                <CheckBox Content="Screen flash" IsChecked="{Binding ScreenFlash}" Margin="0,0,24,0"
+                                          ToolTip="Full-screen flashes on damage and explosions."/>
+                                <CheckBox Content="Chat sound" IsChecked="{Binding ChatSound}" Margin="0,0,24,0"
+                                          ToolTip="The notification chirp when a chat line arrives. On a busy server it wears thin fast."/>
+                                <CheckBox Content="Extra saturation" IsChecked="{Binding Saturate}"
+                                          ToolTip="The renderer's extra colour saturation (Monolith's own 2.2 addition). Richer colour on lightmapped level surfaces - useful if levels read too dark and you don't want to raise gamma. Purely cosmetic, your screen only."/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="Campaign model lighting - brightness:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <TextBox Text="{Binding ModelAdd}" Width="50" VerticalAlignment="Center"
+                                         ToolTip="Adds this much light (0-255) to every model surface regardless of facing - characters read brighter, like a mild fullbright. SINGLE PLAYER ONLY: in multiplayer the game zeroes it for the length of the match (seeing players in dark rooms is an advantage the server cannot detect) and restores your value afterwards."/>
+                                <TextBlock Text="directional:" VerticalAlignment="Center" Margin="16,0,8,0"/>
+                                <TextBox Text="{Binding ModelDirAdd}" Width="50" VerticalAlignment="Center"
+                                         ToolTip="Adds this much light (0-255) scaled by how squarely a surface faces the level's light - shading and contours are kept, more like turning the sun up than putting a lamp inside the model. Single player only, same as brightness."/>
+                                <TextBlock Text="0 = the 1998 look; zeroed in multiplayer" Foreground="{StaticResource DimTextBrush}" VerticalAlignment="Center" Margin="12,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="Weapon auto-switch:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <ComboBox ItemsSource="{Binding AutoSwitchModes}" SelectedItem="{Binding AutoSwitch}"
+                                          Width="170" VerticalAlignment="Center"
+                                          ToolTip="What happens when you walk over a weapon. Your own preference - it travels with you to whichever server you join. Holding nothing, or only a melee weapon, always switches."/>
+                                <TextBlock Text="HUD width:" VerticalAlignment="Center" Margin="24,0,8,0"/>
+                                <ComboBox ItemsSource="{Binding HudAspects}" SelectedItem="{Binding HudAspect}"
+                                          Width="150" VerticalAlignment="Center"
+                                          ToolTip="Holds the health, ammo, frag counter and chat inside a centred band of this aspect ratio instead of pinning them to the screen edges. Useful on ultrawide displays. The crosshair always stays at the true centre; a ratio wider than your display does nothing."/>
+                                <TextBlock Text="Number size:" VerticalAlignment="Center" Margin="24,0,8,0"/>
+                                <TextBox Text="{Binding HudNumberSize}" Width="50" VerticalAlignment="Center"
+                                         ToolTip="Height of the HUD numbers before HUD scaling, in the game's original 640x480 units. 18 is the default; raise or lower it if the health/ammo figures sit wrong against the HUD art."/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="Multiplayer kill feed style:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <ComboBox ItemsSource="{Binding KillFeedStyles}" SelectedItem="{Binding KillFeedStyle}"
+                                          Width="190" VerticalAlignment="Center"
+                                          ToolTip="What appears between the killer's and the victim's name. Weapon icon says what killed them; the original ammo icon says what the weapon was loaded with, which several weapons share. Text reads: killer - weapon name - victim."/>
+                            </StackPanel>
+                            <CheckBox Content="Auto 3rd person in vehicle mode" IsChecked="{Binding VehicleThirdPerson}" Margin="0,10,0,0"
+                                      ToolTip="Transforming to vehicle mode switches to the chase camera; transforming back restores whichever view you were in (ShogoFRESH feature)."/>
+                            <CheckBox Content="Filter profanity in chat and player names (multiplayer)" IsChecked="{Binding ProfanityFilter}" Margin="0,6,0,0"
+                                      ToolTip="Stars out profanity in chat messages and player names on YOUR screen only - nothing on the wire changes, and other players see whatever was typed. Whole-word matching, so ordinary words containing rude substrings are left alone. On by default."/>
+                            <CheckBox Content="Streamer mode (multiplayer)" IsChecked="{Binding StreamerMode}" Margin="0,6,0,0"
+                                      ToolTip="For broadcasting. Hides the chat HUD and silences its chirp, replaces other players' names with generated ones that stay put for as long as you are on the server, and picks a fresh random name for you every time you connect so viewers cannot follow you back to the server. Turning it off restores the name you typed above. Display-side only: nobody else's game is affected."/>
+                            <CheckBox Content="Classic 1998 campaign (single player)" IsChecked="{Binding ClassicCampaign}" Margin="0,6,0,0"
+                                      ToolTip="Restores the 1998 single-player tuning: the 1998 magazines with none of the machinery around them - no reload key, no clip readout, and reloads that cost only whatever animation the weapon has, which is why the sniper rifle reads as full auto - 1998 ammo drops and carry limits, criticals at 4x for everyone, no explosion falloff, AI that fires the instant it sees you, 1998 gibbing, no endless sidearms, no health/armour drops. Bug fixes and all presentation improvements (widescreen, HUD scaling) stay. Multiplayer is untouched - servers have their own Ruleset."/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Display" Padding="10" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Resolution:"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding ResolutionPresets}"
+                                          SelectedItem="{Binding SelectedResolutionPreset}"
+                                          Width="180" VerticalAlignment="Center"/>
+                                <TextBlock Text="  or custom: " VerticalAlignment="Center" Foreground="{StaticResource DimTextBrush}"/>
+                                <TextBox Text="{Binding ScreenWidth}" Width="55" VerticalAlignment="Center"/>
+                                <TextBlock Text=" x " VerticalAlignment="Center"/>
+                                <TextBox Text="{Binding ScreenHeight}" Width="55" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <Label Grid.Row="1" Content="Detail preset:"/>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding DetailPresetNames}"
+                                          SelectedItem="{Binding SelectedDetailPreset}"
+                                          Width="150" VerticalAlignment="Center"
+                                          ToolTip="Shows the preset your current config matches (Custom if none). Ultra = High with a much larger bullet-hole decal budget - the other vars are already maxed by High. Applied on Save."/>
+                                <Button Content="Advanced…" Width="90" Margin="8,0,0,0" Click="DetailAdvanced_Click"
+                                        ToolTip="Edit the 12 individual detail variables."/>
+                            </StackPanel>
+
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Display output (via dgVoodoo wrapper)" Padding="10" Margin="0,10,0,0"
+                              Visibility="{Binding DgVoodooPresent, Converter={StaticResource BoolToVis}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Mode:"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding DisplayModes}" SelectedItem="{Binding SelectedDisplayMode}"
+                                          Width="190" VerticalAlignment="Center"
+                                          ToolTip="The 1998 engine only does exclusive fullscreen; dgVoodoo adds windowed and borderless. Applied on Save."/>
+                                <CheckBox Content="V-sync" IsChecked="{Binding VerticalSync}"
+                                          VerticalAlignment="Center" Margin="16,0,0,0"
+                                          ToolTip="Caps the frame rate to your monitor's refresh and stops tearing. A 1998 engine on modern hardware runs at several hundred frames a second, which is exactly when tearing shows. Off by default, because that is how dgVoodoo ships."/>
+                            </StackPanel>
+                            <Label Grid.Row="1" Content="Monitor:"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding MonitorChoices}" SelectedItem="{Binding SelectedMonitor}"
+                                      Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                      ToolTip="dgVoodoo FullScreenOutput: which monitor on the adapter gets fullscreen output (1-based ordinal)."/>
+                            <Label Grid.Row="2" Content="Filtering / AA:"/>
+                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding FilteringLabels}" SelectedItem="{Binding SelectedFiltering}"
+                                          Width="110" VerticalAlignment="Center"
+                                          ToolTip="Texture filtering override. AF 16x is effectively free on any modern GPU and sharpens textures at oblique angles."/>
+                                <ComboBox ItemsSource="{Binding AntialiasLabels}" SelectedItem="{Binding SelectedAntialias}"
+                                          Width="130" Margin="8,0,0,0" VerticalAlignment="Center"
+                                          ToolTip="Forced MSAA. 4x is a safe default for this era; back off to app-driven if you ever see edge artifacts."/>
+                            </StackPanel>
+                            <Label Grid.Row="3" Content="32-bit rendering:"/>
+                            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding Pure32Bit}" VerticalAlignment="Center"
+                                          ToolTip="Render at full 32-bit precision instead of emulating the 16-bit dither (no color banding). Uncheck for the authentic 1998 dithered look."/>
+                            </StackPanel>
+                            <Label Grid.Row="4" Content="Frame rate cap:"/>
+                            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding LimitFps}" VerticalAlignment="Center" Margin="0,0,10,0"
+                                          ToolTip="The engine's own frame limiter (MaxFPS). Worth enabling on a 1998 engine: uncapped frame rates can spin a core needlessly. Note the cap cannot beat your display: at a 60 Hz desktop mode you get 60 whatever this says."/>
+                                <TextBox Text="{Binding FpsLimit}" Width="60" VerticalAlignment="Center"
+                                         IsEnabled="{Binding LimitFps}" ToolTip="Frames per second (30-1000)."/>
+                            </StackPanel>
+                            <Label Grid.Row="5" Content="Capture mouse:"/>
+                            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding CaptureMouse}" VerticalAlignment="Center"
+                                          ToolTip="On for normal play. Turn OFF for windowed testing - it lets the cursor leave the window so you can move/resize it and run two clients side by side. Writes both dgVoodoo's CaptureMouse and the game's own FreeMouse, because the engine confines the cursor itself and ignores dgVoodoo's setting entirely."/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Advanced launch flags (passed to Client.exe)" Padding="10" Margin="0,10,0,0">
+                        <StackPanel>
+                            <UniformGrid Columns="2">
+                                <CheckBox Content="Skip intro movies" IsChecked="{Binding Prefs.SkipMovies}" Margin="0,3"/>
+                                <CheckBox Content="Triple buffering" IsChecked="{Binding Prefs.TripleBuffering}" Margin="0,3"/>
+                                <CheckBox Content="Disable music" IsChecked="{Binding Prefs.DisableMusic}" Margin="0,3"/>
+                                <CheckBox Content="Poly gap fixing" IsChecked="{Binding Prefs.PolyGapFixing}" Margin="0,3"/>
+                                <CheckBox Content="Disable sound" IsChecked="{Binding Prefs.DisableSound}" Margin="0,3"/>
+                                <CheckBox Content="Disable fog" IsChecked="{Binding Prefs.DisableFog}" Margin="0,3"/>
+                                <CheckBox Content="Optimized surfaces" IsChecked="{Binding Prefs.OptimizedSurfaces}" Margin="0,3"/>
+                            </UniformGrid>
+                            <CheckBox Content="(Cheat) Unlock all levels" IsChecked="{Binding Prefs.UnlockAllLevels}" Margin="0,8,0,3"
+                                      ToolTip="Adds a Campaign Levels entry to the in-game Campaign menu, listing every retail level so you can jump straight to one. Passes +EnableRetailLevels 1."/>
+                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                <Label Content="Seed list URL:"/>
+                                <TextBox Text="{Binding Prefs.SeedListUrl}" Width="280" VerticalAlignment="Center"
+                                         ToolTip="Optional JSON list of server addresses, merged with the shipped Defaults\seed-servers.json and everything else the browser knows. Lets new entry points be published without a launcher release - see Defaults\seed-servers.README.txt. Blank is fine."/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                <Label Content="Extra arguments:"/>
+                                <TextBox Text="{Binding Prefs.ExtraArgs}" Width="280" VerticalAlignment="Center"
+                                         ToolTip="Appended verbatim to the Client.exe command line (e.g. -rez Custom\SomeMod.rez)"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Game installation" Padding="10" Margin="0,16,0,16">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding GameDir, UpdateSourceTrigger=PropertyChanged}" Width="360"/>
+                                <Button Content="Detect" Width="70" Margin="8,0,0,0" Click="DetectGame_Click"/>
+                                <Button Content="Reload" Width="70" Margin="8,0,0,0" Click="ReloadGame_Click"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                <Button Content="Game Setup…" Width="110" Click="OpenSetup_Click"
+                                        ToolTip="Compatibility fixes and the ShogoFRESH mod overlay (opens automatically at startup while anything is missing)."/>
+                                <Button Content="Open logs folder" Width="130" Margin="8,0,0,0" Click="OpenLogs_Click"
+                                        ToolTip="Crash reports land here, not beside the game - a Steam file verification can clear files it does not recognise, and a reinstall would take the history with it. If ShogoFRESH ever crashes, this is the folder to send me."/>
+                                <Button Content="Open screenshots folder" Width="160" Margin="8,0,0,0" Click="OpenScreenshots_Click"
+                                        ToolTip="F8 screenshots land in Save\screenshots under the game folder (JPEG unless ScreenshotJpeg is 0). The folder is created the first time you take one."/>
+                            </StackPanel>
+                            <TextBlock Margin="0,8,0,0" Foreground="{StaticResource DimTextBrush}" TextWrapping="Wrap"
+                                       Text="The launcher edits autoexec.cfg / defkeybd.cfg / ShogoSrv.cfg here and manages mods in Custom\. Nothing is modified until you click a save/host/join action."/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                </ScrollViewer>
+                </DockPanel>
+            </TabItem>
+
+        </TabControl>
+    </DockPanel>
+</Window>
