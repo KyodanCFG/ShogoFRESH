@@ -419,10 +419,37 @@
                                 <DockPanel VerticalAlignment="Top">
                                     <TextBlock DockPanel.Dock="Top" Text="Available (retail + Custom)" Foreground="{StaticResource DimTextBrush}" Margin="0,0,0,4"
                                                ToolTip="Every map the server could load. A * marks a retail map - one that shipped with the game, so every player already has it. Anything unmarked came from Custom\, and a player who does not have that file cannot join while it is running."/>
-                                    <!-- Same Dock and the same 0,12,0,0 margin as the Order row
-                                         opposite, so the two sit on one line across the group. -->
+                                    <!-- The search sits directly under the list with the same
+                                         0,12,0,0 margin as the Order row opposite, so the two land
+                                         on one line across the group; the buttons drop below it.
+                                         Filter on the AVAILABLE list only - the rotation is a
+                                         curated dozen the operator just arranged; this list is
+                                         every map on disk plus every level in every rez, and it is
+                                         the one that grows past finding-by-eye. -->
                                     <StackPanel DockPanel.Dock="Bottom" Margin="0,12,0,0">
-                                      <StackPanel Orientation="Horizontal">
+                                      <Grid>
+                                        <TextBox Padding="2,2,20,2" Text="{Binding MapFilterText, UpdateSourceTrigger=PropertyChanged}"
+                                                 ToolTip="Type to filter the available maps. Matches anywhere in the name."/>
+                                        <!-- The clear button lives INSIDE the field's right edge; the
+                                             padding above keeps typed text from running under it.
+                                             Templated flat because the app theme restyles Button with
+                                             its own chrome - Background=Transparent on the button
+                                             itself lost to the template, and the X rendered as a grey
+                                             slab the height of the row. -->
+                                        <Button Width="16" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,3,0"
+                                                Focusable="False" Cursor="Hand"
+                                                Click="ClearMapFilter_Click" ToolTip="Clear the search">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Grid Background="Transparent">
+                                                        <TextBlock Text="&#x2715;" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                   Foreground="{StaticResource DimTextBrush}"/>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                      </Grid>
+                                      <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
                                         <Button Content="Refresh" Width="95" Click="RefreshMaps_Click"
                                                 ToolTip="Re-scan for maps: retail, Custom\maps\mp, loose Custom\*.dat, and the levels inside any Custom\*.rez. Build a map while the launcher is open and this is how it appears - the rotation you have arranged is left exactly as it is."/>
                                         <Button Content="Open folder" Width="95" Margin="6,0,0,0" Click="OpenMapsFolder_Click"

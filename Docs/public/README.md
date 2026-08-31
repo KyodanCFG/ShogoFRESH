@@ -3,7 +3,7 @@
 Everything here is written for someone outside the project: a player, a
 server operator, or anyone curious about what the work actually changes.
 
-Building FOR Shogo is documented separately: the **Shogo Creative Kit**
+Building FOR Shogo is documented separately: **ShogoMAKE** (github.com/KyodanCFG/ShogoMAKE)
 carries MODDING, TEXTURE-MODDING, DTXFORMAT, REZFORMAT and LOCALIZATION,
 beside the tools and examples they refer to. Those pages are maintained in
 this tree and published with the kit — one copy, two front doors.

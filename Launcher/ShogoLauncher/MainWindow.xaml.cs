@@ -104,7 +104,7 @@ public partial class MainWindow : Window
     private async void Refresh_Click(object sender, RoutedEventArgs e) =>
         await _vm.RefreshServersAsync();
 
-    private void Join_Click(object sender, RoutedEventArgs e) => _vm.JoinSelected();
+    private async void Join_Click(object sender, RoutedEventArgs e) => await _vm.JoinSelectedAsync();
 
     private void ServerGrid_DoubleClick(object sender, MouseButtonEventArgs e)
     {
@@ -112,7 +112,7 @@ public partial class MainWindow : Window
         // the header) must never trigger a join.
         if (FindAncestor<CheckBox>(e.OriginalSource as DependencyObject) is not null) return;
         if (FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject) is null) return;
-        _vm.JoinSelected();
+        _ = _vm.JoinSelectedAsync();
     }
 
     private static T? FindAncestor<T>(DependencyObject? node) where T : DependencyObject
@@ -802,6 +802,8 @@ public partial class MainWindow : Window
     /// it from the saved cfg would throw away unsaved arranging - a refresh
     /// that costs you your work is worse than no refresh.
     /// </summary>
+    private void ClearMapFilter_Click(object sender, RoutedEventArgs e) => _vm.MapFilterText = "";
+
     private void RefreshMaps_Click(object sender, RoutedEventArgs e)
     {
         // What was picked before, so a re-scan does not lose the selection.

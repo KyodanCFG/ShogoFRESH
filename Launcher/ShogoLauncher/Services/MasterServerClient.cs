@@ -141,7 +141,22 @@ public partial class MasterServerClient
             }
         }
 
+        // THIS MACHINE, always probed. A hosted FreshSrv (27888) or listen
+        // server (27889) on the same box never appears on any master or peer
+        // list from in here, so without these two the most common test setup
+        // - launcher and server side by side - showed an empty browser.
+        // Absorbed at Cache priority so a real record of the same address
+        // from any live source wins the merge; the Servers tab drops the
+        // pair again after querying if nothing local answered, so they are
+        // rows only when they are real.
+        var lan = new[]
+        {
+            new ServerInfo { Address = "127.0.0.1", Port = 27888 },
+            new ServerInfo { Address = "127.0.0.1", Port = 27889 },
+        };
+
         Absorb(cached, ServerSource.Cache);
+        Absorb(lan,    ServerSource.Cache);
         Absorb(seeds,  ServerSource.Seed);
         Absorb(saved,  ServerSource.Saved);
         Absorb(master.Servers, ServerSource.Master);

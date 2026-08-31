@@ -427,6 +427,31 @@ public partial class MainViewModel
     /// string nothing writes.</summary>
     private string _mapScanSummary = "";
     public string MapScanSummary { get => _mapScanSummary; set => Set(ref _mapScanSummary, value); }
+
+    /// <summary>
+    /// Filter over the Available list. A VIEW filter, not a rebuild: the
+    /// backing collection keeps every map, so clearing the box costs nothing
+    /// and Refresh keeps its "+N new" arithmetic against the full set.
+    /// Not dirty-tracked for the same reason as MapScanSummary - it is how
+    /// you are looking at the list, not a setting anything saves.
+    /// </summary>
+    private string _mapFilterText = "";
+    public string MapFilterText
+    {
+        get => _mapFilterText;
+        set
+        {
+            Set(ref _mapFilterText, value);
+
+            var view = System.Windows.Data.CollectionViewSource.GetDefaultView(AvailableMaps);
+            if (view is null) return;
+
+            var f = value?.Trim();
+            view.Filter = string.IsNullOrEmpty(f)
+                ? null
+                : o => o is string m && m.Contains(f, StringComparison.OrdinalIgnoreCase);
+        }
+    }
     public ObservableCollection<string> MapRotation { get; } = new();
 
     /// <summary>

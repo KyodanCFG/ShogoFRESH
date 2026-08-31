@@ -173,8 +173,10 @@ def check_dirty_tracking_covers_tabs():
     #   MapScanSummary - a READOUT, not a setting. It reports what the Refresh
     #     button just found; nothing writes it to a config, so marking the tab
     #     dirty for it would offer to save a sentence.
+    #   MapFilterText - also a readout-shaped control: it filters the view
+    #     of the available list and is never persisted anywhere.
     allow = {'SelectedServerProfile', 'NewProfileName', 'GameDir',
-             'MapScanSummary'}
+             'MapScanSummary', 'MapFilterText'}
 
     bad = []
     checked = 0
@@ -1573,7 +1575,7 @@ def check_public_docs():
 
     # The publication boundary has TWO front doors since 2026-08-30: the
     # ShogoFRESH repo (sync-public.ps1) carries the player-facing docs, and
-    # the Shogo Creative Kit (shogo-re's makepackage, GAME_DOCS) stages the
+    # the ShogoMAKE (shogo-re's makepackage, GAME_DOCS) stages the
     # creator-facing ones straight from this directory at build time. A doc
     # in neither list is still the failure this check exists for; a doc in
     # the kit's list is published, just through the other door. Read from

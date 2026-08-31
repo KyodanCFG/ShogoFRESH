@@ -115,6 +115,21 @@ public partial class MainViewModel
             Status = $"Querying {Servers.Count} server(s)...";
             await Task.WhenAll(Servers.Select(QueryServerAsync));
 
+            // The two always-probed loopback rows are only interesting when
+            // something local actually answered - a permanently dead
+            // "127.0.0.1" line reads as the browser being broken. Real
+            // remote entries keep their dead rows (a known server being
+            // down is information); the synthetic local pair is not a
+            // known server, it is a question we ask every refresh.
+            for (int i = Servers.Count - 1; i >= 0; i--)
+            {
+                if (Servers[i].Address == "127.0.0.1" &&
+                    Servers[i].PingMs < 0 && !Servers[i].IsFavorite && !Servers[i].IsManual)
+                {
+                    Servers.RemoveAt(i);
+                }
+            }
+
             // Ask the servers that answered which OTHER servers they know
             // about, and query anything new. This is what makes the list
             // survivable: no master site has to be up for a live network to be
@@ -318,9 +333,36 @@ public partial class MainViewModel
         Status = $"Removed {label} from the list.";
     }
 
-    public void JoinSelected()
+    public async Task JoinSelectedAsync()
     {
         if (!GameFound || SelectedServer is null) return;
+
+        // ASK THE SERVER BEFORE SPENDING A GAME BOOT ON IT. One-click join
+        // fires the engine's connect on the first menu frame, and the
+        // engine's JoinSession BLOCKS the whole client for up to ten seconds
+        // when nothing answers (300ms resends, 10s give-up) - which the
+        // player experiences as launching into a frozen black window. The
+        // launcher can know the answer in a couple of seconds with the same
+        // query the browser list is built from, so a dead server becomes a
+        // status-bar sentence here instead of a hung game there.
+        //
+        // The residual case is a server that dies BETWEEN this probe and the
+        // engine's connect - rare, and the ten-second engine behaviour is
+        // stock and unreachable from CShell.
+
+        var target = SelectedServer;
+        Status = $"Checking {target.DisplayAddress}...";
+
+        var probe = new ServerInfo { Address = target.Address, Port = target.Port };
+        await QueryServerAsync(probe);
+
+        if (probe.PingMs < 0)
+        {
+            Warn($"{target.DisplayAddress} did not answer - not launching. " +
+                 "The server may be down, or a firewall is eating the query.");
+            return;
+        }
+
         var launcher = new GameLaunchService(GameDir!)
         {
             // Where ShogoFRESH.rez sits relative to the Custom\ mods.
@@ -329,8 +371,8 @@ public partial class MainViewModel
         // -multiplayer (from the official launcher's switch set) boots
         // straight into the MP wizard, where our injected Ip0 entry is
         // at the top of the TCP/IP list.
-        launcher.LaunchGame(SelectedServer.DisplayAddress, Prefs.BuildArgs(),
+        launcher.LaunchGame(target.DisplayAddress, Prefs.BuildArgs(),
                             multiplayer: true);
-        Status = $"Connecting to {SelectedServer.DisplayAddress}...";
+        Status = $"Connecting to {target.DisplayAddress}...";
     }
 }
