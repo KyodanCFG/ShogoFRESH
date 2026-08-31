@@ -92,7 +92,8 @@ its assets, or Monolith's source release, none of which are here. See
 
 ## Credits
 
-ShogoFRESH by KyodanCFG
+ShogoFRESH by KyodanCFG. Built with heavy AI assistance; every change
+verified in play against the real game.
 
 THIS LEVEL IS NOT MADE BY OR SUPPORTED BY Monolith Productions, or any of its
 affiliates and subsidiaries.
