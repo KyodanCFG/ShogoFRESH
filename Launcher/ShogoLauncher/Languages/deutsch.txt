@@ -1,0 +1,2104 @@
+# language: Deutsch
+# ShogoFRESH language pack - install via the launcher's Language
+# picker (Settings tab), or drop into Custom\Strings\ by hand.
+# Generated from Tools/loc_overlay.py output; source of truth for
+# corrections is this file - edit, save, next world load shows it.
+
+# IDS_VERSION
+0 = v 2.2
+# IDS_TITLE_MAINMENU
+1 = HAUPTMENUE
+# IDS_TITLE_GAME
+2 = KAMPAGNE
+# IDS_TITLE_DIFFICULTY
+3 = SCHWIERIGKEIT
+# IDS_TITLE_OPTIONS
+4 = OPTIONEN
+# IDS_TITLE_NEWGAME
+5 = NEUES SPIEL
+# IDS_TITLE_LOADGAME
+6 = SPIEL LADEN
+# IDS_TITLE_SAVEGAME
+7 = SPEICHERN
+# IDS_TITLE_CUSTOMLEVELS
+8 = EIGENE LEVEL
+# IDS_TITLE_DISPLAYOPTIONS
+9 = GRAFIKOPTIONEN
+# IDS_TITLE_DISPLAYMODE
+10 = ANZEIGEMODUS
+# IDS_TITLE_ADVANCEDDISPLAY
+11 = ERWEITERTE ANZEIGE
+# IDS_TITLE_SOUND
+12 = SOUND
+# IDS_TITLE_KEYBOARD
+13 = TASTATUR
+# IDS_TITLE_MOUSE
+14 = MAUS
+# IDS_TITLE_JOYSTICK
+15 = JOYSTICK
+# IDS_SINGLEPLAYER
+16 = kampagne
+# IDS_MULTIPLAYER
+17 = multiplayer
+# IDS_OPTIONS
+18 = optionen
+# IDS_CREDITS
+19 = credits
+# IDS_EXIT
+20 = beenden
+# IDS_NEWGAME
+21 = neues spiel
+# IDS_LOADGAME
+22 = spiel laden
+# IDS_SAVEGAME
+23 = speichern
+# IDS_WARP
+24 = eigenes level...
+# IDS_SCREEN
+25 = grafik
+# IDS_SOUND
+26 = sound
+# IDS_KEYBOARD
+27 = tastatur
+# IDS_MOUSE
+28 = maus
+# IDS_JOYSTICK
+29 = joystick
+# IDS_BACK
+30 = zurück
+# IDS_ERROR
+31 = fehler
+# IDS_CUSTOM
+32 = eigene
+# IDS_ON
+33 = an
+# IDS_OFF
+34 = aus
+# IDS_YES
+35 = ja
+# IDS_NO
+36 = nein
+# IDS_NONE
+37 = keine
+# IDS_FEW
+38 = wenige
+# IDS_SOME
+39 = einige
+# IDS_LOTS
+40 = viele
+# IDS_NOTSHOWN
+41 = verborgen
+# IDS_PULLEDBACK
+42 = zurückgezogen
+# IDS_FULL
+43 = voll
+# IDS_HALF
+44 = halb
+# IDS_ALL
+45 = alle
+# IDS_CLOSE
+46 = nah
+# IDS_FARTHER
+47 = mittel
+# IDS_FURTHEST
+48 = weit
+# IDS_RESTOREDEFAULTS
+49 = zurücksetzen
+# IDS_SHARP
+50 = scharf
+# IDS_SOFT
+51 = weich
+# IDS_YESNO
+52 = (j/n)
+# IDS_DONTDISPLAY_TITLE
+60 = Shogo-Multiplayer-Einstellungen
+# IDS_DONTDISPLAY_INFO
+62 = Dieser Dialog wird nicht mehr angezeigt, es sei denn, du hältst die Umschalttaste gedrückt.
+# IDS_NETERR_CONNECTIONREJECTED
+63 = Verbindung abgelehnt.
+# IDS_HEALTH
+80 = LEBEN
+# IDS_ARMOR
+81 = PANZERUNG
+# IDS_AMMO
+82 = MUNITION
+# IDS_TITLE_RUNSPEED
+108 = Serveroption: Lauftempo
+# IDS_TITLE_MISSILESPEED
+110 = Serveroption: Raketentempo
+# IDS_TITLE_TIMESPEED
+112 = Serveroption: Weltzeit-Tempo
+# IDS_TITLE_NIGHTCOLOR
+114 = Serveroption: Nachtfarbe der Welt
+# IDS_TITLE_RESPAWNSCALE
+116 = Serveroption: Respawn-Faktor
+# IDS_TITLE_HEALSCALE
+118 = Serveroption: Heilfaktor
+# IDS_CONTROL_FORWARD
+256 = vorwärts
+# IDS_CONTROL_BACKWARD
+257 = rückwärts
+# IDS_CONTROL_TURNLEFT
+258 = links drehen
+# IDS_CONTROL_TURNRIGHT
+259 = rechts drehen
+# IDS_CONTROL_STRAFE
+260 = seitwärts
+# IDS_CONTROL_STRAFELEFT
+261 = seitwärts links
+# IDS_CONTROL_STRAFERIGHT
+262 = seitwärts rechts
+# IDS_CONTROL_TURNAROUND
+263 = umdrehen
+# IDS_CONTROL_RUN
+264 = rennen
+# IDS_CONTROL_FIRE
+265 = primärfeuer
+# IDS_CONTROL_ACTIVATE
+266 = benutzen
+# IDS_CONTROL_JUMP
+267 = springen
+# IDS_CONTROL_DOUBLEJUMP
+268 = doppelsprung
+# IDS_CONTROL_DUCK
+269 = ducken
+# IDS_CONTROL_NEXTWEAPON
+270 = nächste waffe
+# IDS_CONTROL_PREVIOUSWEAPON
+271 = vorige waffe
+# IDS_CONTROL_LOOKUP
+272 = hochsehen
+# IDS_CONTROL_LOOKDOWN
+273 = runtersehen
+# IDS_CONTROL_CENTERVIEW
+274 = blick zentrieren
+# IDS_CONTROL_CHASEVIEW
+275 = außenansicht
+# IDS_CONTROL_SHOWORDINANCE
+277 = inventar
+# IDS_CONTROL_FRAGCOUNT
+278 = punktestand
+# IDS_CONTROL_SAY
+279 = chat
+# IDS_CONTROL_TRACTORBEAM
+280 = traktorstrahl
+# IDS_CONTROL_VEHICLEMODETOGGLE
+281 = fahrzeugmodus
+# IDS_CONTROL_RUNLOCKTOGGLE
+282 = gehen
+# IDS_CONTROL_MOUSELOOKTOGGLE
+283 = mausblick
+# IDS_CONTROL_CROSSHAIRTOGGLE
+284 = fadenkreuz
+# IDS_CONTROL_WEAPON1
+285 = waffe 1
+# IDS_CONTROL_WEAPON2
+286 = waffe 2
+# IDS_CONTROL_WEAPON3
+287 = waffe 3
+# IDS_CONTROL_WEAPON4
+288 = waffe 4
+# IDS_CONTROL_WEAPON5
+289 = waffe 5
+# IDS_CONTROL_WEAPON6
+290 = waffe 6
+# IDS_CONTROL_WEAPON7
+291 = waffe 7
+# IDS_CONTROL_WEAPON8
+292 = waffe 8
+# IDS_CONTROL_WEAPON9
+293 = waffe 9
+# IDS_CONTROL_WEAPON10
+294 = waffe 10
+# IDS_CONTROL_UNASSIGNED
+297 = nicht belegt
+# IDS_ACTIONSTRING_FORWARD
+300 = Forward
+# IDS_ACTIONSTRING_BACKWARD
+301 = Backward
+# IDS_ACTIONSTRING_TURNLEFT
+302 = Left
+# IDS_ACTIONSTRING_TURNRIGHT
+303 = Right
+# IDS_ACTIONSTRING_STRAFE
+304 = Strafe
+# IDS_ACTIONSTRING_STRAFELEFT
+305 = StrafeLeft
+# IDS_ACTIONSTRING_STRAFERIGHT
+306 = StrafeRight
+# IDS_ACTIONSTRING_TURNAROUND
+307 = TurnAround
+# IDS_ACTIONSTRING_RUN
+308 = Speed
+# IDS_ACTIONSTRING_FIRE
+309 = Fire
+# IDS_ACTIONSTRING_ACTIVATE
+310 = Activate
+# IDS_ACTIONSTRING_JUMP
+311 = Jump
+# IDS_ACTIONSTRING_DOUBLEJUMP
+312 = DoubleJump
+# IDS_ACTIONSTRING_DUCK
+313 = Duck
+# IDS_ACTIONSTRING_NEXTWEAPON
+314 = NextWeapon
+# IDS_ACTIONSTRING_PREVIOUSWEAPON
+315 = PrevWeapon
+# IDS_ACTIONSTRING_LOOKUP
+316 = LookUp
+# IDS_ACTIONSTRING_LOOKDOWN
+317 = LookDown
+# IDS_ACTIONSTRING_CENTERVIEW
+318 = CenterView
+# IDS_ACTIONSTRING_CHASEVIEW
+319 = ChaseView
+# IDS_ACTIONSTRING_SHOWORDINANCE
+321 = ShowOrdinance
+# IDS_ACTIONSTRING_FRAGCOUNT
+322 = FragCount
+# IDS_ACTIONSTRING_SAY
+323 = SendMessage
+# IDS_ACTIONSTRING_TRACTORBEAM
+324 = TractorBeam
+# IDS_ACTIONSTRING_VEHICLEMODETOGGLE
+325 = VehicleModeToggle
+# IDS_ACTIONSTRING_RUNLOCKTOGGLE
+326 = RunLock
+# IDS_ACTIONSTRING_MOUSELOOKTOGGLE
+327 = MouseAim
+# IDS_ACTIONSTRING_CROSSHAIRTOGGLE
+328 = CursorTog
+# IDS_ACTIONSTRING_UNASSIGNED
+329 = unassigned
+# IDS_SUBDET_MODELLOD
+343 = Modell-LOD
+# IDS_SUBDET_SHADOWS
+344 = Schatten
+# IDS_SUBDET_BULLETHOLES
+345 = Einschusslöcher
+# IDS_SUBDET_TEXTUREDETAIL
+346 = Texturdetail
+# IDS_SUBDET_DYNAMICLIGHTING
+347 = Dynamisches Licht
+# IDS_SUBDET_LIGHTMAPPING
+348 = Lightmapping
+# IDS_SUBDET_SPECIALFX
+349 = Spezialeffekt-Detail
+# IDS_SUBDET_ENVMAPPING
+350 = Environment Mapping
+# IDS_SUBDET_MODELFB
+351 = Modell-Fullbrights
+# IDS_SUBDET_CLOUDMAPLIGHT
+352 = Wolken-Modellbeleuchtung
+# IDS_SUBDET_PVWEAPONS
+353 = Spielerwaffen
+# IDS_SUBDET_RENDERDIST
+354 = Sichtweite
+# IDS_SUBDET_FOGENABLED
+355 = Nebel aktiv
+# IDS_SUBDET_DRAWSKY
+356 = Himmel zeichnen
+# IDS_SUBDET_POLYGRIDS
+357 = Polygrids
+# IDS_QUICKLOAD
+360 = schnellladen (F7)
+# IDS_QUICKSAVE
+361 = schnellspeichern (F6)
+# IDS_AUTOSAVING
+364 = Autospeichern...
+# IDS_NOAUTOSAVEGAME
+365 = Kein Autospeicherstand vorhanden.
+# IDS_KILLFEED_ENVIRONMENT
+366 = gestorben
+# IDS_KILLFEED_RAMMED
+367 = Roadkill
+# IDS_CONTINUE
+368 = weiter
+# IDS_KILLFEED_TELEFRAG
+369 = Telefrag
+# IDS_DISPLAY_CURRENTMODE
+414 = anzeigemodus
+# IDS_DISPLAY_8BIT
+415 = 8-bit-texturen
+# IDS_DISPLAY_16BIT
+416 = 16-bit-texturen
+# IDS_DISPLAY_TITLE
+417 = Anzeige einrichten
+# IDS_DISPLAY_CHANGE
+418 = modus ändern
+# IDS_DISPLAY_GORE
+419 = gore-stufe
+# IDS_DISPLAY_SCREENFLASH
+420 = bildschirmblitz
+# IDS_DISPLAY_DETAIL
+421 = detailstufe
+# IDS_DISPLAY_ADVANCED
+422 = erweiterte optionen
+# IDS_SOUND_TITLE
+423 = Soundoptionen
+# IDS_SOUND_MUSICENABLED
+424 = interaktive musik
+# IDS_SOUND_MUSICVOL
+425 = musiklautstärke
+# IDS_SOUND_FX
+426 = soundeffekte
+# IDS_SOUND_FXVOL
+427 = effektlautstärke
+# IDS_SOUND_QUALITY
+428 = effektqualität
+# IDS_SOUND_NONE
+429 = keine
+# IDS_SOUND_IMA
+430 = direct music
+# IDS_LOW
+431 = niedrig
+# IDS_MEDIUM
+432 = mittel
+# IDS_HIGH
+433 = hoch
+# IDS_ADVANCED
+434 = erweitert
+# IDS_MOUSE_MOUSELOOK
+435 = mausblick
+# IDS_MOUSE_LOOKSPRING
+436 = lookspring
+# IDS_MOUSE_INVERTYAXIS
+437 = y-achse umkehren
+# IDS_MOUSE_SENSITIVITY
+438 = empfindlichkeit
+# IDS_MOUSE_INPUTRATE
+439 = glättung
+# IDS_MOUSE_LEFTBUTTON
+440 = linke taste
+# IDS_MOUSE_MIDDLEBUTTON
+441 = mittlere taste
+# IDS_MOUSE_RIGHTBUTTON
+442 = rechte taste
+# IDS_JOY_JOYLOOK
+443 = joylook
+# IDS_JOY_INVERTYAXIS
+444 = y-achse umkehren
+# IDS_JOY_UP
+445 = joystick hoch
+# IDS_JOY_DOWN
+446 = joystick runter
+# IDS_JOY_LEFT
+447 = joystick links
+# IDS_JOY_RIGHT
+448 = joystick rechts
+# IDS_JOY_BUTTON1
+449 = taste 1
+# IDS_JOY_BUTTON2
+450 = taste 2
+# IDS_JOY_BUTTON3
+451 = taste 3
+# IDS_JOY_BUTTON4
+452 = taste 4
+# IDS_JOY_BUTTON5
+453 = taste 5
+# IDS_JOY_BUTTON6
+454 = taste 6
+# IDS_JOY_BUTTON7
+455 = taste 7
+# IDS_JOY_BUTTON8
+456 = taste 8
+# IDS_JOY_BUTTON9
+457 = taste 9
+# IDS_JOY_BUTTON10
+458 = taste 10
+# IDS_NEW_EASY
+460 = leicht
+# IDS_NEW_MEDIUM
+461 = normal
+# IDS_NEW_HARD
+462 = schwer
+# IDS_NEW_INSANE
+463 = WAHNSINN
+# IDS_DMODE_RENDERER
+500 = renderer
+# IDS_DMODE_RESOLUTION
+501 = auflösung
+# IDS_DMODE_BITDEPTH
+502 = farbtiefe
+# IDS_DMODE_DEPTH8
+503 = 8 bit
+# IDS_DMODE_DEPTH16
+504 = 16 bit
+# IDS_DMODE_PLEASEWAIT1
+505 = Bitte warten, während Shogo
+# IDS_DMODE_PLEASEWAIT2
+506 = die Rendererliste erstellt...
+# IDS_KILLEDMYSELF
+520 = Du hast dich selbst getötet!
+# IDS_WEAPON_PULSERIFLE
+550 = Pulsgewehr
+# IDS_WEAPON_SPIDER
+551 = Spider
+# IDS_WEAPON_BULLGUT
+552 = Bullgut
+# IDS_WEAPON_SNIPERRIFLE
+553 = Scharfschützengewehr
+# IDS_WEAPON_JUGGERNAUT
+554 = Juggernaut
+# IDS_WEAPON_SHREDDER
+555 = Shredder
+# IDS_WEAPON_REDRIOT
+556 = Red Riot
+# IDS_WEAPON_ENERGYBATON
+557 = Energieschlagstock
+# IDS_WEAPON_ENERGYBLADE
+558 = Energieklinge
+# IDS_WEAPON_KATANA
+559 = Katana
+# IDS_WEAPON_MONOKNIFE
+560 = Monoklinge
+# IDS_WEAPON_COLT45
+561 = Pistolen
+# IDS_WEAPON_SHOTGUN
+562 = Schrotflinte
+# IDS_WEAPON_ASSAULTRIFLE
+563 = Sturmgewehr
+# IDS_WEAPON_ENERGYGRENADE
+564 = Haftminen
+# IDS_WEAPON_KATOGRENADE
+565 = Kato-Granaten
+# IDS_WEAPON_MAC10
+566 = SMG
+# IDS_WEAPON_TOW
+567 = TOW
+# IDS_WEAPON_LASERCANNON
+568 = Laserkanone
+# IDS_WEAPON_SQUEAKYTOY
+569 = Quietschspielzeug
+# IDS_WEAPON_TANTO
+570 = Tanto
+# IDS_AMMO_PULSERIFLE
+575 = Ladungen
+# IDS_AMMO_SPIDER
+576 = Haftgranaten
+# IDS_AMMO_BULLGUT
+577 = Raketen
+# IDS_AMMO_SNIPERRIFLE
+578 = Geschosse
+# IDS_AMMO_JUGGERNAUT
+579 = Patronen
+# IDS_AMMO_SHREDDER
+580 = Patronen
+# IDS_AMMO_REDRIOT
+581 = Kanister
+# IDS_AMMO_COLT45
+582 = Patronen
+# IDS_AMMO_SHOTGUN
+583 = Schrotpatronen
+# IDS_AMMO_ASSAULTRIFLE
+584 = Patronen
+# IDS_AMMO_ENERGYGRENADE
+585 = Haftminen
+# IDS_AMMO_KATOGRENADE
+586 = Kato-Granaten
+# IDS_AMMO_MAC10
+587 = Patronen
+# IDS_AMMO_TOW
+588 = Raketen
+# IDS_AMMO_LASERCANNON
+589 = Ladungen
+# IDS_MISSIONLOG
+633 = MISSIONSLOG
+# IDS_PRIMARY_OBJECTIVES
+634 = HAUPTZIELE:
+# IDS_ORDINANCE
+640 = Arsenal
+# IDS_WEAPONS
+641 = waffen
+# IDS_AMMUNITION
+642 = munition
+# IDS_COUNT
+643 = anzahl
+# IDS_PAUSED
+650 = Spiel pausiert
+# IDS_UNUSED
+651 = Unbenutzt
+# IDS_PRESSANYKEY
+660 = drücke eine taste...
+# IDS_EMPTY
+661 = [ leer ]
+# IDS_PRESSKEYTOCONTINUE
+662 = weiter mit Enter
+# IDS_SUREWANTQUIT
+663 = Willst du wirklich beenden?
+# IDS_BUMPER_LOADING
+664 = Lade...
+# IDS_ENABLETEXTHARDWRAP
+704 = FALSE
+# IDS_EXCLUDELINESTARTCHARS
+705 = .
+# IDS_ALLOW_NO_GORE
+752 = FALSE
+# IDS_NOCUSTOMWORLDS
+800 = Keine eigenen Welten gefunden
+# IDS_DEMONOCUSTOMWORLDS
+801 = Eigene Welten sind in der Demo nicht verfügbar
+# IDS_DEMODISCONNECT
+802 = Verbindung zum Server getrennt.  (Hinweis: Demo-Spiele müssen von Demo-Servern gehostet werden)
+# IDS_DEMOINFO
+803 = info
+# IDS_NOJOYSTICKDETECTED
+900 = Kein Joystick gefunden.  Bitte prüfe Konfiguration und Anschluss deines Joysticks.
+# IDS_NOQUICKSAVEGAME
+901 = Kein Schnellspeicherstand vorhanden.
+# IDS_LOADGAMEFAILED
+902 = Fehler beim Laden des Spielstands.
+# IDS_SAVEGAMEFAILED
+903 = Fehler beim Speichern.
+# IDS_NOLOADLEVEL
+904 = Level konnte nicht geladen werden.
+# IDS_SOUNDNOTINITED
+905 = Sound konnte nicht initialisiert werden.  Bitte stelle sicher, dass deine Soundkarte richtig konfiguriert ist.
+# IDS_UNSPECIFIEDERROR
+906 = Ein unbekannter Fehler ist aufgetreten.
+# IDS_NOREMAPKEY
+907 = Diese Taste kann nicht neu belegt werden.
+# IDS_NOSOUNDCHANGE
+908 = Soundeffekte müssen aktiviert sein, um diesen Wert zu ändern.
+# IDS_NOMUSICCHANGE
+909 = Musik muss aktiviert sein, um diesen Wert zu ändern.
+# IDS_ENDCURRENTGAME
+910 = Dies beendet dein laufendes Spiel.  Fortfahren?
+# IDS_REINITIALIZING_RENDERER
+911 = Renderer wird neu initialisiert
+# IDS_NETERR_GENERIC
+951 = FEHLER - Netzwerkspiel konnte nicht eingerichtet werden.
+# IDS_NETERR_SELECTSERVICE
+952 = FEHLER - Der gewählte Netzwerkdienst kann nicht verwendet werden.
+# IDS_NETERR_FILLSERVICE
+953 = FEHLER - Kein Zugriff auf die verfügbaren Netzwerkdienste.
+# IDS_NETERR_JOINSESSION
+954 = FEHLER - Beitritt zur gewählten Spielsitzung nicht möglich.
+# IDS_NETERR_HOSTSESSION
+955 = FEHLER - Spielsitzung kann nicht gehostet werden.
+# IDS_NETERR_INIT
+956 = FEHLER - Netzwerksystem konnte nicht initialisiert werden.
+# IDS_NETERR_CANTBINDTOPORT
+957 = FEHLER - Der angeforderte Port kann nicht belegt werden.
+# IDS_NETERR_NOTSAMEGUID
+958 = FEHLER - Beitritt nicht möglich: Der Server hat eine andere Version oder ein anderes Spiel.
+# IDS_JOYSTICKMENUDISABLED
+959 = Joystick-Menü deaktiviert. Der Joystick kann in der Datei joystick.cfg konfiguriert werden.
+# IDS_SANJURO
+1000 = Sanjuro
+# IDS_SAY
+1001 = SAGEN:
+# IDS_CRITICALHIT
+1010 = VOLLTREFFER!
+# IDS_ROCKETLOCKDETECTED
+1011 = Raketenerfassung erkannt!
+# IDS_ROCKETLOCKON
+1012 = Ziel aufgeschaltet
+# IDS_YOUWEREKILLED
+1013 = Du wurdest getötet!
+# IDS_QUICKSAVING
+1014 = Schnellspeichern...
+# IDS_ACCESSGRANTED
+1024 = Zugang gewährt
+# IDS_ACCESSDENIED
+1025 = Zugang verweigert
+# IDS_LOCKED
+1026 = Verschlossen
+# IDS_NO_TIME_NOW
+1027 = Ich habe gerade keine Zeit
+# IDS_SURE_ILL_HELP
+1028 = Klar, ich helfe dir
+# IDS_FOUND_A_SECRET
+1029 = Du hast ein Geheimnis entdeckt!
+# IDS_FOR_GABRIEL
+1030 = Für Gabriel
+# IDS_AGAINST_GABRIEL
+1031 = Gegen Gabriel
+# IDS_ID_REQUIRED
+1032 = Nur für befugtes Personal. Ausweis erforderlich.
+# IDS_MISSIONOBJECTIVE_001
+1040 = Zieh dich zum Drop Point Renegade zurück
+# IDS_MISSIONOBJECTIVE_002
+1041 = Finde deinen Ausweis
+# IDS_MISSIONOBJECTIVE_003
+1042 = Steig in das Shuttle der Orange Line, das dich zu MCA-Dock S bringt
+# IDS_MISSIONOBJECTIVE_004
+1043 = Melde dich zum Dienst
+# IDS_MISSIONOBJECTIVE_005
+1044 = Wähle einen MCA für deine Mission
+# IDS_MISSIONOBJECTIVE_006
+1045 = Begib dich zum Abflug in die Shuttlebucht
+# IDS_MISSIONOBJECTIVE_007
+1046 = Schalte die feindliche Überwachung aus
+# IDS_MISSIONOBJECTIVE_008
+1047 = Infiltriere die Destillationsanlage
+# IDS_MISSIONOBJECTIVE_009
+1048 = Weiter zum Südwest-Eingang
+# IDS_MISSIONOBJECTIVE_010
+1049 = Schwäche die Verteidigung der Gefallenen
+# IDS_MISSIONOBJECTIVE_011
+1050 = Verschaffe dir Zugang nach Avernus
+# IDS_MISSIONOBJECTIVE_012
+1051 = Erreiche den Madison-Tunnel
+# IDS_MISSIONOBJECTIVE_013
+1052 = Weiter zum CMC-Hauptquartier
+# IDS_MISSIONOBJECTIVE_014
+1053 = Finde den zentralen Lüftungsschacht
+# IDS_MISSIONOBJECTIVE_015
+1054 = Schalte die Heizung des Hauptlüftungsschachts ab
+# IDS_MISSIONOBJECTIVE_016
+1055 = Kehre den Luftstrom im Nebenschacht um
+# IDS_MISSIONOBJECTIVE_017
+1056 = Lass dich vom Luftstrom zur oberen Ebene tragen
+# IDS_MISSIONOBJECTIVE_018
+1057 = Docke deinen MCA an
+# IDS_MISSIONOBJECTIVE_019
+1058 = Unterstütze Strike Force Carnivore
+# IDS_MISSIONOBJECTIVE_020
+1059 = Weiter zum Aufzug im Parkhaus
+# IDS_MISSIONOBJECTIVE_021
+1060 = Schalte die Störsender-Anlage ab
+# IDS_MISSIONOBJECTIVE_022
+1061 = Finde den Komm-Knotenpunkt und kontaktiere die Leviathan
+# IDS_MISSIONOBJECTIVE_023
+1062 = Hilf Toshiro, bevor er fällt
+# IDS_MISSIONOBJECTIVE_024
+1063 = Finde den Wartungszugang
+# IDS_MISSIONOBJECTIVE_025
+1064 = Kehr zu deinem MCA zurück
+# IDS_MISSIONOBJECTIVE_026
+1065 = Triff Hank im Parkhaus
+# IDS_MISSIONOBJECTIVE_027
+1066 = Wehre die verfolgenden cronischen Soldaten ab
+# IDS_MISSIONOBJECTIVE_028
+1067 = Beschütze Hank, bis er das Sicherheitssystem überbrücken kann
+# IDS_MISSIONOBJECTIVE_029
+1068 = Wähle einen neuen MCA
+# IDS_MISSIONOBJECTIVE_030
+1069 = Erreiche MEV-Dock 17
+# IDS_MISSIONOBJECTIVE_031
+1070 = Erwisch den Zug
+# IDS_MISSIONOBJECTIVE_032
+1071 = Infiltriere das CMC-Lagerhaus
+# IDS_MISSIONOBJECTIVE_033
+1072 = Gelange auf die Straße darunter
+# IDS_MISSIONOBJECTIVE_034
+1073 = Weiter zum Mecca
+# IDS_MISSIONOBJECTIVE_035
+1074 = Finde den Freiluftmarkt
+# IDS_MISSIONOBJECTIVE_036
+1075 = Finde den Tunnel vor dem Hotel
+# IDS_MISSIONOBJECTIVE_037
+1076 = Hol die Katze von Frau Haddam zurück
+# IDS_MISSIONOBJECTIVE_038
+1077 = Finde das Spielzeug
+# IDS_MISSIONOBJECTIVE_039
+1078 = Schnapp dir die Katze
+# IDS_MISSIONOBJECTIVE_040
+1079 = Wehre die CMC-Sicherheitskräfte ab
+# IDS_MISSIONOBJECTIVE_041
+1080 = Finde den Fahrschein
+# IDS_MISSIONOBJECTIVE_042
+1081 = Entwerte den Fahrschein
+# IDS_MISSIONOBJECTIVE_043
+1082 = Erwisch den Zug
+# IDS_MISSIONOBJECTIVE_044
+1083 = Erreiche das Tram-Terminal und docke an
+# IDS_MISSIONOBJECTIVE_045
+1084 = Entspann dich und genieß die Fahrt
+# IDS_MISSIONOBJECTIVE_046
+1085 = Finde Hilfe
+# IDS_MISSIONOBJECTIVE_047
+1086 = Erreg die Aufmerksamkeit der Wachen
+# IDS_MISSIONOBJECTIVE_048
+1087 = Finde den Hauptaufzug
+# IDS_MISSIONOBJECTIVE_049
+1088 = Gelange zum Zellentrakt
+# IDS_MISSIONOBJECTIVE_050
+1089 = Befreie Kura
+# IDS_MISSIONOBJECTIVE_051
+1090 = Gelange zum Serverkontrollraum
+# IDS_MISSIONOBJECTIVE_052
+1091 = Schalte die Firewall ab
+# IDS_MISSIONOBJECTIVE_053
+1092 = Gelange zum Zellentrakt
+# IDS_MISSIONOBJECTIVE_054
+1093 = Befreie Kura
+# IDS_MISSIONOBJECTIVE_055
+1094 = Verlass mit Kura das Gebäude
+# IDS_MISSIONOBJECTIVE_056
+1095 = Reaktiviere den Autopiloten, um die Tram zu stoppen
+# IDS_MISSIONOBJECTIVE_057
+1096 = Triff Hank
+# IDS_MISSIONOBJECTIVE_058
+1097 = Kehr zu deinem MCA zurück
+# IDS_MISSIONOBJECTIVE_059
+1098 = Geh an Bord des Luftschiffs
+# IDS_MISSIONOBJECTIVE_060
+1099 = Programmiere das Navigationssystem um
+# IDS_MISSIONOBJECTIVE_061
+1100 = Finde den Steckschlüssel
+# IDS_MISSIONOBJECTIVE_062
+1101 = Finde Kura
+# IDS_MISSIONOBJECTIVE_063
+1102 = Besorge die Datendisk
+# IDS_MISSIONOBJECTIVE_064
+1103 = Finde das Datenbankterminal
+# IDS_MISSIONOBJECTIVE_065
+1104 = Übertrage die Daten an die Leviathan
+# IDS_MISSIONOBJECTIVE_066
+1105 = Weiter zum Museum für Kriegsgeschichte
+# IDS_MISSIONOBJECTIVE_067
+1106 = Stell Toshiro
+# IDS_MISSIONOBJECTIVE_068
+1107 = Erreiche das Shuttle auf dem Dach
+# IDS_MISSIONOBJECTIVE_069
+1108 = Kehr zu deinem MCA zurück
+# IDS_MISSIONOBJECTIVE_070
+1109 = Gelange zum Madison-Tunnel
+# IDS_MISSIONOBJECTIVE_071
+1110 = Überquere die Brücke
+# IDS_MISSIONOBJECTIVE_072
+1111 = Erreiche MEV-Wartungslift 7
+# IDS_MISSIONOBJECTIVE_073
+1112 = Finde den Eingang zur Festung der Gefallenen
+# IDS_MISSIONOBJECTIVE_074
+1113 = Gelange zum Hauptlift
+# IDS_MISSIONOBJECTIVE_075
+1114 = Besiege Baku
+# IDS_MISSIONOBJECTIVE_076
+1115 = Besiege Gabriel
+# IDS_MISSIONOBJECTIVE_077
+1116 = Besiege Shogo
+# IDS_MISSIONOBJECTIVE_078
+1117 = Befreie Kathryn
+# IDS_MISSIONOBJECTIVE_079
+1118 = Begib dich zum Kraftwerk
+# IDS_MISSIONOBJECTIVE_080
+1119 = Erhöhe die Energiezufuhr zur Lebenserhaltung
+# IDS_MISSIONOBJECTIVE_081
+1120 = Erhöhe die Energiezufuhr zur Kato-Verarbeitung
+# IDS_MISSIONOBJECTIVE_082
+1121 = Erhöhe die Energiezufuhr zur Computersteuerung
+# IDS_MISSIONOBJECTIVE_083
+1122 = Erhöhe die Energiezufuhr zum Stromnetz 1701
+# IDS_MISSIONOBJECTIVE_084
+1123 = Erhöhe die Energiezufuhr zur Technikstation, Untergeschoss 5
+# IDS_MISSIONOBJECTIVE_085
+1124 = Weiter zum Kato-Verteilungszentrum
+# IDS_MISSIONOBJECTIVE_086
+1125 = Kappe die Energie aller Stationen
+# IDS_MISSIONOBJECTIVE_087
+1126 = Verschaffe dir Zugang zum Hauptcomputerkern
+# IDS_MISSIONOBJECTIVE_088
+1127 = Deaktiviere die Fernsteuerung der Kato-Kanone
+# IDS_MISSIONOBJECTIVE_089
+1128 = Komm an der Sicherheitsstation vorbei
+# IDS_MISSIONOBJECTIVE_090
+1129 = Gelange in die Wartungsschächte
+# IDS_MISSIONOBJECTIVE_091
+1130 = Zerstöre die Stabilisatorpaneele
+# IDS_MISSIONOBJECTIVE_092
+1131 = Überbrücke die Notabriegelung
+# IDS_MISSIONOBJECTIVE_093
+1132 = Weiter zur Brücke
+# IDS_MISSIONOBJECTIVE_094
+1133 = Weiter zur Kato-Kanone
+# IDS_MISSIONOBJECTIVE_095
+1134 = Hindere Admiral Akkaraju daran, die Kontrollterminals zu aktivieren
+# IDS_MISSIONOBJECTIVE_096
+1135 = Gib den Override-Code an allen drei Terminals ein
+# IDS_MISSIONOBJECTIVE_097
+1136 = Melde dich bei der Regionaldiagnostik für Missionsinfos
+# IDS_MISSIONOBJECTIVE_098
+1137 = Senke die Zugbrücken für dein Team
+# IDS_MISSIONOBJECTIVE_099
+1138 = Überbrücke die Sicherheitsabriegelung
+# IDS_MISSIONOBJECTIVE_100
+1139 = Weiter zum MCA-Dockbereich
+# IDS_MISSIONOBJECTIVE_101
+1140 = Finde einen anderen Weg zum Mecca
+# IDS_MISSIONOBJECTIVE_102
+1141 = Kehr zur Wohnung der Haddams zurück
+# IDS_MISSIONOBJECTIVE_103
+1142 = Finde Kura
+# IDS_MISSIONOBJECTIVE_104
+1143 = Merk dir vor, Ryo gehörig in den Hintern zu treten
+# IDS_MISSIONOBJECTIVE_105
+1144 = Spring den Hauptschacht hinunter
+# IDS_MISSIONOBJECTIVE_106
+1145 = Geh an Bord des Dropships, bevor es abhebt
+# IDS_MISSIONOBJECTIVE_107
+1146 = Im Ernst: Rein in das Dropship, oder du bist Geschichte
+# IDS_MISSIONOBJECTIVE_108
+1147 = Stirb mit etwas Würde
+# IDS_MISSIONOBJECTIVE_109
+1148 = Eskortiere Kura zum Datenterminal
+# IDS_MISSIONOBJECTIVE_110
+1149 = Verfolge den Admiral
+# IDS_MISSIONOBJECTIVE_111
+1150 = Versohl Ryo ein für alle Mal den Hintern
+# IDS_MISSIONOBJECTIVE_112
+1151 = Zertritt die kleine Made, bevor sie noch mehr Ärger macht
+# IDS_MISSIONOBJECTIVE_113
+1152 = Mach schon! Er lebt noch!
+# IDS_MISSIONOBJECTIVE_114
+1153 = Steig aufs Dach des Maritropa-Verkehrsamts
+# IDS_DISCONNECTED_FROM_SERVER
+1154 = Verbindung zum Server getrennt
+# IDS_DISCONNECTED_WRONG_VERSION
+1155 = Client- und Serverversion stimmen nicht überein. Eventuell wird ein Patch von shogo-mad.com benötigt!
+# IDS_BUMPERSCREEN_01
+1600 = Eine UCA-Aufklärungsmission in der verlassenen Stadt Avernus ist katastrophal gescheitert. Feindtruppen strömen aus den Zugangstunneln, und Dropships der Gefallenen haben MCA-Trupps auf deinem Rückzugsweg abgesetzt. Du musst dich zum Drop Point Renegade zurückziehen, bevor die UCA mit dem Flächenbombardement aus dem Orbit beginnt. Ein Dropship ist unterwegs, kann aber nicht lange bleiben. Du und dein Trupp habt nur ein kurzes Zeitfenster. Verpass es nich
+# IDS_BUMPERSCREEN_02
+1601 = Zurück an Bord des UCASF-Flaggschiffs Leviathan finden du und Kathryn ein paar kostbare Momente der Ruhe, bevor ihr euch auf die nächste Mission vorbereiten müsst. Aus dem All wirkt Cronus friedlich und fern, doch es hat dich bisher immer besiegt, und die Aussichten waren nie so düster. Genieße die kurze Atempause, denn sie wird nicht lange dauern.
+# IDS_BUMPERSCREEN_03
+1602 = Admiral Akkaraju war immer wie ein Vater für dich, doch seit dem Verlust von Kura, Toshiro und Baku ist er zunehmend distanziert und in sich gekehrt. Seine Entschlossenheit, die Gefallenen zu besiegen, grenzt an Besessenheit, als könnte er durch ihre Vernichtung zurückholen, was er verloren hat. Es ist kein Geheimnis, dass deine Mission vom UCA-Oberkommando angeordnet wurde und dass der Admiral persönlich die Kato-Kanone der Leviathan einsetzen wollte, um die Gefallenen auszu
+# IDS_BUMPERSCREEN_04
+1603 = Admiral Akkaraju war immer wie ein Vater für dich, doch seit dem Verlust von Kura, Toshiro und Baku ist er zunehmend distanziert und in sich gekehrt. Seine Entschlossenheit, die Gefallenen zu besiegen, grenzt an Besessenheit, als könnte er durch ihre Vernichtung zurückholen, was er verloren hat. Es ist kein Geheimnis, dass deine Mission vom UCA-Oberkommando angeordnet wurde und dass der Admiral persönlich die Kato-Kanone der Leviathan einsetzen wollte, um die Gefallenen auszu
+# IDS_BUMPERSCREEN_05
+1604 = LZ Minotaur setzt dich 15 Klicks südöstlich einer Zufahrtsstraße nach Avernus ab. Der Eingang ist schwach verteidigt, doch mit mäßigem Widerstand ist zu rechnen. Größere Ablenkungsverbände binden die Verteidigung der Gefallenen weiter im Norden und Osten, um mögliche Verstärkung abzufangen. Beschütze deine Truppmitglieder. Ihre Feuerkraft wird sich an der Außenmauer auszahlen, wo dich die stärkste Konzentration an Verteidigern erwartet.
+# IDS_BUMPERSCREEN_06
+1605 = Die Außenmauer liegt direkt vor deiner Position. Von hier an wird der Kampf nur härter. Beseitige jeden Widerstand und rücke nach Avernus vor.
+# IDS_BUMPERSCREEN_07
+1606 = Die Stadt Avernus wurde nach einer verheerenden Serie von Erdbeben weitgehend aufgegeben, führt aber ein unheimliches Eigenleben. Die geothermische Infrastruktur filtert Luft, sammelt Kondenswasser und speist die Straßenbeleuchtung - ein brauchbarer Lebensraum für Entwurzelte und Ausgestoßene. Kein Wunder, dass die Stadt zur improvisierten Festung von Gabriels fanatischer Armee wurde. Hier kamen Toshiro, Kura und Baku bei einem gewaltigen Erdbeben ums Leben, während der M
+# IDS_BUMPERSCREEN_08
+1607 = Die Falle ist zugeschnappt. Die Gefallenen stören deine Verbindung zur Leviathan und blockieren deinen Weg in die Innenstadt von Avernus. Deine einzige Hoffnung ist, durch das zentrale Lüftungssystem der Stadt zum Kommunikationszentrum an der Oberfläche zu gelangen. Dort kannst du vielleicht die Verbindung zur UCA wiederherstellen und lebend entkommen. Hank Johnson wird dir helfen. Hör auf seinen Rat, wenn du überleben willst.
+# IDS_BUMPERSCREEN_09
+1608 = UCA-Soldaten der Strike Force Carnivore haben sich nahe der Sicherheitsstation auf Ebene K gegen die Truppen der Gefallenen festgesetzt. Unterdessen versucht Hank, in die Anlage einzudringen und ein Ablenkungsmanöver zu starten, damit du hineinkommst. Unterstütze das UCA-Einsatzteam und rücke dann zur Hauptanlage vor.
+# IDS_BUMPERSCREEN_10
+1609 = Um die Verbindung zur Leviathan wiederherzustellen, musst du die Störsender-Anlage lahmlegen und dann Kathryn über eine Richtstrahlverbindung kontaktieren. Die Anlage ist allerdings gut verteidigt, es wird also nicht leicht. Vielleicht kannst du die Gefallenen mit ein wenig Hilfe von Hank überrumpeln und deine Ziele erreichen.
+# IDS_BUMPERSCREEN_11
+1610 = So weit deine Erinnerung zurückreicht, waren Kura, Toshiro, Kathryn und Baku immer da. Du warst vier Jahre alt, als deine Eltern starben, doch du hast keine Erinnerung an sie. Es waren deine Freunde und dein Bruder, die dich geprägt und zu dem gemacht haben, was du bist. Manche Erinnerungen sind klarer als andere - etwa die, als Toshiro in der baufälligen Kaserne neben dem Schulgebäude herumtollte und sich in eine missliche Lage brachte.
+# IDS_BUMPERSCREEN_12
+1611 = Deine Befehle sind eindeutig: Rückzug zur LZ Minotaur zur sofortigen Evakuierung. Aber die Lage lässt dir keine Ruhe. Kura lebt. Sie wartet in Maritropa auf dich, mit Informationen über Toshiro und Baku. Man darf annehmen, dass der Admiral auch von ihnen wusste. Was hat er dir noch verschwiegen? Wie auch immer: Da Verstärkung der Gefallenen in die Anlage strömt, gilt es zuerst, heil zu deinem MCA zurückzukommen.
+# IDS_BUMPERSCREEN_13
+1612 = Es scheint, das Schicksal hat dir die Entscheidung abgenommen. Ohne MCA gibt es keinen Weg zurück zur LZ Minotaur - die einzig vernünftige Option ist, mit Hank nach Maritropa zu gehen und Kura zu treffen. Admiral Akkaraju wird nicht begeistert sein, aber welche Wahl bleibt dir? Hank ist überzeugt, dich in eine alte CMC-Pumpstation zu bringen, wo du einen MCA stehlen kannst - der Rest liegt bei dir. Die Bewachung dürfte schwach sein, der Weg zum MCA-Dock also recht einfach. Ho
+# IDS_BUMPERSCREEN_14
+1613 = Weite Teile Maritropas stehen seit dem Zerfall des Cronischen Bergbaukonsortiums und dem militärischen Aufstieg der Gefallenen unter striktem Kriegsrecht. Du kannst dich darauf verlassen, dass ein schwer bewaffneter MCA bei den CMC-Sicherheitskräften mehr als nur Misstrauen weckt. Trotzdem gibt es kein besseres Mittel, um schnell ans Ziel zu kommen. Hank hat ein paar alte Freunde überredet, Maurice und Toshi, dir den Rücken zu decken. Gemeinsam müsst ihr euch zum MEV-Dock 17 
+# IDS_BUMPERSCREEN_15
+1614 = Den Zug zur Crescent-Square-Station zu erwischen, sollte einfach sein. Kompliziert wird es, Kura wieder gegenüberzustehen. Immerhin hieltest du sie für tot. Deine Gefühle für sie sind von Trauer überlagert und vom Verlust verstärkt. Sie zu verlieren hieß, einen Teil von dir selbst zu verlieren. Aber jetzt lebt sie. Und du bist mit ihrer Schwester zusammen.
+# IDS_BUMPERSCREEN_16
+1615 = Laut Kura gilt im Shinara-Distrikt eine selektive Ausgangssperre: Nur Bürger mit gültigem Ausweis dürfen auf die Straße. Da du nicht zu diesem erlesenen Kreis gehörst, musst du besonders vorsichtig sein. Kura wird dich führen, so gut sie kann, aber sei darauf gefasst, zu improvisieren...
+# IDS_BUMPERSCREEN_17
+1616 = Frau Haddams Katze ist irgendwo im Gebäude. Du musst erst ihr Quietschspielzeug finden, bevor sie zu dir kommt. Heruntergekommene Anlagen wie diese sind ideale Schlupfwinkel für Streuner - Männer und Frauen, deren Verstand an den harten Bedingungen von Cronus und der Plackerei der Kato-Ernte zerbrochen ist. Im Rudel können sie gefährlich werden.
+# IDS_BUMPERSCREEN_18
+1617 = Gib Frau Haddam ihre Katze und mach dich auf den Weg zum Mecca, um Kura zu treffen.
+# IDS_BUMPERSCREEN_19
+1618 = Kura steckt in Schwierigkeiten. Irgendwie muss die CMC herausgefunden haben, wohin ihr wolltet. Lange kann sie sie nicht aufhalten. Der Gedanke, so nah dran zu sein und sie wieder zu verlieren, ist unerträglich. Du vergisst fast, dass du noch mit ihrer Schwester zusammen bist.
+# IDS_BUMPERSCREEN_20
+1619 = Kura wurde von der CMC-Sicherheit gefangen genommen. Ryo Ishikawa, Chef von Shogo Industries auf Cronus, hat dir angeboten, dich in das CMC-Sicherheitshauptquartier einzuschleusen - im Tausch gegen deine Dienste dort drinnen. Hank glaubt, die Gefallenen werden alles daransetzen, Kura zu beseitigen, bevor sie etwas verraten kann. Du musst vor ihnen bei ihr sein.
+# IDS_BUMPERSCREEN_21
+1620 = Der einzige Weg zur Canopy-Station führt durch die schwer verteidigte Innenstadt von Maritropa. Diesmal bist du allein, gegen noch schlechtere Chancen - stell dich auf erbitterten Widerstand ein. Etwas sagt dir, dass der Kampf um Cronus weit komplizierter ist, als du dachtest. Ryo Ishikawa ist seit Langem ein Verbündeter der UCA, doch seine Motive waren nie ganz klar. Was hat er im CMC-Hauptquartier mit dir vor?
+# IDS_BUMPERSCREEN_22
+1621 = Die Tramfahrt nach Ober-Maritropa dürfte ereignislos verlaufen. Genieße die dringend nötige Verschnaufpause und sieh dich um. Man weiß nie, was so herumliegt.
+# IDS_BUMPERSCREEN_23
+1622 = Als du Baku kennenlerntest, war er ein schmächtiger Versager, ein Opfer für Schläger. Schwach und ängstlich, nahm er deine Freundschaft nur zögernd an - doch als er dir einmal vertraute, war seine Loyalität unverbrüchlich. Du erinnerst dich...
+# IDS_BUMPERSCREEN_24
+1623 = Ryo hat Wort gehalten. Mit dem ID-Code, den er dir gab, bist du unbehelligt ins CMC-Sicherheitshauptquartier gelangt. Kura sitzt auf Ebene zwei, doch Ryo will zuerst, dass du auf die unterste Etage vordringst und die Netzwerksicherungen im gesicherten Serverraum deaktivierst. Danach hilft er dir in den schwer befestigten Zellentrakt. Bisher keine Spur von den Gefallenen, aber die Zeit drängt.
+# IDS_BUMPERSCREEN_25
+1624 = Dein ID-Code ist im Hochsicherheitsbereich, den du jetzt betrittst, nutzlos. Ryo hat dich bis hierher ohne einen einzigen Schuss gebracht, aber sobald man dich entdeckt, kann er kaum noch etwas für dich tun.
+# IDS_BUMPERSCREEN_26
+1625 = Assassinen der Gefallenen sind unterwegs. Selbst wenn du vor ihnen bei Kura bist, werden sie dir dicht auf den Fersen sein. Die Zellen zu erreichen wird deutlich schwerer, jetzt, da Ryo im ganzen Gebäude Alarm ausgelöst hat. Dafür wirst du dich persönlich bei ihm bedanken müssen.
+# IDS_BUMPERSCREEN_27
+1626 = Offenbar will Admiral Akkaraju Avernus mit der Kato-Kanone der Leviathan angreifen und den Gefallenen in ihrer befestigten Heimatbasis den Todesstoß versetzen. Doch die Macht der Kato-Waffe wurde nie an einer besiedelten Welt erprobt, und die Nebenwirkungen der Explosion könnten auch Maritropa und Constantine treffen. Du musst ein Treffen mit Toshiro arrangieren und ihn zur Vernunft bringen. Wenn Kura mit Cothineal recht hat, gibt es vielleicht Hoffnung. Unterdessen ist deine
+# IDS_BUMPERSCREEN_28
+1627 = Kura erwartet dich an der Oshii-Forschungsstation, wo sie schlüssige Beweise für Cothineals Existenz zu finden hofft. Erst musst du hinkommen. Hanks Plan ist simpel: Ihr zwei schmuggelt euch an Bord eines CMC-Frachttransporters und programmiert ihn auf Avernus um. Es gibt nur eine kleine Komplikation...
+# IDS_BUMPERSCREEN_29
+1628 = Solange Ryo lebt, ist jeder in Gefahr, der dir etwas bedeutet. Er wird für Hanks Tod bezahlen, doch die Rache muss warten. Kathryn kann dir helfen, das automatische Navigationssystem des Luftschiffs umzuleiten, sobald du an Bord bist. Vielleicht hat Kura recht, und ein Beweis für Cothineal bringt ihren Vater zum Umdenken. Wenn nicht, musst du Avernus erreichen und Toshiro stellen, bevor der Admiral den Befehl zur Zerstörung von Avernus gibt. Der erste Trick ist, an Bord zu ko
+# IDS_BUMPERSCREEN_30
+1629 = Dein MCA ist sicher an Bord des Transporters angedockt - Zeit, dich zur vorderen Kabine durchzuschlagen und das primäre Navigationssystem zu finden. Eine Abteilung CMC-Soldaten bewacht die kostbare Munitionsfracht des Schiffs, also sei vorsichtig. An ihnen vorbeizukommen wird nicht leicht.
+# IDS_BUMPERSCREEN_31
+1630 = Das Geologische Forschungszentrum Oshii wurde von Shogo-Truppen angegriffen, die Informationen über Cothineal suchen. Sobald du Kura triffst, führt sie dich zur Hauptdatenbank. Von dort solltest du die Daten zur Leviathan hochladen können. Vielleicht reicht das, um Admiral Akkaraju zu überzeugen, dich die Sache auf deine Art lösen zu lassen.
+# IDS_BUMPERSCREEN_32
+1631 = Toshiro hat dir freies Geleit zum Museum für Kriegsgeschichte in Avernus zugesichert, sofern du seine Soldaten nicht angreifst. Aggression wird als Entscheidung gewertet, die Gefallenen herauszufordern, ohne anzuhören, was dein Bruder zu sagen hat.
+# IDS_BUMPERSCREEN_33
+1632 = Die Zeit ist gekommen, deinem Bruder gegenüberzutreten und über dein Schicksal zu entscheiden.
+# IDS_BUMPERSCREEN_34
+1633 = Admiral Akkaraju hat eingewilligt, die Kato-Kanone vorerst nicht gegen die Gefallenen einzusetzen, damit du Toshiro verfolgen und ihn aus Cothineals Einfluss befreien kannst. Gelingt dir das nicht, musst du ihn vernichten. Nun gilt es, den Tempel der Gefallenen zu finden und Gabriel entgegenzutreten - denn es war Gabriel, Cothineals Marionettengeneral, der dich durch die Augen deines Bruders anstarrte, als du sein Bündnisangebot ablehntest, und Gabriel musst du bezwingen, wen
+# IDS_BUMPERSCREEN_35
+1634 = Du hast die Brücke in Midtown unbehelligt erreicht. Sie ist allerdings schwer befestigt - hinüberzukommen wird nicht leicht. Die Straßen der Innenstadt von Avernus sind leider mit Erdbebentrümmern blockiert. Mit einem MEV-Wartungslift kannst du die am schwersten beschädigten Bereiche umgehen. Nutze die Lüftungsschächte auf den Dächern, um von Gebäude zu Gebäude zu springen.
+# IDS_BUMPERSCREEN_36
+1635 = Der Eingang zu Cothineals Höhle ist schwer befestigt, doch es gibt keine andere Wahl, wenn du Gabriel entgegentreten willst. Finde den Eingang und betritt den MCA-Hauptlift.
+# IDS_BUMPERSCREEN_37
+1636 = Irgendwo dort unten wartet Gabriel. Du spürst Cothineals Gegenwart überall um dich herum, wie sie sich kilometerweit in alle Richtungen unter der Oberfläche des Planeten windet. Alles, was Cronus dir genommen hat, nahm dir eine Kreatur, die verzweifelt um ihr Überleben kämpft. So verständlich ihre Motive sein mögen, eines bleibt klar: Toshiros Leben steht auf dem Spiel. Am Ende muss Ryo Ishikawa für das Chaos einstehen, das die Gefallenen über Cronus gebracht haben, doch du w
+# IDS_BUMPERSCREEN_38
+1637 = Der bevorstehende Kampf wird nicht leicht zu gewinnen sein, denn Gabriel wird von Cothineals Macht geschützt. Aber wenn Gabriels Niederlage deinen Bruder befreit, dann musst du genau das tun.
+# IDS_BUMPERSCREEN_39
+1638 = Admiral Akkaraju hat sich mit seiner Entscheidung, Avernus zu zerstören, dem UCA-Oberkommando widersetzt. Er hat die Leviathan unter Militärkontrolle gestellt, alle Zivilisten in ihre Quartiere verbannt und abweichende UCASF-Offiziere und -Soldaten vom Dienst entbunden. Seine loyale Elitegarde kontrolliert die Kommandosektionen des Schiffs - mit dem Befehl, Rebellen ohne Vorwarnung zu exekutieren. Deine erste Aufgabe ist, Kathryn zu befreien. Sie ist unter Bewachung in deinem
+# IDS_BUMPERSCREEN_40
+1639 = Der Hauptcomputerkern ist nur im Notfall zugänglich - also musst du einen auslösen. Folge Kathryns Anweisungen. Sobald du Zugriff auf den Computerkern hast, kannst du sämtliche Fernsteuerung der Kato-Kanone abschalten und den Admiral so aufhalten.
+# IDS_BUMPERSCREEN_41
+1640 = Vielleicht kannst du den Admiral auf der Brücke abfangen, bevor er merkt, was du getan hast. Unwahrscheinlich, aber einen Versuch wert.
+# IDS_BUMPERSCREEN_42
+1641 = Admiral Akkaraju hat die Feuersequenz der Kato-Kanone eingeleitet. Um den Schuss zu verhindern, musst du ihm den Override-Code abnehmen und ihn von Hand in die drei Hauptkontrollterminals eingeben. Du hast zwei Minuten, um die Feuersequenz zu stoppen.  Scheiterst du, wird die Oberfläche von Cronus verwüstet, und alles ist verloren.
+# IDS_BUMPERSCREEN_43
+1642 = Cothineals Schwächung hat deinen Bruder aus Cothineals Einfluss befreit, doch die enorme Belastung seiner langen psychischen Gefangenschaft hat ihren Tribut gefordert. Sein Wesen war immer etwas kühl, doch jetzt liegt eine noch größere Ferne in seinen Augen. Vielleicht gibt ihm die Genesung in der Obhut der UCA etwas von seinem alten Selbst zurück. Gegen Admiral Akkaraju ermittelt das UCA-Oberkommando, doch da kein wirklicher Schaden entstand, ist eine Anklage unwahrscheinlic
+# IDS_BUMPERSCREEN_44
+1643 = Admiral Akkaraju wurde verhaftet und wird sich vor dem UCA-Oberkommando verantworten. Unterdessen hat sich die Lage auf Cronus deutlich beruhigt. Die Gefallenen haben einen Waffenstillstand erklärt, und die UCA hat die bedingungslose Kapitulation der CMC angenommen. Da Shogo nach Ryo Ishikawas jähem Ableben aus dem Spiel ist, scheint eine friedliche Lösung wahrscheinlich. Die Zeit wird es zeigen. Toshiro hat beschlossen, als Cothineals Botschafter bei den Menschen auf Cronus 
+# IDS_TRANSMISSION_01
+2000 = Verpass den Zug nicht, Sanjuro. Der nächste kommt erst in einer halben Stunde.
+# IDS_TRANSMISSION_02
+2001 = Geh in das Lagerhaus neben dem Depot. Es führt hinaus auf die Straße. Von dort kann ich dich weiterlotsen.
+# IDS_TRANSMISSION_03
+2002 = Sei vorsichtig.
+# IDS_TRANSMISSION_04
+2003 = Pass auf, Soldaten.
+# IDS_TRANSMISSION_05
+2004 = Klar.
+# IDS_TRANSMISSION_06
+2005 = Niemals.
+# IDS_TRANSMISSION_07
+2006 = Das hättest du wohl gern.
+# IDS_TRANSMISSION_08
+2007 = Die CMC hat wegen der Gefallenen den Straßenverkehr eingeschränkt, du musst also kreativ werden.
+# IDS_TRANSMISSION_09
+2008 = Hinter dem Hotel St. Michel gibt es einen Freiluftmarkt. Such die Gasse gleich dahinter.
+# IDS_TRANSMISSION_10
+2009 = Du bist fast da. Du musst die Pumpstation finden. Auf der anderen Seite liegt das Mecca.
+# IDS_TRANSMISSION_11
+2010 = Sanjuro!
+# IDS_TRANSMISSION_12
+2011 = CMC-Soldaten!
+# IDS_TRANSMISSION_13
+2012 = Beeil dich! Ich kann sie nicht aufhalten!
+# IDS_TRANSMISSION_14
+2013 = Hmmm, sieht aus, als hätte die CMC Kura geschnappt. Sie bringen sie zu ihrer Sicherheitszentrale in Ober-Maritropa.
+# IDS_TRANSMISSION_15
+2014 = Ich kann dir helfen reinzukommen, aber erst musst du mir einen Gefallen tun.
+# IDS_TRANSMISSION_16
+2015 = Geh zurück zu deinem MCA. Ich melde mich bald.
+# IDS_TRANSMISSION_17
+2016 = Hey Schatz, du wirst am MCA-Dock S erwartet. Vergiss deinen Ausweis nicht. Ich glaube, er liegt auf dem Nachttisch.
+# IDS_TRANSMISSION_18
+2017 = Sanjuro, hier ist Admiral Akkaraju. Schluss mit den Albernheiten, kommen Sie zu Dock S.
+# IDS_TRANSMISSION_19
+2018 = Commander, melden Sie sich sofort bei Dock S. Meine Geduld ist bald am Ende.
+# IDS_TRANSMISSION_20
+2019 = Schön, dass deine Verbindung wieder steht, Sanjuro! Aber ich habe schlechte Nachrichten: Die Überwachung zeigt CMC-Soldaten auf dem Weg zu deinem Mecha. Du solltest schnell zurück!!
+# IDS_TRANSMISSION_21
+2020 = Du musst alle fünf Großrechner ausschalten. Kapiert?
+# IDS_TRANSMISSION_22
+2021 = Der Laden hier ist voll mit üblen Typen. Ich muss dir ein Ablenkungsmanöver basteln.
+# IDS_TRANSMISSION_23
+2022 = Ich hab sie auf der Flucht! Los jetzt!
+# IDS_TRANSMISSION_24
+2023 = Finde den Computer, der das Kraftfeld steuert, und schalte ihn ab.
+# IDS_TRANSMISSION_25
+2024 = Äh, Sanjuro? Ich glaube, ich stecke hier in Schwierigkeiten...
+# IDS_TRANSMISSION_26
+2025 = Was zum Teufel ist passiert? Bist du okay?
+# IDS_TRANSMISSION_27
+2026 = Melde dich, wenn du irgendwo in Sicherheit bist! Sei vorsichtig!
+# IDS_TRANSMISSION_28
+2027 = Mist, wir haben ungebetenen Besuch. Deine beste Chance sind die Wartungstunnel. Der Hauptbereich sieht ziemlich gut bewacht aus.
+# IDS_TRANSMISSION_29
+2028 = Wir treffen uns im Parkhaus.
+# IDS_TRANSMISSION_30
+2029 = Hallo, Sanjuro.
+# IDS_TRANSMISSION_31
+2030 = Du kommst in ein schwer befestigtes Gebiet. Versuch, unauffällig zu bleiben.
+# IDS_TRANSMISSION_32
+2031 = Du musst in den Venus-Distrikt. Von dort kann ich dich zu den Docks lotsen.
+# IDS_TRANSMISSION_33
+2032 = Die Verbindungsstraße ist abgeriegelt, du musst also klettern. Sieh zu, dass du irgendwie aufs Dach des Maritropa-Verkehrsamts kommst.
+# IDS_TRANSMISSION_2053
+2053 = Recon 4, Rückzug zum Drop Point Renegade zur sofortigen Evakuierung. Wir orten Verstärkung der Gefallenen aus Südosten. Wiederhole: Verstärkung der Gefallenen aus Südosten. Bringen Sie Ihr Team raus, sofort. Over.
+# IDS_TRANSMISSION_2055
+2055 = Hier Avenging Angel im Endanflug. Absetzpunkt gesichert. Over.
+# IDS_TRANSMISSION_2056
+2056 = Roger, Wirkungsfeuer. Over.
+# IDS_TRANSMISSION_2057
+2057 = Also gut, Recon 4, Abflug in 30. Ende.
+# IDS_TRANSMISSION_2060
+2060 = Hey Schatz, du wirst am MCA-Dock S erwartet. Vergiss deinen Ausweis nicht. Ich glaube, er liegt auf dem Nachttisch.
+# IDS_TRANSMISSION_2063
+2063 = Sanjuro, hier ist Admiral Akkaraju. Schluss mit den Albernheiten, melden Sie sich zum Dienst.
+# IDS_TRANSMISSION_2064
+2064 = Commander, melden Sie sich sofort bei Dock S. Meine Geduld ist bald am Ende.
+# IDS_TRANSMISSION_2065
+2065 = Das gibt einen Tadel. Ich hoffe, Sie sind stolz auf sich.
+# IDS_TRANSMISSION_2110
+2110 = Sei vorsichtig, er ist etwas aufgebracht.
+# IDS_TRANSMISSION_2116
+2116 = Jedes Terminal fährt einen bestimmten MCA in Dockposition. Du kannst diesen MCA besteigen, indem du zur zugehörigen Zugangstür herumgehst.
+# IDS_TRANSMISSION_2139
+2139 = Ich hoffe, Sie haben Erfolg, Commander. Ich würde nur ungern zu drastischeren Mitteln greifen, um die Gefallenen zu beseitigen. Akkaraju Ende.
+# IDS_TRANSMISSION_2140
+2140 = Sei vorsichtig, Sanjuro. Komm bloß heil zu mir zurück.
+# IDS_TRANSMISSION_2147
+2147 = Erlaubnis erteilt, Commander. Das wird ein Höllenritt.
+# IDS_TRANSMISSION_2151
+2151 = Gut. Zwischen dir und dem Südwest-Eingang liegt eine befestigte Kondensatorstation. Du musst hindurch, um nach Avernus zu kommen.
+# IDS_TRANSMISSION_2153
+2153 = Schalte unbedingt alle Überwachungseinrichtungen aus. Gib ihnen keine Gelegenheit, Verstärkung zu rufen.
+# IDS_TRANSMISSION_2156
+2156 = Ich orte Verstärkung der Gefallenen direkt südlich von dir, nahe dem Hauptversorgungstunnel. Sie wissen, dass du kommst.
+# IDS_TRANSMISSION_2159
+2159 = Für wen zum Teufel hältst du dich, hier so reinzuplatzen? Dir bring ich Manieren bei!
+# IDS_TRANSMISSION_2160
+2160 = Für wen zum Teufel hältst du dich, hier reinzuplatzen? Ich polier dir die Fresse, du Mistkerl.
+# IDS_TRANSMISSION_2162
+2162 = Wir geben Ihnen Deckung, während Sie die Brücken herunterlassen, Commander.
+# IDS_TRANSMISSION_2165
+2165 = Du näherst dich dem Eingang. Bleib wachsam.
+# IDS_TRANSMISSION_2167
+2167 = Perimeter gesichert, Commander. Seien Sie vorsichtig.
+# IDS_TRANSMISSION_2172
+2172 = Das unterirdische Versorgungssystem der Stadt liegt direkt unter deiner Position. Es führt dich zu einer Unterstation, wo du die Sicherheitssperren überbrücken kannst.
+# IDS_TRANSMISSION_2174
+2174 = Tu einfach, was ich dir sage.
+# IDS_TRANSMISSION_2176
+2176 = Du kriegst Besuch.
+# IDS_TRANSMISSION_2177
+2177 = Du kriegst Besuch, Herzchen.
+# IDS_TRANSMISSION_2179
+2179 = Ein Freund von einem Freund. Hank Johnson mein Name.
+# IDS_TRANSMISSION_2181
+2181 = Such jetzt den Madison-Tunnel und mach dich auf zum CMC-Hauptquartier.
+# IDS_TRANSMISSION_2184
+2184 = Schon mal von Uziel gehört? Das ist Gabriels rechte Hand. Er ist in der Nähe, also sei vorsichtig.
+# IDS_TRANSMISSION_2185
+2185 = Schon mal von Uziel gehört? Das ist Gabriels rechte Hand. Der Mistkerl ist in der Nähe, also sei vorsichtig.
+# IDS_TRANSMISSION_2188
+2188 = Raus da, Sanjuro! Es ist eine Falle!
+# IDS_TRANSMISSION_2189
+2189 = Raus da, Sanjuro! Das ist 'ne verdammte Falle!
+# IDS_TRANSMISSION_2190
+2190 = Sanjuro, was ist da los? Ich verliere-
+# IDS_TRANSMISSION_2192
+2192 = Sanjuro? Hmmm.
+# IDS_TRANSMISSION_2195
+2195 = Die Gefallenen stören dein Komm-Signal. Du kannst nicht mit der Leviathan kommunizieren, solange du die Störsender-Anlage nicht abschaltest. Geh zurück, wie du gekommen bist, aber pass auf: Verstärkung strömt in das Gebiet.
+# IDS_TRANSMISSION_2196
+2196 = Die Gefallenen stören dein Komm-Signal. Du musst ihre Störsender-Anlage abschalten. Geh zurück, wie du reingekommen bist, aber pass auf ihre Verstärkung auf.
+# IDS_TRANSMISSION_2197
+2197 = Diese Gefallenen-Mistkerle stören dein Komm-Signal. Du musst ihre Störsender-Anlage abschalten. Geh zurück, wie du reingekommen bist, aber pass auf ihre Verstärkung auf.
+# IDS_TRANSMISSION_2199
+2199 = Wenn du zum zentralen Lüftungsschacht kommst, hab ich dich ruckzuck an der Oberfläche. Das bringt dich direkt zur Haupt-Kommunikationsanlage.
+# IDS_TRANSMISSION_2202
+2202 = Der Zugang zum Lüftungsschacht ist links von dir. Ich schau mal, ob ich das Sicherheitssystem umgehen kann.
+# IDS_TRANSMISSION_2207
+2207 = Da bist du ja! Mach dich bereit zu sterben, Made!
+# IDS_TRANSMISSION_2211
+2211 = Also gut, du musst den Luftstrom im Hauptschacht umkehren. Dann kannst du auf dem Luftstrom zur oberen Ebene reiten.
+# IDS_TRANSMISSION_2213
+2213 = Zweifelst du an mir, Junge?
+# IDS_TRANSMISSION_2214
+2214 = Schalte die Heizelemente ab, oder du brätst.
+# IDS_TRANSMISSION_2215
+2215 = Mach die Heizelemente aus, oder dein hübscher Hintern brät.
+# IDS_TRANSMISSION_2219
+2219 = Commander Makabe, hier Lieutenant Cloud von Strike Force Carnivore. Wir halten uns nahe der Sicherheitsstation auf Ebene K. Wir könnten wirklich Hilfe gebrauchen, Sir.
+# IDS_TRANSMISSION_2221
+2221 = Ich versuch mal, in die Anlage zu kommen und dir 'ne Ablenkung zu basteln. Melde mich bald.
+# IDS_TRANSMISSION_2225
+2225 = Gut zu hören, Sir. Wir sind gleich da vorn.
+# IDS_TRANSMISSION_2226
+2226 = Sie kommen einfach immer weiter, ahhhh!
+# IDS_TRANSMISSION_2229
+2229 = Sieht aus, als beruhigt sich die Lage. Wir bleiben und bewachen Ihren MCA.
+# IDS_TRANSMISSION_2230
+2230 = Sieht sauber aus, Sir. Wir bleiben hier und sichern Ihren Rückzug.
+# IDS_TRANSMISSION_2232
+2232 = Geh zum Aufzug im Parkhaus. Er bringt dich hoch in die Haupt-Kommunikationsanlage.
+# IDS_TRANSMISSION_2235
+2235 = Ich hab sie auf der Flucht! Finde die Störsender-Anlage und schalte sie ab.
+# IDS_TRANSMISSION_2236
+2236 = Ich hab die Weicheier auf der Flucht! Finde die Störsender-Anlage und schalte sie ab!
+# IDS_TRANSMISSION_2239
+2239 = Willst du ein Stück von mir, du elender Pausenclown?
+# IDS_TRANSMISSION_2240
+2240 = Na los, ihr Würmer! Ist das alles, was ihr draufhabt?
+# IDS_TRANSMISSION_2241
+2241 = Oh-oh!
+# IDS_TRANSMISSION_2242
+2242 = Ich bin raus hier, Bruder. Pass auf deinen Hintern auf!
+# IDS_TRANSMISSION_2246
+2246 = Okay, such die Komm-Zentrale. Dort kannst du die Verbindung zur UCA wiederherstellen.
+# IDS_TRANSMISSION_2250
+2250 = Hallo, Sanjuro.
+# IDS_TRANSMISSION_2252
+2252 = Es ist schön, deine Stimme wieder zu hören.
+# IDS_TRANSMISSION_2254
+2254 = Gut geraten.
+# IDS_TRANSMISSION_2256
+2256 = Können wir uns in Maritropa treffen? Ich muss mit dir reden. Es geht um Toshiro und Baku.
+# IDS_TRANSMISSION_2257
+2257 = Ich muss mit dir von Angesicht zu Angesicht reden. Es geht um Toshiro und Baku.
+# IDS_TRANSMISSION_2259
+2259 = Mach dich auf nach Maritropa, ich melde mich dort bei dir. Kura Ende.
+# IDS_TRANSMISSION_2260
+2260 = Sanjuro? Was zum Teufel ist passiert? Bist du okay?
+# IDS_TRANSMISSION_2262
+2262 = Verstehe.
+# IDS_TRANSMISSION_2263
+2263 = ...
+# IDS_TRANSMISSION_2264
+2264 = Rückzug zur LZ Minotaur zur sofortigen Evakuierung, Commander. Ich breche die Mission ab. Es ist Zeit, die Sache ein für alle Mal zu regeln.
+# IDS_TRANSMISSION_2266
+2266 = Natürlich lebt sie. Woher, glauben Sie, kamen unsere Aufklärungsdaten?
+# IDS_TRANSMISSION_2268
+2268 = Kura ist Soldatin, Commander. Sie tut, was man ihr sagt. Sie täten gut daran, ihrem Beispiel zu folgen.
+# IDS_TRANSMISSION_2270
+2270 = Erlaubnis verweigert. Ich dulde keine Befehlsverweigerung. Sie haben Ihre Befehle. Akkaraju Ende.
+# IDS_TRANSMISSION_2283
+2283 = Sanjuro! Hör auf zu träumen! Du musst da schnell raus! Verstärkung strömt in den Laden! Die Lobby haben sie gesichert, nimm also besser den Zugang zum Versorgungstunnel drüben bei der Störsender-Anlage. Der ist deutlich sicherer.
+# IDS_TRANSMISSION_2284
+2284 = Sanjuro! Hör verdammt noch mal auf zu träumen! Du musst da sofort raus! Verstärkung strömt in den Laden! Die Lobby haben sie gesichert, also ab zum Versorgungstunnel-Zugang bei der Störsender-Anlage. Der ist um Welten sicherer.
+# IDS_TRANSMISSION_2286
+2286 = Commander, wir haben Ärger!
+# IDS_TRANSMISSION_2287
+2287 = Uns geht die Munition aus! Wir können sie nicht halten!
+# IDS_TRANSMISSION_2289
+2289 = Sie haben uns festgenagelt, Sir!
+# IDS_TRANSMISSION_2294
+2294 = Ahhhhhh!
+# IDS_TRANSMISSION_2297
+2297 = Sie haben deinen MCA erobert. Da kannst du jetzt nicht mehr zurück.
+# IDS_TRANSMISSION_2298
+2298 = Die Mistkerle haben deinen MCA. Da kannst du jetzt nicht mehr zurück.
+# IDS_TRANSMISSION_2300
+2300 = Wir treffen uns im Parkhaus. Ich hab da eine Idee.
+# IDS_TRANSMISSION_2302
+2302 = Ich wusste nichts von Kura. Ich schwöre es.
+# IDS_TRANSMISSION_2305
+2305 = Sei vorsichtig, Sanjuro.
+# IDS_TRANSMISSION_2308
+2308 = Beeil dich und spring rein!
+# IDS_TRANSMISSION_2309
+2309 = Beweg deinen Hintern nach hinten!
+# IDS_TRANSMISSION_2313
+2313 = Sanjuro!
+# IDS_TRANSMISSION_2314
+2314 = Sie haben WAS verloren? Abbrechen, Sanjuro! Es ist vorbei.
+# IDS_TRANSMISSION_2316
+2316 = Es ist wegen Kura, oder?
+# IDS_TRANSMISSION_2317
+2317 = ...
+# IDS_TRANSMISSION_2346
+2346 = Also gut, alles bereit. Such dir einen aus.
+# IDS_TRANSMISSION_2347
+2347 = Mach dich auf zum MEV-Dock 17 im Shinara-Distrikt. Dort kriegst du einen Zug zur Crescent-Square-Station, die liegt gleich um die Ecke von einem Nachtclub namens Mecca. Wir treffen uns dort.
+# IDS_TRANSMISSION_2349
+2349 = Ein paar Jungs, die ich kenne, helfen dir an der CMC vorbei. Die Sicherheitslage ist ziemlich angespannt, mit dem Kriegsrecht und allem - einfach wird das nicht. Du musst nur in den Shinara-Distrikt kommen, dann bist du durch.
+# IDS_TRANSMISSION_2351
+2351 = Gern geschehen.
+# IDS_TRANSMISSION_2354
+2354 = Der Admiral ist wirklich sauer. Er will, dass du sofort da verschwindest. Aber das wirst du nicht tun, oder?
+# IDS_TRANSMISSION_2355
+2355 = Sanjuro?
+# IDS_TRANSMISSION_2357
+2357 = Toshiro und Baku sind tot. 
+# IDS_TRANSMISSION_2359
+2359 = Weil Kura lebt.
+# IDS_TRANSMISSION_2362
+2362 = Sagen Sie Maurice und Toshi Hallo, Commander.
+# IDS_TRANSMISSION_2363
+2363 = Freut mich.
+# IDS_TRANSMISSION_2364
+2364 = Seien Sie gegrüßt, Commander.
+# IDS_TRANSMISSION_2369
+2369 = Diese Energiegitter werden von mobilen Generatoren gespeist. Schalte die Generatoren aus, dann kommst du durch.
+# IDS_TRANSMISSION_2372
+2372 = Gut, jetzt such das Dock. Du willst doch den Zug nicht verpassen!
+# IDS_TRANSMISSION_2373
+2373 = Viel Glück, Commander.
+# IDS_TRANSMISSION_2377
+2377 = Wir treffen uns wieder.
+# IDS_TRANSMISSION_2378
+2378 = Stirb!
+# IDS_TRANSMISSION_2381
+2381 = Verpass den Zug nicht, Sanjuro. Der nächste kommt erst in einer halben Stunde.
+# IDS_TRANSMISSION_2388
+2388 = Geh in das Lagerhaus neben dem Depot. Es führt hinaus auf die Straße. Von dort kann ich dich weiterlotsen.
+# IDS_TRANSMISSION_2389
+2389 = Immer zu spät. Ähm, okay... geh in das Lagerhaus neben dem Depot. Es führt hinaus auf die Straße. Von dort kann ich dich weiterlotsen.
+# IDS_TRANSMISSION_2393
+2393 = Die Straße sollte direkt zum Mecca führen.
+# IDS_TRANSMISSION_2399
+2399 = Gut, geh die Treppe rechts vom Tor hinunter. Dort ist ein Freiluftmarkt, der dich zu einem Hotel führt. Such den Tunnel davor.
+# IDS_TRANSMISSION_2402
+2402 = Toll. Mir gehen die Ideen aus.
+# IDS_TRANSMISSION_2406
+2406 = Sanjuro!
+# IDS_TRANSMISSION_2408
+2408 = Die CMC! Sie sind überall.
+# IDS_TRANSMISSION_2409
+2409 = Hör mir zu: Toshiro ist Gabriel. Aber da steckt mehr dahinter. Cothineal-
+# IDS_TRANSMISSION_2447
+2447 = Wo bist du jetzt?
+# IDS_TRANSMISSION_2449
+2449 = ...
+# IDS_TRANSMISSION_2463
+2463 = Was ist da los, Sanjuro? Wo ist Kura?
+# IDS_TRANSMISSION_2464
+2464 = Hmmm, sieht aus, als hätte die CMC deine Freundin geschnappt.
+# IDS_TRANSMISSION_2466
+2466 = Sie bringen sie zu ihrer Sicherheitszentrale in Ober-Maritropa. Ich kann dir helfen reinzukommen, aber erst musst du mir einen Gefallen tun.
+# IDS_TRANSMISSION_2469
+2469 = Geh zurück zu deinem MCA. Ich melde mich bald.
+# IDS_TRANSMISSION_2470
+2470 = Wenn die Gefallenen erfahren, dass sie geschnappt wurde, steckt sie in großen Schwierigkeiten. Du musst vor ihnen da sein.
+# IDS_TRANSMISSION_2471
+2471 = Wenn diese Gefallenen-Spinner erfahren, dass sie geschnappt wurde, steckt sie in großen Schwierigkeiten. Du musst vor ihnen da sein.
+# IDS_TRANSMISSION_2472
+2472 = Was haben Sie getan, Sanjuro? Wenn ihr etwas zustößt, ich schwöre, dann bringe ich Sie eigenhändig um.
+# IDS_TRANSMISSION_2485
+2485 = Okay, such die Canopy-Station und docke deinen MCA an. Dort kriegst du eine Tram nach Ober-Maritropa. Komm diesmal nicht zu spät.
+# IDS_TRANSMISSION_2488
+2488 = Cothineal ist der Grund, warum es die Gefallenen gibt. Kura kann dir alles erklären. 
+# IDS_TRANSMISSION_2498
+2498 = Sie dürften keine Schwierigkeiten haben. Ich habe dafür gesorgt, dass die CMC-Sicherheit anderweitig beschäftigt ist. Ich melde mich, sobald Sie drinnen sind.
+# IDS_TRANSMISSION_2500
+2500 = Bald.
+# IDS_TRANSMISSION_2502
+2502 = Sie dürften keine Schwierigkeiten haben. Ich habe dafür gesorgt, dass die CMC-Sicherheit anderweitig beschäftigt ist. Ich melde mich, sobald Sie drinnen sind.
+# IDS_TRANSMISSION_2504
+2504 = Die Presse verbiegt die Wahrheit, wie es ihr passt. Das sollten Sie besser wissen als jeder andere. Belassen wir es dabei. Ryo Ende.
+# IDS_TRANSMISSION_2509
+2509 = Von Shogo?
+# IDS_TRANSMISSION_2511
+2511 = Na dann, sei vorsichtig. Ach, Sanjuro...
+# IDS_TRANSMISSION_2513
+2513 = Ich wollte mich nur entschuldigen, für meine Reaktion, als ich hörte, dass Kura lebt. Ich liebe meine Schwester genauso wie du. Ich bin nur...
+# IDS_TRANSMISSION_2529
+2529 = Der Empfang ist gleich da vorn. Geh zur Sicherheitsschleuse auf der linken Seite. Solange du niemanden über den Haufen schießt, passiert dir nichts.
+# IDS_TRANSMISSION_2533
+2533 = Geradeaus müsste ein Aufzug sein. Fahr damit ganz nach unten.
+# IDS_TRANSMISSION_2535
+2535 = Sie glauben also, Sie können Kura ohne meine Hilfe retten, hm? Nur zu, versuchen Sie es.
+# IDS_TRANSMISSION_2536
+2536 = Leben Sie wohl, Commander.
+# IDS_TRANSMISSION_2542
+2542 = Ich habe die Alarmanlage der ganzen Etage abgeschaltet, aber sobald ich das Sicherheits-Kraftfeld senke, ist mit Ärger zu rechnen.
+# IDS_TRANSMISSION_2545
+2545 = Okay, bieg rechts ab und geh zu den Aufzügen.
+# IDS_TRANSMISSION_2547
+2547 = Fahr die Energiebrücke aus und geh zum Serverraum.
+# IDS_TRANSMISSION_2550
+2550 = Danke für Ihre Hilfe, Commander. Sie sind mir jetzt nicht mehr von Nutzen. Tut mir leid, Sie hängen zu lassen.
+# IDS_TRANSMISSION_2553
+2553 = Ein Todeskommando der Gefallenen ist unterwegs, Sanjuro. Schaff Kura schnell da raus.
+# IDS_TRANSMISSION_2560
+2560 = Äh, warum fragst du?
+# IDS_TRANSMISSION_2561
+2561 = Also, eigentlich bin ich mit deiner Schwester zusammen.
+# IDS_TRANSMISSION_2578
+2578 = Hebt euch das Turteln für später auf. Diese Assassinen der Gefallenen sind auf dem Weg zum Zellentrakt!
+# IDS_TRANSMISSION_2581
+2581 = Und, hattet ihr zwei schon Gelegenheit, über alte Zeiten zu plaudern?
+# IDS_TRANSMISSION_2582
+2582 = Entschuldige, das war nicht so gemeint.
+# IDS_TRANSMISSION_2583
+2583 = Hör zu, der Admiral hat befohlen, die Kato-Kanone bereitzumachen. Ich glaube, er will Avernus auslöschen - gegen den direkten Befehl des UCA-Oberkommandos. Wenn Toshiro und Baku wirklich dort sind, sind sie in Gefahr.
+# IDS_TRANSMISSION_2585
+2585 = Ich weiß nicht, er redet nicht mit mir.
+# IDS_TRANSMISSION_2595
+2595 = Geh zurück zur Pumpstation. In der Nähe ist ein Luftschiff-Dock. Wenn wir an Bord eines der automatischen Transporter kommen, kann ich den Navigationscomputer umleiten und uns nach Avernus bringen.
+# IDS_TRANSMISSION_2597
+2597 = Ich bewundere Ihre Hartnäckigkeit, Commander. Diesmal wird Ihr Glück nicht reichen.
+# IDS_TRANSMISSION_2599
+2599 = Als Sie vor zwei Jahren Ihren Trupp nach Avernus führten und Ivan Isarevich töteten, haben Sie weit mehr getan, als einen aufstrebenden Tyrannen zu liquidieren - Sie haben einen Plan zerstört, den ich über Jahre gehegt hatte. Es hat mich viel Zeit gekostet, das von Ihnen angerichtete Chaos zu beheben. Und jetzt versuchen Sie erneut, mich zu ruinieren.
+# IDS_TRANSMISSION_2600
+2600 = Wer, glauben Sie, hat der CMC überhaupt den Tipp mit Ihrem Turteltäubchen gegeben?
+# IDS_TRANSMISSION_2602
+2602 = Leben Sie wohl, Commander. Ich richte Kura Ihre Grüße aus.
+# IDS_TRANSMISSION_2614
+2614 = Na, hallo. Sieht aus, als hätte diesmal ich den Vorteil.
+# IDS_TRANSMISSION_2623
+2623 = Geh zum Luftschiff-Dock. Ich helfe dir, den Nav-Computer umzuleiten.
+# IDS_TRANSMISSION_2625
+2625 = Wollen Sie Toshiro nun retten oder nicht? Los jetzt, Commander.
+# IDS_TRANSMISSION_2628
+2628 = Weiter kommst du nicht.
+# IDS_TRANSMISSION_2630
+2630 = Ich weiß, wer du bist, aber das wird mich nicht von meiner Pflicht abhalten.
+# IDS_TRANSMISSION_2632
+2632 = Du kannst nicht hoffen, uns zu besiegen, Commander.
+# IDS_TRANSMISSION_2634
+2634 = Nein, Bruder, du bist es, der in Gefahr ist.
+# IDS_TRANSMISSION_2636
+2636 = Nun gut. Ich empfange dich im Museum für Kriegsgeschichte in Avernus. Ein passender Ort, findest du nicht? Dir wird freies Geleit gewährt, solange du meine Soldaten nicht angreifst.
+# IDS_TRANSMISSION_2638
+2638 = Laut und deutlich. Ich versuche, meinen Vater hinzuhalten.
+# IDS_TRANSMISSION_2642
+2642 = Geh zum Navigationscomputer in der vorderen Kabine. Nimm dich vor dem Sicherheitspersonal in Acht.
+# IDS_TRANSMISSION_2646
+2646 = Okay, ich lade einen Override-Code auf deinen Comlink. Speise ihn in den Hauptcomputer ein.
+# IDS_TRANSMISSION_2648
+2648 = Commander, über Ihre Befehlsverweigerung sprechen wir später. Kathryn habe ich wegen Beihilfe in ihrem Quartier eingeschlossen.
+# IDS_TRANSMISSION_2649
+2649 = Fliegen Sie nicht nach Avernus. Die Kato-Kanone lädt und ist in zwei Stunden feuerbereit. Ich werde den Angriff unter keinen Umständen verzögern.
+# IDS_TRANSMISSION_2651
+2651 = Er ist ein Verräter an der UCA.
+# IDS_TRANSMISSION_2653
+2653 = Ryo Ishikawa hat unwiderlegbare Beweise vorgelegt-
+# IDS_TRANSMISSION_2655
+2655 = Mr. Ishikawa ist seit über einem Jahrzehnt ein wertvoller Verbündeter der UCA. 
+# IDS_TRANSMISSION_2657
+2657 = Diese Narren begreifen die Lage hier nicht!
+# IDS_TRANSMISSION_2659
+2659 = Unsinn! Sie sind so ahnungslos wie die Idioten im Oberkommando. Die Gefallenen stehen kurz vor dem Sieg. Ich kann nicht zusehen, wie Cronus mörderischen Fanatikern in die Hände fällt.
+# IDS_TRANSMISSION_2685
+2685 = Ich bin direkt vor dir. Gib mir Deckung, während ich zur Datenbank renne.
+# IDS_TRANSMISSION_2694
+2694 = In deiner Nähe müsste ein Datenbankterminal sein. Sag Bescheid, wenn du dort bist.
+# IDS_TRANSMISSION_2696
+2696 = Leg die Disk ein. Sie sollte automatisch starten.
+# IDS_TRANSMISSION_2699
+2699 = Das war's! Jetzt ab ins Museum. Ich kontaktiere meinen Vater und versuche, ihn hinzuhalten.
+# IDS_TRANSMISSION_2701
+2701 = Ich habe dich wirklich vermisst, Sanjuro.
+# IDS_TRANSMISSION_2704
+2704 = Willkommen in Avernus, Commander. Du darfst näher treten.
+# IDS_TRANSMISSION_2705
+2705 = Ich habe meinen Vater nicht erreicht, du hast also nicht viel Zeit. Wenn Kathryn recht hat, ist die Kato-Kanone binnen einer Stunde voll geladen.
+# IDS_TRANSMISSION_2707
+2707 = So vergelten Sie mir mein Vertrauen? Dann sei es so. 
+# IDS_TRANSMISSION_2710
+2710 = Also gut, Commander, ich gebe Ihnen eine letzte Chance. Entweder Sie schalten Gabriel aus, oder ich zerstöre Avernus. Wenn Sie Gabriel gegenübertreten, können Sie Toshiro vielleicht retten. Andernfalls wird er mit dem Rest der Gefallenen untergehen. Die Wahl liegt bei Ihnen.
+# IDS_TRANSMISSION_2715
+2715 = Sieh dich um, Sanjuro. Dieser Ort ist ein Schrein dessen, was es heißt, Mensch zu sein. Welches Symbol der Menschheit ist treffender als eine geballte Faust, ein gezücktes Messer, eine geladene Waffe? Wir sind Zerstörer, Eroberer, Verschlinger. Unsere Gier definiert uns. Menschliche Größe ist ein zerstörerisches Ding. Sie wird in Eroberung und Blutvergießen gemessen.
+# IDS_TRANSMISSION_2716
+2716 = Cothineal existiert, mehr nicht. Sein einziger Hunger ist die Selbsterhaltung. Als die Menschen auf diese Welt kamen, nach Coth, kamen sie der Macht wegen. Sie kamen, um zu ernten. Viele Jahre duldete Cothineal sie, denn sie waren keine Bedrohung. Als schließlich eine entstand, wandte sich Cothineal an die Eindringlinge und flehte sie an, ihre Ernte zu mäßigen. Ivan Isarevich war der Botschafter von Coth, und als die Menschheit ihn verhöhnte, wurde er zum Terroristen. Als wir
+# IDS_TRANSMISSION_2717
+2717 = Isarevich scheiterte, weil er kein Krieger war. Er kannte die wahre Sprache der Menschheit nicht. Aber ich spreche fließend Gewalt, und ich habe triumphiert.
+# IDS_TRANSMISSION_2721
+2721 = Zur Hölle mit deinem Handel. Du hast mir Toshiro genommen, und ich hole ihn mir zurück.
+# IDS_TRANSMISSION_2722
+2722 = Na gut, ich gehe zurück zur Leviathan und versuche, den Admiral vom Abfeuern der Kanone abzuhalten.
+# IDS_TRANSMISSION_2723
+2723 = Nun gut, du hast meine Treue. Ich gehe zurück zur Leviathan und versuche, den Admiral vom Abfeuern der Kanone abzuhalten.
+# IDS_TRANSMISSION_2726
+2726 = Sanjuro, mein Vater hat mich wieder in den Dienst gestellt, mit Zugriff auf alle Aufklärungsberichte. Ich müsste dich fast den ganzen Weg führen können.
+# IDS_TRANSMISSION_2728
+2728 = Lass dich bloß nicht umbringen.
+# IDS_TRANSMISSION_2731
+2731 = Sei vorsichtig, Sanjuro. Wir haben eine Menge nachzuholen. Kura Ende.
+# IDS_TRANSMISSION_2734
+2734 = Ich orte anfliegende Maschinen. Mach dich bereit zu rennen!
+# IDS_TRANSMISSION_2740
+2740 = Der Wartungslift müsste rechts von dir sein.
+# IDS_TRANSMISSION_2745
+2745 = Der Lift bringt dich in einen Tunnel, der zur Oberfläche führt. Du bist fast da.
+# IDS_TRANSMISSION_2747
+2747 = Ich würde es verstehen, wenn du wieder mit Kura zusammen sein willst.
+# IDS_TRANSMISSION_2748
+2748 = ...
+# IDS_TRANSMISSION_2754
+2754 = Du bist fast da. Du erkennst es, wenn du es siehst.
+# IDS_TRANSMISSION_2756
+2756 = Kommst du rein?
+# IDS_TRANSMISSION_2760
+2760 = Gut, such den Hauptlift. Er führt zum Tempel.
+# IDS_TRANSMISSION_2762
+2762 = Du musst Cothineal schwächen, sonst kannst du Gabriel nichts anhaben.
+# IDS_TRANSMISSION_2766
+2766 = Ich mache mir Sorgen.
+# IDS_TRANSMISSION_2768
+2768 = Das war jetzt nicht besonders nett.
+# IDS_TRANSMISSION_2770
+2770 = Schön. Lass dich halt umbringen. Als ob mich das kümmert.
+# IDS_TRANSMISSION_2772
+2772 = Diesmal beenden wir es.
+# IDS_TRANSMISSION_2774
+2774 = Ich lebe nicht mehr in deinem Schatten, Sanjuro.
+# IDS_TRANSMISSION_2779
+2779 = Willkommen, Bruder. Lass dich umarmen.
+# IDS_TRANSMISSION_2780
+2780 = Du kannst nicht gewinnen.
+# IDS_TRANSMISSION_2784
+2784 = Sanjuro?
+# IDS_TRANSMISSION_2785
+2785 = Sanjuro, Shogo-Dropships nähern sich aus Südosten. Es ist eine Falle!
+# IDS_TRANSMISSION_2789
+2789 = Da kommen sie!
+# IDS_TRANSMISSION_2790
+2790 = Es wird mir ein großes Vergnügen sein, Ihnen beim Sterben zuzusehen, Commander.
+# IDS_TRANSMISSION_2794
+2794 = Du hast es geschafft!
+# IDS_TRANSMISSION_2796
+2796 = Gute Arbeit, Commander. Mission erfüllt. Ich freue mich auf Ihre Einsatzberichte.
+# IDS_TRANSMISSION_2797
+2797 = Pass bloß auf, du kleines Flittchen!
+# IDS_TRANSMISSION_2800
+2800 = Sie widern mich an, Commander. Sie sind ein Verräter und ein Feigling.
+# IDS_TRANSMISSION_2814
+2814 = Viel Glück, Sanjuro. Ich würde gern mit dir nachholen, wenn das alles vorbei ist. Falls du Interesse hast. Kura Ende.
+# IDS_TRANSMISSION_2817
+2817 = Im Kraftwerk gibt es fünf kritische Stationen. Wenn du bei allen die Energie hochfährst und dann den Stecker ziehst, überlastest du das System. Ich lade die Infos auf deinen Comlink.
+# IDS_TRANSMISSION_2820
+2820 = Jetzt geh zur Energieverteilungsstation und kappe den Strom.
+# IDS_TRANSMISSION_2822
+2822 = Strom gekappt. Wow, es hat funktioniert.
+# IDS_TRANSMISSION_2823
+2823 = Der Computerkern sollte jetzt zugänglich sein. Ich habe einen Override-Code auf deinen Comlink geladen. Er schaltet die Fernsteuerung automatisch ab.
+# IDS_TRANSMISSION_2826
+2826 = Großartig! Jetzt ab in den Kommandobereich - sieh zu, dass du meinen Vater abfängst.
+# IDS_TRANSMISSION_2829
+2829 = Sei vorsichtig, direkt vor deiner Position liegt eine Sicherheitsstation.
+# IDS_TRANSMISSION_2831
+2831 = Sie haben eine Notabriegelung ausgelöst. Durch den Hauptgang kommst du nicht mehr.
+# IDS_TRANSMISSION_2833
+2833 = Im MCA-Durchgang gibt es einen Wartungsschacht. Lass dich nicht zertreten.
+# IDS_TRANSMISSION_2834
+2834 = Die Leiter hoch und dann ganz nach links. Das erste Paneel müsste direkt unter dir sein.
+# IDS_TRANSMISSION_2836
+2836 = Jetzt den ganzen Gang wieder zurück. Rechts müsste eine Leiter sein.
+# IDS_TRANSMISSION_2837
+2837 = Weiter, bis du beim zweiten Paneel bist.
+# IDS_TRANSMISSION_2839
+2839 = Ja, ich glaube schon.
+# IDS_TRANSMISSION_2840
+2840 = Du musst zurück Richtung Sicherheitsstation. Geh in den Sicherheitskontrollraum und überbrücke die Notabriegelung.
+# IDS_TRANSMISSION_2842
+2842 = Der Admiral ist noch auf der Brücke. Versuch, ihn abzufangen, bevor er merkt, was du getan hast.
+# IDS_TRANSMISSION_2844
+2844 = Du kommst zu spät, Sanjuro.
+# IDS_TRANSMISSION_2845
+2845 = Er ist auf dem Weg zur Kato-Kanone!
+# IDS_TRANSMISSION_2854
+2854 = Die Feuersequenz ist aktiv. Ich habe die Override-Codes auf deinen Comlink geladen. Du hast zwei Minuten, um alle drei Terminals anzusteuern. Sonst feuert die Kanone.
+# IDS_TRANSMISSION_2855
+2855 = Zu spät, Commander. Die Gefallenen sind dem Untergang geweiht.
+# IDS_TRANSMISSION_2857
+2857 = Wachen, tötet ihn!
+# IDS_TRANSMISSION_2859
+2859 = Feigling. Sie liefern Cronus den Fanatikern aus.
+# IDS_TRANSMISSION_2865
+2865 = Ich wusste, dass du es schaffst!
+# IDS_TRANSMISSION_2867
+2867 = Zu spät!
+# IDS_TRANSMISSION_2870
+2870 = Ich habe genug von Ihrer Einmischung. Dann feuere ich die Kanone eben selbst ab! Gleich nachdem ich Sie erledigt habe.
+# IDS_TRANSMISSION_2872
+2872 = Gratulation, Commander. Jetzt, wo das alles vorbei ist, hätte ich da einen kleinen Undercover-Auftrag für Sie.
+# IDS_TRANSMISSION_2873
+2873 = Na warte! Du wirst dir noch wünschen, tot geblieben zu sein, wenn ich mit dir fertig bin!
+# IDS_TRANSMISSION_2875
+2875 = Halt!
+# IDS_TRANSMISSION_2876
+2876 = Eindringling!
+# IDS_TRANSMISSION_2877
+2877 = Sicherheitsdienst!
+# IDS_TRANSMISSION_2878
+2878 = Sanitäter!
+# IDS_TRANSMISSION_2879
+2879 = Kannst du das noch mal langsam sagen?
+# IDS_TRANSMISSION_2880
+2880 = Ich brauche Verstärkung!
+# IDS_TRANSMISSION_2881
+2881 = Hey!
+# IDS_TRANSMISSION_2882
+2882 = Hilfe!
+# IDS_TRANSMISSION_2883
+2883 = Er muss die Feuersequenz von Hand starten. Sobald sie aktiv ist, hast du zwei Minuten, um sie zu überschreiben.
+# IDS_TRANSMISSION_2884
+2884 = Waffe fallen lassen!
+# IDS_TRANSMISSION_2885
+2885 = Dieser Bereich ist gesperrt.
+# IDS_TRANSMISSION_2886
+2886 = Hallo.
+# IDS_TRANSMISSION_2887
+2887 = Hi.
+# IDS_TRANSMISSION_2888
+2888 = Kann ich helfen?
+# IDS_TRANSMISSION_2889
+2889 = Mörder!
+# IDS_TRANSMISSION_2890
+2890 = Was ist hier los?
+# IDS_TRANSMISSION_2891
+2891 = Mach, dass es aufhört!
+# IDS_TRANSMISSION_2892
+2892 = Jetzt reicht's!
+# IDS_TRANSMISSION_2893
+2893 = Du gehst zu Boden!
+# IDS_TRANSMISSION_2894
+2894 = Ich bin weg hier!
+# IDS_TRANSMISSION_2895
+2895 = Mama!
+# IDS_TRANSMISSION_2896
+2896 = Du bist tot!
+# IDS_TRANSMISSION_2897
+2897 = Rückzug!
+# IDS_TRANSMISSION_2898
+2898 = Stirb!
+# IDS_TRANSMISSION_2899
+2899 = Captain!
+# IDS_TRANSMISSION_2900
+2900 = Aaaaahhhhh!
+# IDS_TRANSMISSION_2901
+2901 = Er ist hier drüben!
+# IDS_TRANSMISSION_2902
+2902 = Pass doch auf, wo du hinläufst.
+# IDS_TRANSMISSION_2903
+2903 = Idiot.
+# IDS_TRANSMISSION_2904
+2904 = Uff.
+# IDS_TRANSMISSION_2905
+2905 = Pass auf.
+# IDS_TRANSMISSION_2906
+2906 = Hey, Vorsicht!
+# IDS_TRANSMISSION_2907
+2907 = Was ist dein Problem?
+# IDS_TRANSMISSION_2908
+2908 = Hey, warte mal!
+# IDS_TRANSMISSION_2909
+2909 = Moment!
+# IDS_TRANSMISSION_2910
+2910 = Gib mir eine Sekunde!
+# IDS_TRANSMISSION_2911
+2911 = Wo willst du hin?
+# IDS_TRANSMISSION_2912
+2912 = Ich hab ihn verloren.
+# IDS_TRANSMISSION_2913
+2913 = Wo ist er hin?
+# IDS_TRANSMISSION_2914
+2914 = Wo ist er?
+# IDS_TRANSMISSION_2915
+2915 = Er muss hier irgendwo sein.
+# IDS_TRANSMISSION_2916
+2916 = Gib mir den Granatwerfer.
+# IDS_TRANSMISSION_2917
+2917 = Hier lang!
+# IDS_TRANSMISSION_2918
+2918 = Mir reicht's!
+# IDS_TRANSMISSION_2919
+2919 = Friss das!
+# IDS_TRANSMISSION_2920
+2920 = Was geht...? Ich schätz mal, die Uhr. Die geht.
+# IDS_TRANSMISSION_2921
+2921 = Modern, und doch funktional.
+# IDS_TRANSMISSION_2922
+2922 = Duuuh... Ich hab mir wieder das Pipimännchen eingezwickt, Mama.
+# IDS_TRANSMISSION_2923
+2923 = Pipimann braucht Liebe.
+# IDS_TRANSMISSION_2924
+2924 = Einmal Wauwau-Burger mit Fritten zum Mitnehmen.
+# IDS_TRANSMISSION_2925
+2925 = Nur eine Fleischwunde.
+# IDS_TRANSMISSION_2926
+2926 = Da ist er - Feuer frei.
+# IDS_TRANSMISSION_2927
+2927 = Vorsicht, er hat eine Waffe.
+# IDS_TRANSMISSION_2928
+2928 = Nicht schießen, ich bin unbewaffnet.
+# IDS_TRANSMISSION_2929
+2929 = Du willst ein Stück von mir - dann komm und hol's dir.
+# IDS_TRANSMISSION_2930
+2930 = Warum machst'n das?
+# IDS_TRANSMISSION_2931
+2931 = Hüa!
+# IDS_TRANSMISSION_2932
+2932 = Jaaaaa...
+# IDS_TRANSMISSION_2933
+2933 = Also im Grunde willst du mir sagen...
+# IDS_TRANSMISSION_2934
+2934 = Na ja, darüber können wir später reden, aber was gewisse Punkte angeht...
+# IDS_TRANSMISSION_2935
+2935 = Augen offen halten. Laut Komm-Daten ist er in der Gegend.
+# IDS_TRANSMISSION_2936
+2936 = Roger.
+# IDS_TRANSMISSION_2937
+2937 = Der soll mir bloß nicht über den Weg laufen. Ich hab 'ne Ladung Blei, die ein neues Zuhause sucht.
+# IDS_TRANSMISSION_2938
+2938 = Meine Frau ist stinksauer wegen der Doppelschichten.
+# IDS_TRANSMISSION_2939
+2939 = Einheit 8 hier, keine Spur von ihm...
+# IDS_TRANSMISSION_2940
+2940 = Ja, angeblich ist er Mecha-Pilot. Ich wette, so ein Akademie-Bübchen kämpft nicht wie ein Trooper, der schon richtig Dreck gefressen hat.
+# IDS_TRANSMISSION_2941
+2941 = Ja, angeblich ist er Mecha-Pilot. Ich wette, so ein Akademie-Bübchen kämpft nicht wie ein Trooper, der schon was erlebt hat.
+# IDS_TRANSMISSION_2942
+2942 = Einheit 4 antwortet nicht. Diese Idioten haben bestimmt wieder ihre Funkgeräte abgeschaltet. Das melde ich.
+# IDS_TRANSMISSION_2999
+2999 = Einen guten. Wir können später darüber reden.
+# IDS_TRANSMISSION_3000
+3000 =  - Sanjuro, bist du da? Melde dich, Sanjuro.
+# IDS_TRANSMISSION_3001
+3001 = Zeit, ein paar Punks zu zerlegen!
+# IDS_TRANSMISSION_3002
+3002 = Grrrr.
+# IDS_TRANSMISSION_3003
+3003 = Ha!
+# IDS_TRANSMISSION_3004
+3004 = Hey!
+# IDS_TRANSMISSION_3005
+3005 = Ich hab da so eine Wut im Bauch.
+# IDS_TRANSMISSION_3006
+3006 = Ich bin grad in Stimmung, Schädel einzuschlagen.
+# IDS_TRANSMISSION_3007
+3007 = Es ist nicht vorbei, bevor Oma gepupst hat.
+# IDS_TRANSMISSION_3008
+3008 = Keine Zeit zum Kuscheln.
+# IDS_TRANSMISSION_3009
+3009 = Sanjuro!
+# IDS_TRANSMISSION_3010
+3010 = Pass auf!
+# IDS_TRANSMISSION_3011
+3011 = Nimm dich vor der in Acht, die bricht dich in zwei Hälften.
+# IDS_TRANSMISSION_3012
+3012 = Na so ein hinterhältiger Hund!
+# IDS_TRANSMISSION_3013
+3013 = Da steckst du in einer ordentlichen Zwickmühle, Junge.
+# IDS_TRANSMISSION_3014
+3014 = Willst du tanzen, oder was?
+# IDS_TRANSMISSION_3015
+3015 = Klar hat's geklappt. Hab ich doch gesagt, oder?
+# IDS_TRANSMISSION_3016
+3016 = Also gut, hör zu. Es gibt zwei Hauptlüftungsschächte - A und B - und vier Nebenschächte, 1 bis 4. Du musst den Luftstrom in Schacht B umkehren, damit du auf dem Windstrom zur oberen Ebene reiten kannst. Im Moment saugt er Luft in die Filter. Springst du jetzt rein, machen dich die Ventilatoren zu Hackfleisch.
+# IDS_TRANSMISSION_3017
+3017 = Schlechte Idee. Wenn die wissen, dass du kommst, bist du so gut wie tot.
+# IDS_TRANSMISSION_3018
+3018 = Verdammt! Diese Energiegitter lassen sich nicht vor Ort abschalten. Du musst einen anderen Weg an ihnen vorbei finden.
+# IDS_TRANSMISSION_3019
+3019 = Geh zum Aufzug im Parkhaus. Er bringt dich hoch in die Haupt-Kommunikationsanlage. Von dort solltest du den Kontakt zur UCA wiederherstellen können.
+# IDS_TRANSMISSION_3020
+3020 = Gut, jetzt musst du die Heizspulen von Schacht A abschalten. Die Spulen sind in deiner Nähe. Finde sie und zerstöre ihre Schalttafeln.
+# IDS_TRANSMISSION_3021
+3021 = Okay, jetzt kommt der spaßige Teil. Du musst Schacht A runterspringen. Der Luftstrom sollte deinen Fall genug bremsen, dass du keinen Krater schlägst. Nahe dem Schachtboden ist eine Plattform, die dich zu Schacht B bringt.
+# IDS_TRANSMISSION_3022
+3022 = Sanjuro, raus hier! Shogo-Truppen stürmen den Laden! Es sind zu viele - Beeil dich, Sanjuro!
+# IDS_TRANSMISSION_3023
+3023 = Sagen Sie Maurice und Toshi Hallo, Commander. Die beiden helfen Ihnen aus.
+# IDS_TRANSMISSION_3024
+3024 = Siehst du das Luftansaugrohr?
+# IDS_TRANSMISSION_3025
+3025 = Das wird dir nicht gefallen...
+# IDS_TRANSMISSION_3026
+3026 = Warte mal, Herzchen.
+# IDS_TRANSMISSION_3093
+3093 = Muss los!
+# IDS_TRANSMISSION_3148
+3148 = Strapazieren Sie meine Geduld nicht.
+# IDS_TRANSMISSION_3149
+3149 = Sanjuro!
+# IDS_TRANSMISSION_3150
+3150 = Zurücktreten, Soldat!
+# IDS_TRANSMISSION_3151
+3151 = Das wäre alles, Commander.
+# IDS_TRANSMISSION_3152
+3152 = Die Gefallenen werden untergehen.
+# IDS_TRANSMISSION_3153
+3153 = Verräter!
+# IDS_TRANSMISSION_3154
+3154 = Sie enttäuschen mich, Commander.
+# IDS_TRANSMISSION_3155
+3155 = Sie sind ein Versager.
+# IDS_TRANSMISSION_3156
+3156 = Gute Arbeit, Commander, ich freue mich auf die Einsatzbesprechung.
+# IDS_TRANSMISSION_3157
+3157 = Hmmm.
+# IDS_TRANSMISSION_3158
+3158 = Gut, Sie sind da - ich komme zur Sache. Ihre Mission ist es, Gabriel zu finden und um jeden Preis auszuschalten.
+# IDS_TRANSMISSION_3159
+3159 = Töten Sie diesen Verräter.
+# IDS_TRANSMISSION_3160
+3160 = Wurde auch Zeit, Commander!
+# IDS_TRANSMISSION_3161
+3161 = Übrigens, Commander, ich stelle erfreut fest, dass Sie bei der Regionaldiagnostik vorbeigeschaut haben. Wurde ja auch Zeit, dass Sie etwas Eigeninitiative zeigen.
+# IDS_TRANSMISSION_3162
+3162 = Übrigens, Commander, Sie waren nie bei der Regionaldiagnostik. Ich hatte gehofft, Sie würden diese Mission etwas verantwortungsvoller angehen.
+# IDS_TRANSMISSION_3163
+3163 = Commander-
+# IDS_TRANSMISSION_3164
+3164 = Commander, schauen Sie unbedingt bei der Regionaldiagnostik vorbei. Dort finden Sie in der Datenbank Hintergrundinformationen zu Ihrer Mission.
+# IDS_TRANSMISSION_3165
+3165 = Commander, über Ihre Befehlsverweigerung sprechen wir später. Kathryn habe ich wegen Beihilfe in ihrem Quartier eingeschlossen.
+# IDS_TRANSMISSION_3166
+3166 = Fliegen Sie nicht nach Avernus. Die Kato-Kanone lädt und ist in zwei Stunden feuerbereit. Ich werde den Angriff unter keinen Umständen verzögern.
+# IDS_TRANSMISSION_3167
+3167 = Haben Sie mir etwas mitzuteilen, Commander?
+# IDS_TRANSMISSION_3168
+3168 = Er ist ein Verräter an der UCA.
+# IDS_TRANSMISSION_3169
+3169 = Seine Truppen sammeln sich in der verlassenen Stadt Avernus. Wir rechnen binnen weniger Tage mit einem finalen Angriff auf Maritropa. Wenn Gabriel nicht gestoppt wird, vernichten die Gefallenen die CMC und übernehmen die Kontrolle über Cronus. Dann versiegt der Kato-Fluss in unserem gesamten System. Das kann und wird nicht passieren. Notfalls kümmere ich mich persönlich darum.
+# IDS_TRANSMISSION_3170
+3170 = Hmmm, DAS habe ich doch schon mal gehört.
+# IDS_TRANSMISSION_3171
+3171 = Mr. Ishikawa ist seit über einem Jahrzehnt ein wertvoller Verbündeter der UCA.
+# IDS_TRANSMISSION_3172
+3172 = Unsinn! Sie sind so ahnungslos wie die Idioten im Oberkommando. Die Gefallenen stehen kurz vor dem Sieg. Ich kann nicht zusehen, wie Cronus mörderischen Fanatikern in die Hände fällt.
+# IDS_TRANSMISSION_3173
+3173 = Ryo Ishikawa hat unwiderlegbare Beweise vorgelegt-
+# IDS_TRANSMISSION_3174
+3174 = Diese Narren begreifen die Lage hier nicht!
+# IDS_TRANSMISSION_3175
+3175 = Sie dürfen für diese Mission einen MCA auswählen. Die Spezifikationen der einzelnen Einheiten finden Sie am Terminal der jeweiligen Bucht. Viel Glück, Commander.
+# IDS_TRANSMISSION_3176
+3176 = Sie meinen Lt. Commander Akkaraju. Ja, das ist sie.
+# IDS_TRANSMISSION_3177
+3177 = Sie können wegtreten.
+# IDS_TRANSMISSION_3178
+3178 = Du kommst zu spät, Sanjuro. Heute bringe ich Cronus den Frieden.
+# IDS_TRANSMISSION_3179
+3179 = Ihre Mission ist es, Gabriel zu finden und auszuschalten, den Anführer der Gefallenen. Seine Truppen sammeln sich in der verlassenen Stadt Avernus. Binnen weniger Tage werden sie einen finalen Angriff auf Maritropa versuchen. Wenn Gabriel nicht gestoppt wird, vernichten die Gefallenen die CMC und übernehmen die Kontrolle über Cronus. Dann versiegt der Kato-Fluss in unserem gesamten System. Das kann und wird nicht passieren. Notfalls kümmere ich mich persönlich darum. Und jetz
+# IDS_TRANSMISSION_3303
+3303 = Ich kann's mir schwer vorstellen. Vielleicht führst du es mir mal vor.
+# IDS_TRANSMISSION_3304
+3304 = Baku ist wahnsinnig. Ich weiß nicht, was aus ihm geworden ist, aber er ist gefährlich.
+# IDS_TRANSMISSION_3305
+3305 = Sei vorsichtig.
+# IDS_TRANSMISSION_3306
+3306 = Komm ein bisschen näher.
+# IDS_TRANSMISSION_3307
+3307 = Cothineal ist eine Lebensform, so riesig, dass die Menschen 200 Jahre daraufgestarrt haben, ohne zu erkennen, was es ist. Es erstreckt sich über Hunderte Kilometer unter der Oberfläche von Cronus. Cothineal ist die Quelle des Kato. Es benutzt Toshiro, um sich zu schützen.
+# IDS_TRANSMISSION_3308
+3308 = Lass mich nicht warten.
+# IDS_TRANSMISSION_3309
+3309 = Grrrr.
+# IDS_TRANSMISSION_3310
+3310 = Ich wusste, dass du kommst. Schön, dich wiederzusehen.
+# IDS_TRANSMISSION_3311
+3311 = Ich freue mich ebenfalls auf die Nachbesprechung.
+# IDS_TRANSMISSION_3312
+3312 = Ich muss meinen Vater von Cothineal überzeugen. Er hält Toshiro für einen Verräter. Triff mich an der Oshii-Forschungsstation in Avernus. In den Vermessungsdaten und Geologieberichten stecken genug Beweise für Cothineal, um es ein für alle Mal zu belegen.
+# IDS_TRANSMISSION_3313
+3313 = Ich habe dir gesagt, dass Toshiro Gabriel ist. Nun, das ist nur die halbe Wahrheit.
+# IDS_TRANSMISSION_3314
+3314 = Ich warte auf dich.
+# IDS_TRANSMISSION_3315
+3315 = Ich bin nicht wütend wegen Kathryn. Na gut, ich bin wütend, aber ich bringe dich nicht um.
+# IDS_TRANSMISSION_3316
+3316 = Ich bin weg hier.
+# IDS_TRANSMISSION_3317
+3317 = Wurde auch Zeit, Sanjuro. Eine Shogo-Invasionstruppe nimmt gerade die Station ein!
+# IDS_TRANSMISSION_3318
+3318 = Es ist lange her. Wenn du verstehst, was ich meine.
+# IDS_TRANSMISSION_3319
+3319 = Es geht nicht so sehr darum, wo er ist, sondern wer er ist und wofür er kämpft. Es ist viel größer, als du dir je vorstellen könntest.
+# IDS_TRANSMISSION_3320
+3320 = Mach ihn fertig.
+# IDS_TRANSMISSION_3321
+3321 = Versprochen?
+# IDS_TRANSMISSION_3322
+3322 = Sanjuro!
+# IDS_TRANSMISSION_3323
+3323 = Sollte ich überhaupt fragen?
+# IDS_TRANSMISSION_3324
+3324 = Tut mir leid, ich habe noch etwas zu erledigen. Außerdem wirst du deinen MCA brauchen.
+# IDS_TRANSMISSION_3325
+3325 = Konnten sie nicht. Ich war undercover. Mein Vater hat mich darauf angesetzt, alles über die Gefallenen herauszufinden.
+# IDS_TRANSMISSION_3326
+3326 = Es geht um Gabriel. Beeil dich!
+# IDS_TRANSMISSION_3327
+3327 = Deck mir den Rücken.
+# IDS_TRANSMISSION_3328
+3328 = Wir müssen die Daten zur Leviathan hochladen und dann das System löschen. Das hält sie zumindest eine Weile auf.
+# IDS_TRANSMISSION_3329
+3329 = Na, hallo.
+# IDS_TRANSMISSION_3330
+3330 = Na, du hast mich wohl vermisst, hm?
+# IDS_TRANSMISSION_3331
+3331 = Was jetzt?
+# IDS_TRANSMISSION_3332
+3332 = Ja, mir geht's gut.
+# IDS_TRANSMISSION_3333
+3333 = Ja?
+# IDS_TRANSMISSION_3334
+3334 = Du hast mich wirklich vermisst, was?
+# IDS_TRANSMISSION_3335
+3335 = Du musst ihn aufhalten!
+# IDS_TRANSMISSION_3336
+3336 = Du musst ihn aufhalten, Sanjuro. Vergiss, dass er mein Vater ist. Mein Vater würde so etwas nie tun.
+# IDS_TRANSMISSION_3337
+3337 = Warte, Sanjuro!
+# IDS_TRANSMISSION_3338
+3338 = Willst du mich abhängen?
+# IDS_TRANSMISSION_3339
+3339 = Sanjuro!
+# IDS_TRANSMISSION_3340
+3340 = Moment mal!
+# IDS_TRANSMISSION_3341
+3341 = Mann, jetzt mach mal halblang! Ich bin doch nur eine KI!
+# IDS_TRANSMISSION_3365
+3365 = Du bist SO gemein!
+# IDS_TRANSMISSION_3376
+3376 = Shogo hat zwei Staffeln Ikari-Jäger gestartet. Sie greifen die Leviathan an. Wir werden mit ihnen fertig, geh du zu Gabriel.
+# IDS_TRANSMISSION_3377
+3377 = Ha!
+# IDS_TRANSMISSION_3378
+3378 = Und, hattet ihr zwei Gelegenheit, über alte Zeiten zu plaudern?
+# IDS_TRANSMISSION_3379
+3379 = Was ist mit Kura?
+# IDS_TRANSMISSION_3380
+3380 = Wart's nur ab.
+# IDS_TRANSMISSION_3381
+3381 = Und wie steht's mit dir, mein Schatz?
+# IDS_TRANSMISSION_3382
+3382 = Vergisst du nicht deine Truppmitglieder?
+# IDS_TRANSMISSION_3383
+3383 = Sei vorsichtig, Sanjuro, der Admiral ist etwas aufgebracht
+# IDS_TRANSMISSION_3384
+3384 = Zwing mich nicht, da runterzukommen.
+# IDS_TRANSMISSION_3385
+3385 = Leg dich nicht mit mir an.
+# IDS_TRANSMISSION_3386
+3386 = War ja klar.
+# IDS_TRANSMISSION_3387
+3387 = Geh zum Luftschiff-Dock. Sobald du an Bord bist, helfe ich dir, den Nav-Computer umzuleiten.
+# IDS_TRANSMISSION_3388
+3388 = Wie geht es Toshiro?
+# IDS_TRANSMISSION_3389
+3389 = Ich habe dich auch vermisst.
+# IDS_TRANSMISSION_3390
+3390 = Ich bin mir nicht sicher.
+# IDS_TRANSMISSION_3391
+3391 = Es tut mir leid, Sanjuro.
+# IDS_TRANSMISSION_3392
+3392 = Ich hab langsam wirklich genug von dem Mist!
+# IDS_TRANSMISSION_3393
+3393 = Es ist irgendwo nahe deiner aktuellen Position. Du musst einfach danach suchen.
+# IDS_TRANSMISSION_3394
+3394 = Nur weil ich der Gewalt abgeschworen habe, heißt das nicht, dass ich dir nicht den Schädel spalte, Freundchen!
+# IDS_TRANSMISSION_3395
+3395 = War nur ein Scherz.
+# IDS_TRANSMISSION_3396
+3396 = Mach ihn fertig, Schatz.
+# IDS_TRANSMISSION_3397
+3397 = Hör zu, der Admiral hat befohlen, die Kato-Kanone an Bord der Leviathan bereitzumachen. Ich glaube, er will Avernus auslöschen - gegen den direkten Befehl des UCA-Oberkommandos. Wenn Toshiro und Baku wirklich dort sind, sind sie in Gefahr.
+# IDS_TRANSMISSION_3398
+3398 = Sanjuro!
+# IDS_TRANSMISSION_3399
+3399 = Sanjuro, Ryo ist an Bord der Leviathan. Er war es sogar, der darauf bestand, mich einzusperren. Jetzt drängt er meinen Vater, die Waffe abzufeuern.
+# IDS_TRANSMISSION_3400
+3400 = Sanjuro, du hattest recht. Diese Kampfschiffe nähern sich aus Südosten. Ryo ist bei ihnen.
+# IDS_TRANSMISSION_3401
+3401 = Entschuldige, das war nicht so gemeint.
+# IDS_TRANSMISSION_3402
+3402 = Schluss mit den Albernheiten!
+# IDS_TRANSMISSION_3403
+3403 = Das bin ja SO nicht ich.
+# IDS_TRANSMISSION_3404
+3404 = Der Transporter setzt dich nahe dem Südwest-Eingang von Avernus ab. Laut unserer Aufklärung ist das der am schwächsten verteidigte Zugang zur Stadt.
+# IDS_TRANSMISSION_3405
+3405 = Dafür ist keine Zeit!
+# IDS_TRANSMISSION_3406
+3406 = Keine Zeit, sie abzufangen.
+# IDS_TRANSMISSION_3407
+3407 = Sie können nicht lange warten, also sei einmal im Leben pünktlich.
+# IDS_TRANSMISSION_3408
+3408 = Sehr witzig.
+# IDS_TRANSMISSION_3409
+3409 = Gut gemacht, Sanjuro. Die Shogo-Flotte ist auf der Flucht.
+# IDS_TRANSMISSION_3410
+3410 = Wir haben eine Gruppe Shogo-Kampfschiffe geortet, die in die Atmosphäre von Cronus eintritt. Sieht aus, als wäre der Angriff hier oben nur ein Ablenkungsmanöver gewesen.
+# IDS_TRANSMISSION_3411
+3411 = Also, Shogo führt definitiv etwas im Schilde. Sie ziehen außerhalb dieses Systems etwas zusammen, das nach einer Kriegsflotte aussieht.
+# IDS_TRANSMISSION_3412
+3412 = Was ist mit Gabriel?
+# IDS_TRANSMISSION_3413
+3413 = Was denkst du gerade?
+# IDS_TRANSMISSION_3414
+3414 = Ja, aber ich mache mir Sorgen um meinen Vater. Irgendetwas stimmt nicht mit ihm. Wenn du ihn jetzt nicht aufhältst, feuert er die Kato-Kanone ab.
+# IDS_TRANSMISSION_3415
+3415 = Sei bloß nett zu Kura, denn zu Hause erwartet dich ein leeres Bett, harter Kerl.
+# IDS_TRANSMISSION_3416
+3416 = Du musst den Madison-Tunnel finden. Er führt zum alten CMC-Hauptquartier in der Innenstadt von Avernus. Dort müsstest du Gabriel aufspüren können.
+# IDS_TRANSMISSION_3535
+3535 = Da kommen sie!
+# IDS_TRANSMISSION_3536
+3536 = Ich... ich glaube schon.
+# IDS_TRANSMISSION_3537
+3537 = Wenn du deine Mission weiterverfolgst, bleibt Avernus vielleicht verschont, doch du wirst die wahre Macht Gabriels kennenlernen.
+# IDS_TRANSMISSION_3538
+3538 = Sieh dich um, Sanjuro. Dieser Ort ist ein Schrein dessen, was es heißt, Mensch zu sein. Welches Symbol der Menschheit ist treffender als eine geballte Faust, ein gezücktes Messer, eine geladene Waffe? Wir sind Zerstörer, Eroberer, Verschlinger. Unsere Gier definiert uns. Menschliche Größe ist ein zerstörerisches Ding. Sie wird in Eroberung und Blutvergießen gemessen.
+# IDS_TRANSMISSION_3539
+3539 = Cothineal existiert, mehr nicht. Sein einziger Hunger ist die Selbsterhaltung. Als die Menschen auf diese Welt kamen, nach Coth, kamen sie der Macht wegen. Sie kamen, um zu ernten. Viele Jahre duldete Cothineal sie, denn sie waren keine Bedrohung. Als schließlich eine entstand, wandte sich Cothineal an die Eindringlinge und flehte sie an, ihre Ernte zu mäßigen. Ivan Isarevich war der Botschafter von Coth, und als die Menschheit ihn verhöhnte, wurde er zum Terroristen. Als wir
+# IDS_TRANSMISSION_3540
+3540 = Isarevich scheiterte, weil er kein Krieger war. Er kannte die wahre Sprache der Menschheit nicht. Aber ich spreche fließend Gewalt, und ich habe triumphiert.
+# IDS_TRANSMISSION_3541
+3541 = Nein, Bruder, du bist in Gefahr. Größerer, als du dir vorstellen kannst.
+# IDS_TRANSMISSION_3542
+3542 = Sanjuro?
+# IDS_TRANSMISSION_3543
+3543 = Shogo kann uns nicht besiegen. Wir sind zu stark.
+# IDS_TRANSMISSION_3544
+3544 = Dann wirst du sterben.
+# IDS_TRANSMISSION_3545
+3545 = Nun gut. Ich empfange dich im Museum für Kriegsgeschichte in Avernus. Ein passender Ort, findest du nicht? Dir wird freies Geleit gewährt, solange du meine Soldaten nicht angreifst.
+# IDS_TRANSMISSION_3546
+3546 = Willkommen, Bruder. Lass dich umarmen.
+# IDS_TRANSMISSION_3547
+3547 = Du kannst nicht hoffen, uns zu besiegen, Commander.
+# IDS_TRANSMISSION_3548
+3548 = Du kannst nicht gewinnen.
+# IDS_TRANSMISSION_3549
+3549 = Du musst deinen Weg wählen, Sanjuro. Wir bieten dir einen Handel: Schwöre uns die Treue, und dein Bruder wird verschont - vorausgesetzt, du kannst deinen Admiral daran hindern, Avernus zu zerstören.
+# IDS_TRANSMISSION_3666
+3666 = Na schön. Ach, und Baku: Ich bin froh, dass du lebst.
+# IDS_TRANSMISSION_3667
+3667 = Ich glaube nicht.
+# IDS_TRANSMISSION_3668
+3668 = Ich erinnere mich... du hast mir das Leben gerettet. Dafür verschone ich deins. Dieses eine Mal.
+# IDS_TRANSMISSION_3669
+3669 = Weiter kommst du nicht, Sanjuro.
+# IDS_TRANSMISSION_3670
+3670 = Das beenden wir später.
+# IDS_TRANSMISSION_3671
+3671 = Recon 4, Rückzug zum Drop Point Renegade zur sofortigen Evakuierung. Wir orten Verstärkung der Gefallenen aus Südosten. Bringen Sie Ihr Team raus, sofort. Over.
+# IDS_TRANSMISSION_3672
+3672 = Roger, Wirkungsfeuer. Over.
+# IDS_TRANSMISSION_3676
+3676 = Verschwinde. Nächstes Mal verschone ich dich nicht.
+# IDS_TRANSMISSION_3677
+3677 = Sanjuro? Ich kenne dich...
+# IDS_TRANSMISSION_3700
+3700 = Kura ist tot! Mission gescheitert!
+# IDS_TRANSMISSION_3701
+3701 = Hank ist tot! Mission gescheitert!
+# IDS_TRANSMISSION_3702
+3702 = Mission gescheitert! Kato-Kanone abgefeuert!
+# IDS_PIT_UNKNOWN
+3703 = Unbekanntes Objekt aufgenommen
+# IDS_PIT_ARMOR_REPAIR100
+3704 = 100 Panzerungsreparatur aufgenommen
+# IDS_PIT_ARMOR_REPAIR250
+3705 = 250 Panzerungsreparatur aufgenommen
+# IDS_PIT_ARMOR_REPAIR500
+3706 = 500 Panzerungsreparatur aufgenommen
+# IDS_PIT_ARMOR_BODY50
+3707 = 50 Körperpanzerung aufgenommen
+# IDS_PIT_ARMOR_BODY100
+3708 = 100 Körperpanzerung aufgenommen
+# IDS_PIT_ARMOR_BODY200
+3709 = 200 Körperpanzerung aufgenommen
+# IDS_PIT_ENHANCEMENT_DAMAGE
+3710 = Schadensverstärkung aufgenommen
+# IDS_PIT_ENHANCEMENT_MELEEDAMAGE
+3711 = Nahkampf-Schadensverstärkung aufgenommen
+# IDS_PIT_ENHANCEMENT_PROTECTION
+3712 = Schutzverstärkung aufgenommen
+# IDS_PIT_ENHANCEMENT_ENERGYPROTECTION
+3713 = Energieschutz-Verstärkung aufgenommen
+# IDS_PIT_ENHANCEMENT_PROJECTILEPROTECTION
+3714 = Projektilschutz-Verstärkung aufgenommen
+# IDS_PIT_ENHANCEMENT_EXPLOSIVEPROTECTION
+3715 = Explosionsschutz-Verstärkung aufgenommen
+# IDS_PIT_ENHANCEMENT_REGEN
+3716 = Regenerationsverstärkung aufgenommen
+# IDS_PIT_ENHANCEMENT_HEALTH
+3717 = Gesundheitsverstärkung aufgenommen
+# IDS_PIT_ENHANCEMENT_ARMOR
+3718 = Panzerungsverstärkung aufgenommen
+# IDS_PIT_FIRSTAID_10
+3719 = 10 Erste Hilfe aufgenommen
+# IDS_PIT_FIRSTAID_15
+3720 = 15 Erste Hilfe aufgenommen
+# IDS_PIT_FIRSTAID_25
+3721 = 25 Erste Hilfe aufgenommen
+# IDS_PIT_FIRSTAID_50
+3722 = 50 Erste Hilfe aufgenommen
+# IDS_PIT_POWERSURGE_50
+3723 = 50 Energieschub aufgenommen
+# IDS_PIT_POWERSURGE_100
+3724 = 100 Energieschub aufgenommen
+# IDS_PIT_POWERSURGE_150
+3725 = 150 Energieschub aufgenommen
+# IDS_PIT_POWERSURGE_250
+3726 = 250 Energieschub aufgenommen
+# IDS_PIT_ULTRA_DAMAGE
+3727 = Ultra-Schaden aufgenommen
+# IDS_PIT_ULTRA_HEALTH
+3728 = Ultra-Gesundheit aufgenommen
+# IDS_PIT_ULTRA_POWERSURGE
+3729 = Ultra-Energieschub aufgenommen
+# IDS_PIT_ULTRA_SHIELD
+3730 = Ultra-Schild aufgenommen
+# IDS_PIT_ULTRA_STEALTH
+3731 = Ultra-Tarnung aufgenommen
+# IDS_PIT_ULTRA_REFLECT
+3732 = Ultra-Reflektor aufgenommen
+# IDS_PIT_ULTRA_NIGHTVISION
+3733 = Ultra-Nachtsicht aufgenommen
+# IDS_PIT_ULTRA_INFRARED
+3734 = Ultra-Infrarot aufgenommen
+# IDS_PIT_ULTRA_SILENCER
+3735 = Ultra-Schalldämpfer aufgenommen
+# IDS_PIT_ULTRA_RESTORE
+3736 = Ultra-Regeneration aufgenommen
+# IDS_PIT_UPGRADE_DAMAGE
+3737 = Schadens-Upgrade aufgenommen
+# IDS_PIT_UPGRADE_PROTECTION
+3738 = Schutz-Upgrade aufgenommen
+# IDS_PIT_UPGRADE_REGEN
+3739 = Regenerations-Upgrade aufgenommen
+# IDS_PIT_UPGRADE_HEALTH
+3740 = Gesundheits-Upgrade aufgenommen
+# IDS_PIT_UPGRADE_ARMOR
+3741 = Panzerungs-Upgrade aufgenommen
+# IDS_PIT_UPGRADE_TARGETING
+3742 = Zielsystem-Upgrade aufgenommen
+# IDS_PIT_CAT
+3743 = Katze aufgenommen
+# IDS_PIT_SHOGO_S
+3744 = 'S' aufgenommen
+# IDS_PIT_SHOGO_H
+3745 = 'H' aufgenommen
+# IDS_PIT_SHOGO_O
+3746 = 'O' aufgenommen
+# IDS_PIT_SHOGO_G
+3747 = 'G' aufgenommen
+# IDS_MESSAGE_INVALID3DSOUNDPROVIDER
+3748 = Ungültiger 3D-Soundanbieter.
+# IDS_CONTROL_RELOAD
+3800 = nachladen
+# IDS_ACTIONSTRING_RELOAD
+3801 = Reload
+# IDS_CONTROL_HOLSTER
+3802 = waffe wegstecken
+# IDS_ACTIONSTRING_HOLSTER
+3803 = Holster
+# IDS_PUTIMER_DAMAGE
+3810 = SCHADEN
+# IDS_PUTIMER_SHIELD
+3811 = SCHILD
+# IDS_PUTIMER_STEALTH
+3812 = TARNUNG
+# IDS_PUTIMER_REFLECT
+3813 = REFLEKTOR
+# IDS_PUTIMER_NIGHTVISION
+3814 = NACHTSICHT
+# IDS_PUTIMER_INFRARED
+3815 = INFRAROT
+# IDS_PUTIMER_SILENCER
+3816 = SCHALLDAEMPFER
+# IDS_OBJECTIVE_UPDATED
+3817 = ZIEL AKTUALISIERT
+# IDS_GORE_OFF
+3820 = aus
+# IDS_GORE_REALISTIC
+3821 = realistisch
+# IDS_GORE_FULL
+3822 = voll
+# IDS_CAMPAIGNLEVELS
+3823 = kampagnenlevel...
+# IDS_TITLE_CAMPAIGNLEVELS
+3824 = KAMPAGNENLEVEL
+# IDS_NOCAMPAIGNLEVELS
+3825 = Keine Kampagnenlevel gefunden
+# IDS_PICKUP_KEY
+3826 = Schlüssel aufgenommen!
+# IDS_PICKUP_UPGRADE
+3827 = Upgrade aufgenommen!
+# IDS_PICKUP_ENHANCEMENT
+3828 = Verstärkung aufgenommen!
+# IDS_MENU_RESPAWN
+3829 = respawn
+# IDS_WEAPON_DMR
+3830 = DMR
+# IDS_CONTROL_SECONDARY_HOLD
+3831 = sekundärfeuer/zoom (halten)
+# IDS_ACTIONSTRING_SECONDARY_HOLD
+3832 = SecondaryHold
+# IDS_CONTROL_SECONDARY_TOGGLE
+3833 = sekundärfeuer/zoom (umschalten)
+# IDS_ACTIONSTRING_SECONDARY_TOGGLE
+3834 = SecondaryToggle
+# IDS_CONTROL_QUICKMELEE
+3835 = nahkampfschlag (halten)
+# IDS_ACTIONSTRING_QUICKMELEE
+3836 = QuickMelee
+# IDS_WEAPON_ENERGYGRENADE_CLASSIC
+3837 = Energiegranaten
