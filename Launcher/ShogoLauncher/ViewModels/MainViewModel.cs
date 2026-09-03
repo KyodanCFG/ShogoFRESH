@@ -127,6 +127,43 @@ public partial class MainViewModel : INotifyPropertyChanged
         }
     }
 
+    // --- Language pack (see LanguagePacks) ---
+    //
+    // Applies on selection rather than on Save, like FreshTakesPriority: a
+    // language is a fact about the install, not a pending edit, and the
+    // game reads it on the next world load with no restart.
+
+    public List<LanguagePacks.Choice> LanguageChoices { get; } = LanguagePacks.Available();
+
+    public LanguagePacks.Choice SelectedLanguage
+    {
+        get => LanguageChoices.FirstOrDefault(c =>
+                   string.Equals(c.FileName, string.IsNullOrEmpty(Prefs.LanguagePack) ? null : Prefs.LanguagePack,
+                                 StringComparison.OrdinalIgnoreCase))
+               ?? LanguageChoices[0];
+        set
+        {
+            if (value is null || Equals(SelectedLanguage, value)) return;
+
+            Prefs.LanguagePack = value.FileName ?? "";
+            OnPropertyChanged(nameof(SelectedLanguage));
+            if (GameFound)
+            {
+                try
+                {
+                    LanguagePacks.Apply(GameDir!, value.FileName);
+                    Status = value.FileName is null
+                        ? "Language pack removed - the game is back on its built-in English."
+                        : $"Language set to {value.Display}. Applies from the next world load - no restart needed.";
+                }
+                catch (Exception ex)
+                {
+                    Status = $"Could not install the language pack: {ex.Message}";
+                }
+            }
+        }
+    }
+
     public string UpdateBannerText => AvailableUpdate is null
         ? ""
         : $"ShogoFRESH {AvailableUpdate.DisplayVersion} is available "
@@ -211,6 +248,10 @@ public partial class MainViewModel : INotifyPropertyChanged
 
     private void LoadFromGameDirCore()
     {
+        // Re-assert the chosen language pack, so a launcher update's
+        // corrected pack reaches the game folder. Does nothing when no
+        // language was ever chosen.
+        LanguagePacks.Refresh(GameDir!, Prefs.LanguagePack);
 
         // The engine only knows the actions defaults.cfg registers, so any
         // command ShogoFRESH adds has to be declared there before a key

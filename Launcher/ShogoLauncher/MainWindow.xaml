@@ -948,6 +948,12 @@
                                       ToolTip="For broadcasting. Hides the chat HUD and silences its chirp, replaces other players' names with generated ones that stay put for as long as you are on the server, and picks a fresh random name for you every time you connect so viewers cannot follow you back to the server. Turning it off restores the name you typed above. Display-side only: nobody else's game is affected."/>
                             <CheckBox Content="Classic 1998 campaign (single player)" IsChecked="{Binding ClassicCampaign}" Margin="0,6,0,0"
                                       ToolTip="Restores the 1998 single-player tuning: the 1998 magazines with none of the machinery around them - no reload key, no clip readout, and reloads that cost only whatever animation the weapon has, which is why the sniper rifle reads as full auto - 1998 ammo drops and carry limits, criticals at 4x for everyone, no explosion falloff, AI that fires the instant it sees you, 1998 gibbing, no endless sidearms, no health/armour drops. Bug fixes and all presentation improvements (widescreen, HUD scaling) stay. Multiplayer is untouched - servers have their own Ruleset."/>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="Language:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <ComboBox ItemsSource="{Binding LanguageChoices}" SelectedItem="{Binding SelectedLanguage}"
+                                          Width="190" VerticalAlignment="Center"
+                                          ToolTip="Menus, HUD and mission text. Applies immediately and the game reads it on the next world load - no restart. Installs one string file into Custom\Strings and removes any other language the launcher put there; string files you or a mod added are never touched. Translations are community-reviewable text files - see LOCALIZATION.md to make one."/>
+                            </StackPanel>
                         </StackPanel>
                     </GroupBox>
 

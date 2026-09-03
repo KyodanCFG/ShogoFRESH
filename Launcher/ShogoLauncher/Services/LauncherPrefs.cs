@@ -150,6 +150,14 @@ public class LauncherPrefs
     private string _extraArgs = "";
     public string ExtraArgs { get => _extraArgs; set => Set(ref _extraArgs, value); }
 
+    /// <summary>
+    /// Installed language pack file name (Languages\*.txt), "" = stock
+    /// English. Stored here rather than inferred from Custom\Strings\ so a
+    /// launcher update can re-copy its corrected pack - see LanguagePacks.
+    /// </summary>
+    private string _languagePack = "";
+    public string LanguagePack { get => _languagePack; set => Set(ref _languagePack, value); }
+
     private string? _gameDirOverride;
     public string? GameDirOverride { get => _gameDirOverride; set => Set(ref _gameDirOverride, value); }
 
