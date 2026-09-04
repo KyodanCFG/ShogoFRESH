@@ -49,6 +49,36 @@ public partial class MainViewModel
         }
     }
 
+    // The build/ruleset filter. A ShogoFRESH server advertises "mod" and
+    // "ruleset" in its \status\ response (MyGameSpyMgr.cpp); a stock server
+    // sends neither. So three states are distinguishable at the list level -
+    // any server, a ShogoFRESH server of either ruleset, or specifically a
+    // Classic-ruleset one - and "stock only" falls out as the servers that
+    // never claimed to be FRESH.
+    public const string FleetFilterAll     = "All servers";
+    public const string FleetFilterFresh   = "ShogoFRESH only";
+    public const string FleetFilterClassic = "Classic ruleset only";
+    public const string FleetFilterStock   = "Stock (non-FRESH) only";
+
+    public string[] FleetFilterLabels { get; } =
+    {
+        FleetFilterAll, FleetFilterFresh, FleetFilterClassic, FleetFilterStock,
+    };
+
+    private string _selectedFleetFilter = FleetFilterAll;
+    public string SelectedFleetFilter
+    {
+        get => _selectedFleetFilter;
+        set
+        {
+            if (_selectedFleetFilter == value) return;
+
+            _selectedFleetFilter = value;
+            OnPropertyChanged(nameof(SelectedFleetFilter));
+            ServersView?.Refresh();
+        }
+    }
+
     private System.ComponentModel.ICollectionView? _serversView;
 
     /// <summary>
@@ -64,10 +94,45 @@ public partial class MainViewModel
             if (_serversView == null)
             {
                 _serversView = System.Windows.Data.CollectionViewSource.GetDefaultView(Servers);
-                _serversView.Filter = PassesBotFilter;
+                _serversView.Filter = PassesFilters;
             }
 
             return _serversView;
+        }
+    }
+
+    private bool PassesFilters(object o)
+    {
+        return o is not ServerInfo s || (PassesBotFilter(s) && PassesFleetFilter(s));
+    }
+
+    // FRESH vs stock is read from the "mod" key; ruleset from "ruleset".
+    // Both come only from a server that answered a query AS ShogoFRESH -
+    // a server nobody has queried yet, or a firewalled community server that
+    // never answers UDP (see the master-vouch join), reports neither. So a
+    // FRESH filter shows what has PROVEN itself FRESH, and the stock filter
+    // shows what has not - which correctly leaves an unqueried row out of
+    // "FRESH only" rather than guessing it in.
+    private bool PassesFleetFilter(ServerInfo s)
+    {
+        bool isFresh = s.RawInfo.TryGetValue("mod", out var mod) &&
+                       mod.StartsWith("ShogoFRESH", StringComparison.OrdinalIgnoreCase);
+
+        switch (_selectedFleetFilter)
+        {
+            case FleetFilterFresh:
+                return isFresh;
+
+            case FleetFilterClassic:
+                return isFresh &&
+                       s.RawInfo.TryGetValue("ruleset", out var rs) &&
+                       rs.Equals("Classic", StringComparison.OrdinalIgnoreCase);
+
+            case FleetFilterStock:
+                return !isFresh;
+
+            default:
+                return true;
         }
     }
 

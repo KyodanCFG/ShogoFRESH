@@ -70,6 +70,9 @@
                         <ComboBox ItemsSource="{Binding BotFilterLabels}" SelectedItem="{Binding SelectedBotFilter}"
                                   Width="200" VerticalAlignment="Center"
                                   ToolTip="Bot-filled servers look busy. Use this to find games with real people in them, or to find a populated server to warm up on."/>
+                        <ComboBox ItemsSource="{Binding FleetFilterLabels}" SelectedItem="{Binding SelectedFleetFilter}"
+                                  Width="200" VerticalAlignment="Center" Margin="8,0,0,0"
+                                  ToolTip="Filter by build and ruleset. A ShogoFRESH server says so when queried; a stock server does not. 'Classic ruleset only' finds FRESH servers running the 1998 balance. Servers not yet queried are treated as not-FRESH until they answer."/>
                     </StackPanel>
 
                     <DataGrid x:Name="ServerGrid" ItemsSource="{Binding ServersView}" SelectedItem="{Binding SelectedServer}"
