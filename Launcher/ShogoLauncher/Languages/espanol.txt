@@ -1,4 +1,8 @@
 # language: Espanol
+# Menu strings are ASCII-folded on purpose: the 1998 menu bitmap fonts
+# stop at character 126, so accents VANISH there (no glyph, no advance).
+# Everything drawn in Windows fonts (transmissions, HUD, chat) keeps its
+# proper spelling. See Docs/public/LOCALIZATION.md.
 # ShogoFRESH language pack - install via the launcher's Language
 # picker (Settings tab), or drop into Custom\Strings\ by hand.
 # Generated from Tools/loc_overlay.py output; source of truth for
@@ -37,13 +41,13 @@
 # IDS_TITLE_JOYSTICK
 15 = JOYSTICK
 # IDS_SINGLEPLAYER
-16 = campaña
+16 = campana
 # IDS_MULTIPLAYER
 17 = multijugador
 # IDS_OPTIONS
 18 = opciones
 # IDS_CREDITS
-19 = créditos
+19 = creditos
 # IDS_EXIT
 20 = salir
 # IDS_NEWGAME
@@ -71,11 +75,11 @@
 # IDS_CUSTOM
 32 = a medida
 # IDS_ON
-33 = sí
+33 = si
 # IDS_OFF
 34 = no
 # IDS_YES
-35 = sí
+35 = si
 # IDS_NO
 36 = no
 # IDS_NONE
@@ -89,7 +93,7 @@
 # IDS_NOTSHOWN
 41 = oculto
 # IDS_PULLEDBACK
-42 = retraído
+42 = retraido
 # IDS_FULL
 43 = total
 # IDS_HALF
@@ -105,7 +109,7 @@
 # IDS_RESTOREDEFAULTS
 49 = restaurar valores
 # IDS_SHARP
-50 = nítido
+50 = nitido
 # IDS_SOFT
 51 = suave
 # IDS_YESNO
@@ -279,7 +283,7 @@
 # IDS_SUBDET_TEXTUREDETAIL
 346 = Detalle de texturas
 # IDS_SUBDET_DYNAMICLIGHTING
-347 = Iluminación dinámica
+347 = Iluminacion dinamica
 # IDS_SUBDET_LIGHTMAPPING
 348 = Mapas de luz
 # IDS_SUBDET_SPECIALFX
@@ -301,9 +305,9 @@
 # IDS_SUBDET_POLYGRIDS
 357 = Polygrids
 # IDS_QUICKLOAD
-360 = carga rápida (F7)
+360 = carga rapida (F7)
 # IDS_QUICKSAVE
-361 = guardado rápido (F6)
+361 = guardado rapido (F6)
 # IDS_AUTOSAVING
 364 = Autoguardando...
 # IDS_NOAUTOSAVEGAME
@@ -337,9 +341,9 @@
 # IDS_SOUND_TITLE
 423 = Opciones de sonido
 # IDS_SOUND_MUSICENABLED
-424 = música interactiva
+424 = musica interactiva
 # IDS_SOUND_MUSICVOL
-425 = volumen de música
+425 = volumen de musica
 # IDS_SOUND_FX
 426 = efectos de sonido
 # IDS_SOUND_FXVOL
@@ -369,11 +373,11 @@
 # IDS_MOUSE_INPUTRATE
 439 = suavidad
 # IDS_MOUSE_LEFTBUTTON
-440 = botón izquierdo
+440 = boton izquierdo
 # IDS_MOUSE_MIDDLEBUTTON
-441 = botón central
+441 = boton central
 # IDS_MOUSE_RIGHTBUTTON
-442 = botón derecho
+442 = boton derecho
 # IDS_JOY_JOYLOOK
 443 = vista con joystick
 # IDS_JOY_INVERTYAXIS
@@ -387,7 +391,7 @@
 # IDS_JOY_RIGHT
 448 = joystick derecha
 # IDS_JOY_BUTTON1
-449 = botón 1
+449 = boton 1
 # IDS_JOY_BUTTON2
 450 = botón 2
 # IDS_JOY_BUTTON3
@@ -407,17 +411,17 @@
 # IDS_JOY_BUTTON10
 458 = botón 10
 # IDS_NEW_EASY
-460 = fácil
+460 = facil
 # IDS_NEW_MEDIUM
 461 = normal
 # IDS_NEW_HARD
-462 = difícil
+462 = dificil
 # IDS_NEW_INSANE
 463 = LOCURA
 # IDS_DMODE_RENDERER
 500 = renderizador
 # IDS_DMODE_RESOLUTION
-501 = resolución
+501 = resolucion
 # IDS_DMODE_BITDEPTH
 502 = bits de color
 # IDS_DMODE_DEPTH8
@@ -521,7 +525,7 @@
 # IDS_PRESSANYKEY
 660 = presiona una tecla...
 # IDS_EMPTY
-661 = [ vacío ]
+661 = [ vacio ]
 # IDS_PRESSKEYTOCONTINUE
 662 = presiona Enter para continuar
 # IDS_SUREWANTQUIT
@@ -537,15 +541,15 @@
 # IDS_NOCUSTOMWORLDS
 800 = No hay mundos personalizados
 # IDS_DEMONOCUSTOMWORLDS
-801 = Los mundos personalizados no están disponibles en la demo
+801 = Los mundos personalizados no estan disponibles en la demo
 # IDS_DEMODISCONNECT
 802 = Desconectado del servidor.  (nota: las partidas demo deben alojarse en servidores demo)
 # IDS_DEMOINFO
 803 = info
 # IDS_NOJOYSTICKDETECTED
-900 = No se detectó ningún joystick.  Revisa la configuración y la conexión de tu joystick.
+900 = No se detecto ningun joystick.  Revisa la configuracion y la conexion de tu joystick.
 # IDS_NOQUICKSAVEGAME
-901 = No existe ningún guardado rápido.
+901 = No existe ningun guardado rapido.
 # IDS_LOADGAMEFAILED
 902 = Error al cargar la partida guardada.
 # IDS_SAVEGAMEFAILED
@@ -553,7 +557,7 @@
 # IDS_NOLOADLEVEL
 904 = No se pudo cargar el nivel.
 # IDS_SOUNDNOTINITED
-905 = No se pudo inicializar el sonido.  Asegúrate de que tu tarjeta de sonido esté bien configurada.
+905 = No se pudo inicializar el sonido.  Asegurate de que tu tarjeta de sonido este bien configurada.
 # IDS_UNSPECIFIEDERROR
 906 = Ocurrió un error no especificado.
 # IDS_NOREMAPKEY
@@ -561,7 +565,7 @@
 # IDS_NOSOUNDCHANGE
 908 = Los efectos de sonido deben estar activados para cambiar este valor.
 # IDS_NOMUSICCHANGE
-909 = La música debe estar activada para cambiar este valor.
+909 = La musica debe estar activada para cambiar este valor.
 # IDS_ENDCURRENTGAME
 910 = Esto terminará tu partida actual.  ¿Continuar?
 # IDS_REINITIALIZING_RENDERER
@@ -583,7 +587,7 @@
 # IDS_NETERR_NOTSAMEGUID
 958 = ERROR - No se pudo entrar: el servidor es de otra versión o de otro juego.
 # IDS_JOYSTICKMENUDISABLED
-959 = Menú de joystick desactivado. El joystick se configura en el archivo joystick.cfg.
+959 = Menu de joystick desactivado. El joystick se configura en el archivo joystick.cfg.
 # IDS_SANJURO
 1000 = Sanjuro
 # IDS_SAY
@@ -2073,7 +2077,7 @@
 # IDS_GORE_FULL
 3822 = total
 # IDS_CAMPAIGNLEVELS
-3823 = niveles de campaña...
+3823 = niveles de campana...
 # IDS_TITLE_CAMPAIGNLEVELS
 3824 = NIVELES DE CAMPANA
 # IDS_NOCAMPAIGNLEVELS

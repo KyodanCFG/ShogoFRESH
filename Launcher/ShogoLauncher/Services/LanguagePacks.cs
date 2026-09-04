@@ -82,8 +82,20 @@ public static class LanguagePacks
             foreach (var f in Directory.GetFiles(dir, "*.txt"))
             {
                 var name = Path.GetFileName(f);
-                if (owned.Contains(name) &&
-                    !name.Equals(fileName, StringComparison.OrdinalIgnoreCase))
+                if (name.Equals(fileName, StringComparison.OrdinalIgnoreCase)) continue;
+
+                // Owned by NAME - or by SELF-DECLARATION. A pack names
+                // itself with a "# language:" header, and a file that says
+                // "I am a language pack" is bound by the one-pack rule
+                // whatever it is called. Ownership-by-current-list alone
+                // left a legacy english.txt (a name a former build shipped
+                // and this one does not) contesting all 1,049 stock ids
+                // with whichever pack was picked - the winner fell to
+                // engine enumeration order, so German loaded and Spanish
+                // did not (2026-09-03). A mapper's MyMod.txt has no such
+                // header and ids 50000+ anyway; it is never touched.
+
+                if (owned.Contains(name) || DeclaresItselfALanguagePack(f))
                 {
                     File.Delete(f);
                 }
@@ -93,6 +105,23 @@ public static class LanguagePacks
         if (fileName is null) return;
         Directory.CreateDirectory(dir);
         File.Copy(Path.Combine(PacksDir, fileName), Path.Combine(dir, fileName), overwrite: true);
+    }
+
+    // Does this file's header say "# language: ..."? Same ten-line,
+    // Latin1 read as Available()'s display-name scan, so the two cannot
+    // disagree about what counts as a pack.
+    private static bool DeclaresItselfALanguagePack(string path)
+    {
+        try
+        {
+            foreach (var line in File.ReadLines(path, System.Text.Encoding.Latin1).Take(10))
+            {
+                var t = line.TrimStart('#', ' ', '\t');
+                if (t.StartsWith("language:", StringComparison.OrdinalIgnoreCase)) return true;
+            }
+        }
+        catch { /* unreadable = not ours to judge, leave it */ }
+        return false;
     }
 
     /// <summary>

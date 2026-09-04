@@ -1,4 +1,8 @@
 # language: Deutsch
+# Menu strings are ASCII-folded on purpose: the 1998 menu bitmap fonts
+# stop at character 126, so accents VANISH there (no glyph, no advance).
+# Everything drawn in Windows fonts (transmissions, HUD, chat) keeps its
+# proper spelling. See Docs/public/LOCALIZATION.md.
 # ShogoFRESH language pack - install via the launcher's Language
 # picker (Settings tab), or drop into Custom\Strings\ by hand.
 # Generated from Tools/loc_overlay.py output; source of truth for
@@ -65,7 +69,7 @@
 # IDS_JOYSTICK
 29 = joystick
 # IDS_BACK
-30 = zurück
+30 = zurueck
 # IDS_ERROR
 31 = fehler
 # IDS_CUSTOM
@@ -89,7 +93,7 @@
 # IDS_NOTSHOWN
 41 = verborgen
 # IDS_PULLEDBACK
-42 = zurückgezogen
+42 = zurueckgezogen
 # IDS_FULL
 43 = voll
 # IDS_HALF
@@ -103,7 +107,7 @@
 # IDS_FURTHEST
 48 = weit
 # IDS_RESTOREDEFAULTS
-49 = zurücksetzen
+49 = zuruecksetzen
 # IDS_SHARP
 50 = scharf
 # IDS_SOFT
@@ -275,7 +279,7 @@
 # IDS_SUBDET_SHADOWS
 344 = Schatten
 # IDS_SUBDET_BULLETHOLES
-345 = Einschusslöcher
+345 = Einschussloecher
 # IDS_SUBDET_TEXTUREDETAIL
 346 = Texturdetail
 # IDS_SUBDET_DYNAMICLIGHTING
@@ -325,7 +329,7 @@
 # IDS_DISPLAY_TITLE
 417 = Anzeige einrichten
 # IDS_DISPLAY_CHANGE
-418 = modus ändern
+418 = modus aendern
 # IDS_DISPLAY_GORE
 419 = gore-stufe
 # IDS_DISPLAY_SCREENFLASH
@@ -339,13 +343,13 @@
 # IDS_SOUND_MUSICENABLED
 424 = interaktive musik
 # IDS_SOUND_MUSICVOL
-425 = musiklautstärke
+425 = musiklautstaerke
 # IDS_SOUND_FX
 426 = soundeffekte
 # IDS_SOUND_FXVOL
-427 = effektlautstärke
+427 = effektlautstaerke
 # IDS_SOUND_QUALITY
-428 = effektqualität
+428 = effektqualitaet
 # IDS_SOUND_NONE
 429 = keine
 # IDS_SOUND_IMA
@@ -367,7 +371,7 @@
 # IDS_MOUSE_SENSITIVITY
 438 = empfindlichkeit
 # IDS_MOUSE_INPUTRATE
-439 = glättung
+439 = glaettung
 # IDS_MOUSE_LEFTBUTTON
 440 = linke taste
 # IDS_MOUSE_MIDDLEBUTTON
@@ -417,7 +421,7 @@
 # IDS_DMODE_RENDERER
 500 = renderer
 # IDS_DMODE_RESOLUTION
-501 = auflösung
+501 = aufloesung
 # IDS_DMODE_BITDEPTH
 502 = farbtiefe
 # IDS_DMODE_DEPTH8
@@ -425,7 +429,7 @@
 # IDS_DMODE_DEPTH16
 504 = 16 bit
 # IDS_DMODE_PLEASEWAIT1
-505 = Bitte warten, während Shogo
+505 = Bitte warten, waehrend Shogo
 # IDS_DMODE_PLEASEWAIT2
 506 = die Rendererliste erstellt...
 # IDS_KILLEDMYSELF
@@ -519,7 +523,7 @@
 # IDS_UNUSED
 651 = Unbenutzt
 # IDS_PRESSANYKEY
-660 = drücke eine taste...
+660 = druecke eine taste...
 # IDS_EMPTY
 661 = [ leer ]
 # IDS_PRESSKEYTOCONTINUE
@@ -537,13 +541,13 @@
 # IDS_NOCUSTOMWORLDS
 800 = Keine eigenen Welten gefunden
 # IDS_DEMONOCUSTOMWORLDS
-801 = Eigene Welten sind in der Demo nicht verfügbar
+801 = Eigene Welten sind in der Demo nicht verfuegbar
 # IDS_DEMODISCONNECT
 802 = Verbindung zum Server getrennt.  (Hinweis: Demo-Spiele müssen von Demo-Servern gehostet werden)
 # IDS_DEMOINFO
 803 = info
 # IDS_NOJOYSTICKDETECTED
-900 = Kein Joystick gefunden.  Bitte prüfe Konfiguration und Anschluss deines Joysticks.
+900 = Kein Joystick gefunden.  Bitte pruefe Konfiguration und Anschluss deines Joysticks.
 # IDS_NOQUICKSAVEGAME
 901 = Kein Schnellspeicherstand vorhanden.
 # IDS_LOADGAMEFAILED
@@ -559,9 +563,9 @@
 # IDS_NOREMAPKEY
 907 = Diese Taste kann nicht neu belegt werden.
 # IDS_NOSOUNDCHANGE
-908 = Soundeffekte müssen aktiviert sein, um diesen Wert zu ändern.
+908 = Soundeffekte muessen aktiviert sein, um diesen Wert zu aendern.
 # IDS_NOMUSICCHANGE
-909 = Musik muss aktiviert sein, um diesen Wert zu ändern.
+909 = Musik muss aktiviert sein, um diesen Wert zu aendern.
 # IDS_ENDCURRENTGAME
 910 = Dies beendet dein laufendes Spiel.  Fortfahren?
 # IDS_REINITIALIZING_RENDERER
@@ -583,7 +587,7 @@
 # IDS_NETERR_NOTSAMEGUID
 958 = FEHLER - Beitritt nicht möglich: Der Server hat eine andere Version oder ein anderes Spiel.
 # IDS_JOYSTICKMENUDISABLED
-959 = Joystick-Menü deaktiviert. Der Joystick kann in der Datei joystick.cfg konfiguriert werden.
+959 = Joystick-Menue deaktiviert. Der Joystick kann in der Datei joystick.cfg konfiguriert werden.
 # IDS_SANJURO
 1000 = Sanjuro
 # IDS_SAY
