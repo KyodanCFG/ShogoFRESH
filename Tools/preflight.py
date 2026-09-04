@@ -1928,6 +1928,131 @@ def check_weapon_powerup_ids():
                    "constructor, stored-zero guard in place" % len(pairs))
 
 
+def check_computed_property_defaults():
+    """A property default the FGD generator cannot evaluate stores ZERO.
+
+    ADD_LONGINTPROP(Ammo, GetSpawnedAmmo(GUN_SHOTGUN_ID)) is a CALL, not a
+    literal, and only a C++ compiler can evaluate it. DEdit could - it was
+    linked against the game DLL - so every retail map carries the answer and
+    1998 never saw this. The mapping kit's fgdgen.py parses the macro as TEXT,
+    keeps the expression verbatim as a comment ("a wrong default is worse than
+    an absent one"), and edobjects.coerce() then turns the unparseable string
+    into 0 for the compiled world. The mapper sees nothing wrong at any stage.
+
+    That cost a release: every weapon pickup in every kit-built map handed out
+    ZERO ammunition, including the MP_ArenaOF and MP_TUTORIAL examples that
+    ship in the public kit. Found in play 2026-08-30. BUGS.md C9.
+
+    So a computed default is only safe if the DLL neutralises the zero it will
+    actually receive, and this asserts that neutralisation is still there for
+    each shape. New shapes have to be listed here deliberately - that is the
+    point of the check, because the failure is silent in the editor, silent in
+    the compiler and silent in the engine.
+    """
+    sources = {}
+    for path in sorted(glob.glob(os.path.join(ROOT, 'ObjectDLL', '*.cpp'))):
+        with io.open(path, encoding='utf-8', errors='replace') as fh:
+            sources[os.path.basename(path)] = fh.read()
+
+    found = {}
+    for name, src in sources.items():
+        for m in re.finditer(
+                r'ADD_(?:REAL|STRING|LONGINT|BOOL)PROP(?:_FLAG)?\(\s*'
+                r'(\w+)\s*,\s*([A-Za-z_]\w*)\s*\(', src):
+            found.setdefault((m.group(1), m.group(2)), []).append(name)
+
+    # (property, function) -> (where the zero is neutralised, what proves it)
+    known = {
+        ('Ammo', 'GetSpawnedAmmo'):
+            ("WeaponPowerup::ReadProp keeps a stored Ammo only when it is "
+             "positive, then rolls from the table",
+             'WeaponPowerups.cpp'),
+        ('Filename', 'GetModel'):
+            ("BaseAI::PostPropRead overwrites m_Filename from GetModel() "
+             "unconditionally, so the stored string is never read",
+             'BaseAI.cpp'),
+    }
+
+    unknown = sorted(k for k in found if k not in known)
+    if unknown:
+        fails.append("property defaults that no compiler will evaluate and "
+                     "nothing is known to neutralise: "
+                     + '; '.join('%s = %s() in %s'
+                                 % (p, f, ', '.join(sorted(set(found[(p, f)]))))
+                                 for p, f in unknown))
+        return
+
+    # Each arm's neutralisation, asserted rather than trusted.
+
+    src = sources.get('WeaponPowerups.cpp', '')
+    ammo_read = re.search(
+        r'GetPropGeneric\(\s*"Ammo",\s*&genProp\s*\)\s*==\s*DE_OK\s*\)'
+        r'(.{0,200}?)m_dwAmmo\s*=\s*\(\s*DDWORD\s*\)genProp\.m_Long',
+        src, re.S)
+
+    if not ammo_read:
+        fails.append("could not find the Ammo property read in "
+                     "WeaponPowerup::ReadProp")
+        return
+
+    if 'genProp.m_Long > 0' not in ammo_read.group(1):
+        fails.append("the Ammo read has lost its positive guard - a kit-built "
+                     "map stores 0 and every weapon pickup in it will hand "
+                     "out nothing (BUGS.md C9)")
+        return
+
+    if not re.search(r'if\s*\(\s*m_dwAmmo\s*==\s*0\s*\)\s*'
+                     r'm_dwAmmo\s*=\s*GetSpawnedAmmo', src):
+        fails.append("WeaponPowerup::ReadProp no longer falls back to "
+                     "GetSpawnedAmmo when nothing set an amount - a bare "
+                     "WeaponPowerup placed by WeaponType (as 32_MUSEUM does) "
+                     "goes back to giving zero")
+        return
+
+    if 'ReadProp' not in src[:src.find('if( m_dwAmmo == 0 )')]:
+        fails.append("the Ammo fallback has moved out of ReadProp")
+        return
+
+    ai = sources.get('BaseAI.cpp', '')
+
+    # The blank-record heal. Same defect one level out (BUGS.md C9b): the kit
+    # stored 0 for every AI dial too, and unlike Ammo a zero is a LEGAL value
+    # for most of them - State 0 is IDLE, Bravado 0 is BRAVADO1 - so the guard
+    # keys on all three senses being zero at once, which no retail AI is.
+    # Asserted here because it is six lines that read like a style choice.
+
+    if not re.search(r'bBlankRecord\s*=\s*\(\s*gpSight\.m_Float\s*<=\s*0'
+                     r'.{0,160}?gpHear\.m_Float\s*<=\s*0'
+                     r'.{0,160}?gpSound\.m_Float\s*<=\s*0', ai, re.S):
+        fails.append("BaseAI::ReadProp has lost the blank-record test - AI in "
+                     "maps built with the pre-2026-08-30 kit go back to being "
+                     "blind, deaf and idle (BUGS.md C9b)")
+        return
+
+    gated = len(re.findall(r'bBlankRecord\s*&&\s*genProp\.m_Long\s*==\s*0', ai))
+    senses = len(re.findall(r'==\s*DE_OK\s*&&\s*!bBlankRecord', ai))
+    if gated != 6 or senses != 3:
+        fails.append("BaseAI::ReadProp gates %d enum dials and %d senses on the "
+                     "blank record; expected 6 and 3 (State, Bravado, "
+                     "Experience, Marksmanship, Evasive, WeaponId + the three "
+                     "ranges). A property added to the class needs gating too, "
+                     "or it silently keeps the kit's zero" % (gated, senses))
+        return
+
+    if not re.search(r'GetModel\(\s*m_nModelId.{0,200}?'
+                     r'SAFE_STRCPY\(\s*pStruct->m_Filename', ai, re.S):
+        fails.append("BaseAI no longer rewrites m_Filename from GetModel() - "
+                     "the 172 AI classes that default Filename to a function "
+                     "call would start loading a model named "
+                     "\"GetModel(MI_AI_TROOPER_ID)\"")
+        return
+
+    oks.append("computed property defaults: %d shapes neutralised in the DLL, "
+               "blank AI records healed (%s)"
+               % (len(found),
+                  ', '.join('%s=%s()' % k for k in sorted(found))))
+
+
 def check_character_mgr_pairing():
     """Every character added to CCharacterMgr must be let go of again.
 
@@ -2668,6 +2793,7 @@ def main():
                check_sfx_id_table,
                check_arena_pass_reaches_pickups,
                check_weapon_powerup_ids,
+               check_computed_property_defaults,
                check_docs_are_text, check_net_update_rate,
                check_server_driven_projectile, check_mouse_smoothness,
                check_game_mode_extraction, check_game_mode_lists,

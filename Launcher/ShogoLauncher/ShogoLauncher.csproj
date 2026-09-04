@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ShogoLauncher</RootNamespace>
     <AssemblyName>ShogoFRESH</AssemblyName>
-    <Version>0.10.101</Version>
+    <Version>0.11.1</Version>
     <Description>Modern launcher for Shogo: Mobile Armor Division</Description>
 
     <!-- Regenerate with Tools/makeicon.py, which is also where the design and
