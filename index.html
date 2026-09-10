@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShogoFRESH — Shogo: Mobile Armor Division, modernized</title>
+<meta name="description" content="A free, open-source modernization of Shogo: Mobile Armor Division (1998): widescreen, dedicated servers with bots, new game modes, and a full TrenchBroom mapping kit. Works with your Steam or GOG copy.">
+<style>
+  :root{
+    --bg:#0d0f12; --bg2:#14171c; --panel:#1a1e24; --line:#2a2f37;
+    --amber:#ff9b2f; --amber-dim:#c97a26; --text:#d8dce2; --muted:#8a919c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font:16px/1.6 "Segoe UI",system-ui,sans-serif}
+  a{color:var(--amber);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header{padding:72px 0 48px;background:
+    linear-gradient(180deg, rgba(255,155,47,.06), rgba(13,15,18,0) 60%);
+    border-bottom:1px solid var(--line);text-align:center}
+  .logo{font-size:14px;letter-spacing:.35em;color:var(--amber);text-transform:uppercase}
+  h1{font-size:clamp(30px,6vw,52px);line-height:1.1;margin:14px 0 6px;font-weight:800}
+  h1 .fresh{color:var(--amber)}
+  .tag{color:var(--muted);font-size:18px;max-width:640px;margin:10px auto 0}
+  .cta{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 26px;border-radius:6px;font-weight:700;border:1px solid var(--amber)}
+  .btn.primary{background:var(--amber);color:#151005}
+  .btn.primary:hover{background:#ffb45e;text-decoration:none}
+  .btn.ghost{color:var(--amber)}
+  .btn.ghost:hover{background:rgba(255,155,47,.08);text-decoration:none}
+  .fine{margin-top:14px;color:var(--muted);font-size:14px}
+  .badge{display:inline-block;margin-top:16px;padding:4px 12px;border:1px solid var(--line);
+    border-radius:99px;color:var(--muted);font-size:13px}
+  .badge b{color:var(--text)}
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:24px;margin-bottom:8px}
+  .kick{color:var(--amber);font-size:13px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:6px}
+  .lead{color:var(--muted);max-width:700px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:28px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}
+  .card h3{font-size:16px;margin-bottom:6px;color:var(--text)}
+  .card p{font-size:14.5px;color:var(--muted)}
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:28px}
+  .shot{aspect-ratio:16/9;background:var(--bg2);border:1px dashed var(--line);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13.5px;
+    text-align:center;padding:10px}
+  .shot img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+  .how{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:26px;margin-top:24px}
+  .how p{margin-bottom:12px}
+  .how p:last-child{margin-bottom:0}
+  ul.plain{margin:16px 0 0 20px;color:var(--muted)}
+  ul.plain li{margin-bottom:8px}
+  ul.plain b{color:var(--text)}
+  footer{padding:36px 0 56px;color:var(--muted);font-size:13.5px}
+  footer p{margin-bottom:8px}
+  @media (prefers-reduced-motion:no-preference){
+    .btn{transition:background .15s ease}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Mobile Armor Division</div>
+    <h1>Shogo<span class="fresh">FRESH</span></h1>
+    <p class="tag">Monolith's 1998 anime mecha shooter, modernized: widescreen, servers with
+    bots, new game modes, and a full mapping kit. Free and open source. Runs on the Shogo
+    you already own.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/KyodanCFG/ShogoFRESH/releases/latest">Download</a>
+      <a class="btn ghost" href="https://github.com/KyodanCFG/ShogoFRESH">Source on GitHub</a>
+      <a class="btn ghost" href="https://github.com/KyodanCFG/ShogoMAKE">Mapping kit</a>
+    </div>
+    <p class="fine">Needs a copy of Shogo: Mobile Armor Division (Steam or GOG). Unzip, point the
+    launcher at your install, play.</p>
+    <div class="badge" id="ver">Latest release: <b>see GitHub</b></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="kick">The game</div>
+    <h2>Thirty feet tall, or five foot ten</h2>
+    <p class="lead">Shogo: Mobile Armor Division was Monolith's 1998 love letter to anime mecha:
+    a fast, bloody FPS where one level puts you in a transforming mobile armor towering over a
+    city, and the next sends you down its corridors on foot. It came out weeks before Half-Life
+    and history looked the other way. It deserved better. This project's whole job is to make
+    playing it in the 2020s effortless.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">What FRESH adds</div>
+    <h2>The 1998 game, minus the 1998 friction</h2>
+    <div class="grid">
+      <div class="card"><h3>Modern display</h3><p>Widescreen with correct FOV, a HUD that scales
+        with your monitor, borderless window, high resolutions. No config-file surgery.</p></div>
+      <div class="card"><h3>A launcher that does the work</h3><p>Server browser with one-click
+        join, hosting, mod management, settings with explanations, keybinds you can actually
+        change.</p></div>
+      <div class="card"><h3>Servers that stay alive</h3><p>A rebuilt dedicated server with bots
+        that hold seats until humans arrive, hand them over, and come back after. Empty-server
+        night is over.</p></div>
+      <div class="card"><h3>Bots with temperament</h3><p>Rushers, snipers, lurkers. They lose
+        you in the dark, hear gunfire through walls and come looking, run for medkits when hurt,
+        and you can teach them patrol routes by walking the route yourself.</p></div>
+      <div class="card"><h3>New game modes</h3><p>TOWs Out (every pickup is a rocket launcher)
+        and Squishie (fight mechs on foot at one-fifth scale). Stock clients can join both.</p></div>
+      <div class="card"><h3>Classic, when you want 1998</h3><p>A Classic ruleset that restores
+        the original balance to the pixel, and full compatibility both ways: FRESH clients on
+        stock servers, stock clients on FRESH servers.</p></div>
+      <div class="card"><h3>A real mapping kit</h3><p>ShogoMAKE: build Shogo levels in
+        TrenchBroom with tutorials, checkers, working example maps, and a one-command
+        compile-and-launch loop.</p></div>
+      <div class="card"><h3>Hundreds of fixes</h3><p>Crash fixes, netcode repair, security
+        holes closed, a kill feed that names the right weapon. Every one recorded in a changelog
+        that says how it was found.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">Media</div>
+    <h2>Screenshots</h2>
+    <div class="shots">
+      <div class="shot">screenshot slot: MCA combat, widescreen<br>(replace with img tag)</div>
+      <div class="shot">screenshot slot: on-foot firefight</div>
+      <div class="shot">screenshot slot: server browser, one-click join</div>
+      <div class="shot">screenshot slot: Squishie mode scale</div>
+      <div class="shot">screenshot slot: TrenchBroom editing a Shogo map</div>
+      <div class="shot">screenshot slot: trailer embed</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">Honesty page</div>
+    <h2>How this is built</h2>
+    <div class="how">
+      <p>ShogoFRESH is built by one person with heavy AI assistance, and every change is
+      verified in play against the real game before it ships.</p>
+      <p><b>The game's art is untouched.</b> Every texture, model, sound, level, and line of
+      story is Monolith's original 1998 work. Nothing here is generated art. Think film
+      restoration: the art is the artifact, and the machinery around it got rebuilt.</p>
+      <p>The receipts are public: a <a href="https://github.com/KyodanCFG/ShogoFRESH/blob/main/CHANGELOG.md">changelog
+      covering every release</a>, with how each change was found. If a project built this way
+      isn't for you, that's a fair choice; the servers here welcome unmodified clients precisely
+      so nobody has to pick a side. The longer statement is in the
+      <a href="https://github.com/KyodanCFG/ShogoFRESH#how-this-is-built">README</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kick">Get started</div>
+    <h2>Three steps</h2>
+    <ul class="plain">
+      <li><b>Own Shogo.</b> Steam or GOG, a few dollars on sale.</li>
+      <li><b>Download ShogoFRESH</b> from the
+        <a href="https://github.com/KyodanCFG/ShogoFRESH/releases/latest">releases page</a>,
+        unzip anywhere, run the launcher, point it at your install.</li>
+      <li><b>Play.</b> Campaign, or the server browser. Want to build levels?
+        <a href="https://github.com/KyodanCFG/ShogoMAKE">ShogoMAKE</a> is the kit.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>ShogoFRESH by KyodanCFG. Launcher and tools MIT licensed; the game and its assets belong
+    to their owners. Not affiliated with or endorsed by Monolith Productions or Warner Bros.
+    Games. Shogo: Mobile Armor Division is a trademark of its respective owner.</p>
+    <p><a href="https://github.com/KyodanCFG/ShogoFRESH">GitHub</a> ·
+       <a href="https://github.com/KyodanCFG/ShogoFRESH/blob/main/CHANGELOG.md">Changelog</a> ·
+       <a href="https://github.com/KyodanCFG/ShogoMAKE">ShogoMAKE</a> ·
+       <a href="https://www.shogoservers.com/">Community master server</a></p>
+  </div>
+</footer>
+
+<script>
+  fetch("https://api.github.com/repos/KyodanCFG/ShogoFRESH/releases/latest")
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (d && d.tag_name) {
+        document.getElementById("ver").innerHTML = "Latest release: <b>" + d.tag_name + "</b>";
+      }
+    })
+    .catch(function(){ /* badge keeps its fallback text */ });
+</script>
+
+</body>
+</html>
