@@ -95,6 +95,30 @@ its assets, or Monolith's source release, none of which are here. See
 ShogoFRESH by KyodanCFG. Built with heavy AI assistance; every change
 verified in play against the real game.
 
+### How this is built
+
+The one-line disclosure above is honest but thin. Here is the detail it
+can't carry:
+
+- **The game's art is untouched.** Every texture, model, sound, level and
+  line of story is Monolith's original 1998 work. Nothing here is generated
+  art — the project exists to keep that work running, not to replace it.
+  Think film restoration: the art is the artifact, the machinery around it
+  got rebuilt.
+- **AI writes engineering, play decides.** One person directs the work,
+  plays every change against the real game, and more than once has
+  overruled the machine — when analysis said 1998's weapons never
+  auto-reloaded and human memory said they did, the original source proved
+  the memory right, and the changelog records the correction under 0.10.91.
+- **The receipts are public.** [CHANGELOG.md](CHANGELOG.md) carries every
+  release — not just what changed but how each change was found, which was
+  usually by playing. Skeptical? Read ten entries at random; that is the
+  honest audit.
+
+If a project built this way isn't for you, that's a fair choice — the
+original game and its community are still there, and this project's servers
+welcome stock clients precisely so nobody has to pick a side.
+
 THIS LEVEL IS NOT MADE BY OR SUPPORTED BY Monolith Productions, or any of its
 affiliates and subsidiaries.
 

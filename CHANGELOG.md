@@ -14,6 +14,205 @@ server (`FreshSrv.exe`), and the launcher.
 
 ---
 
+## 0.12.0 — 2026-09-10
+
+**the AI learns to be somebody: fourteen commits of senses, brains and personality ship together**
+
+The release wrapper for the SAIN-inspired AI overhaul (2026-09-05/06,
+fourteen commits, all FRESH-gated, Classic untouched, kill switch per
+system): five stock defects closed (metronomic burst cadence, permanent
+panic, broken target memory among them), darkness that shortens AI sight
+- 1998's own stealth system, shipped off behind an unset #define and
+enabled with its averaging bug fixed - fire heard through walls,
+investigation of heard sounds, scent trails in multiplayer, target
+leading by skilled marksmen, range-band movement for projectile enemies,
+nearest-first targeting, and for bots: personas, suppression, vision
+acquisition time, medkit self-care, footstep hearing, squad callouts,
+retreat with a destination, a waypoint graph, and a recorder that
+teaches routes by walking them.
+
+Matrix rows 32-50 carry the play tests. Version rolled to 0.12.0 at the
+owner's call - an AI system is a milestone, and 1.0 stays reserved for
+the public launch.
+
+Also: the how-built section lands in both public READMEs (the
+perception-strategy artifact - what AI wrote, what it never touched, and
+where the receipts are), and one heredoc-mangled backspace byte in
+AI-ANALYSIS.md is repaired (the documented trap, found by preflight's
+control-byte check doing its job).
+
+---
+
+## 0.11.1 — 2026-09-03
+
+**kit-built maps get their ammunition and their AI back**
+
+Renumbered from 0.10.94/0.10.95. The work landed on a branch off 0.10.93 on
+2026-08-30 and was stamped with those two numbers; main then released its OWN,
+different 0.10.94 and 0.10.95 in the days after - the pickup-light arbitration
+and the blocklist fix - and went on to 0.11.0. Rebasing onto main dropped both
+of my stamps in favour of one release here.
+
+Watch the collision when reading anything older: BACKLOG Part 2 rows 20 and 22
+still say 0.10.94 and 0.10.95, and those are MAIN's, not these. They were left
+alone deliberately.
+
+The four commits underneath are unchanged in content and no longer carry
+version numbers in their subjects, because they are not releases on their own:
+
+  Kit-built weapon pickups hand out ammunition again      (BUGS.md C9)
+  C9b: the other 1,810 zeroed defaults, fixed in the kit
+  AI in maps built with the old kit can see, hear and fight again  (C9b)
+  C9b: record the real blast radius - 19 of 90 kit maps place AI
+
+Main had touched none of WeaponPowerups.cpp, BaseAI.cpp or preflight.py since
+0.10.93, so the rebase conflicted only on the three version stamps.
+
+WHY THIS STILL MATTERS AFTER THE KIT SHIPPED. shogo-re main already carries the
+fgdgen constant resolver, so maps compiled with the current kit get correct AI
+defaults. That is the half that needed the other one least. Without the engine
+half, which is what this branch is, every ShogoFRESH build still hands out ZERO
+ammunition from a weapon pickup in any kit-built map - the kit cannot fix that
+one, because GetSpawnedAmmo is a random roll the server makes at spawn and the
+schema legitimately stores 0. The public kit is currently shipping an FGD that
+says "0 = the weapon's own pickup roll, rolled by the server", which is a
+contract no released engine honours until this lands.
+
+All five projects rebuilt against main, preflight 0 FAIL, the
+check_computed_property_defaults break-tests re-run on the rebased tree.
+
+---
+
+## 0.10.101 — 2026-09-03
+
+**the menu-font switch works, the cursor stays gone, and the list filters by fleet**
+
+THREE from one testing session (owner, 2026-09-03):
+
+MenuFont did nothing. 0.10.99 gated it at CBitmapFont::Init, but the
+eight menu fonts load ONCE at menu-system init - a console toggle never
+re-ran Init. Moved to CTextHelper::CreateSurfaceFromString, the one
+choke point every menu string passes, so it acts live on the next screen
+re-entry and there is a single copy of the rule. The Init gate is gone.
+
+The cursor flashed again after alt-tab. 0.10.98's WM_SETCURSOR is
+edge-driven - returning focus without moving the mouse left nothing to
+re-hide it, and the engine re-asserts the cursor on re-acquire. Now
+enforced per frame while focused, confined to the client rect so a
+windowed build keeps its borders. Immune to both the missing edge and a
+periodic re-show.
+
+Server fleet filter, requested: ShogoFRESH-only / Classic-ruleset-only /
+stock-only, beside the existing bot filter. Pure launcher work - the
+responder already advertises 'mod' and 'ruleset' (MyGameSpyMgr), so this
+reads what is on the wire. A server not yet queried counts as not-FRESH
+until it answers, which keeps an unprobed row out of 'FRESH only' rather
+than guessing it in.
+
+Also carries 0.10.100's server-window mode/ruleset-at-startup line.
+
+---
+
+## 0.10.100 — 2026-09-03
+
+**the server window states its mode and ruleset from the first frame**
+
+The current-level tag ('MCA_SPIRES  [TOWs Out, FRESH]') was appended only
+in OnStandardUpdate, so it appeared once the game sent its first update
+and not before - a server sitting at startup, or an idle one nobody had
+joined, showed a bare map name and read as plain deathmatch. The display
+code was never broken (0.10.96, the only recent edit to this file, added
+the shogoservers sync calls and nothing near the display); this closes
+the startup/idle window the tag never covered.
+
+LoadConfigFile runs before the dialog, so GameMode/Ruleset from the cfg
+are already in the server console at OnInitDialog; DecorateLevelName
+degrades to the defaults for any value left unset, which is the honest
+thing to show before the game confirms it.
+
+---
+
+## 0.10.99 — 2026-09-03
+
+**the menus can speak: MenuFont opts into Windows-font menus**
+
+The one switch engine fact 23 documented and this project declined to
+take - 'it changes every install' - taken as an OPT-IN instead.
+'MenuFont 1' declines the 1998 bitmap strips at CBitmapFont::Init, which
+drops all 89 menu draw sites onto CTextHelper's Windows-font fallback at
+once: Monolith's own localization hack, complete with per-size heights
+(themselves overridable by a language pack) and selected/normal colours.
+Default 0 keeps the 1998 look to the pixel.
+
+This is the door every non-Latin menu needs: the strips' width tables
+stop at character 126, which is why the language packs ASCII-fold their
+menu strings today. Row 27 gates unfolding the accents on this switch
+proving out in play; CJK menus later stand on the same switch.
+
+Also from this session's language work: menu strings in both packs fold
+to ASCII surgically (the 123 ids the menu sources reference - 26 Spanish
+and 17 German entries), pack ownership goes by self-declaration so a
+retired pack name can never squat again (the stale english.txt that kept
+Spanish from loading), and BUGS.md Z2 opens the floating-Sanjuro report.
+
+---
+
+## 0.10.98 — 2026-09-03
+
+**the cursor fix comes home**
+
+The flashing Windows cursor returned with 0.10.97's shim refresh, and
+the archaeology explains why: the old dinput.dll was never a release of
+anything. It was the build Elisha Riedlinger hard-coded for Shogo in
+dxwrapper issue 54 ('Cursor randomly flickers onto screen in Shogo') -
+byte-identical to the issue's attachment, v1.0.31, debug-sized,
+importing ShowCursor when no official release ever has. The cursor fix
+this project relied on was a side effect of a one-off, and pinning the
+shims to digest-verified official builds evicted it.
+
+So the fix moves into code we own: FreshFocus's window subclass answers
+WM_SETCURSOR with SetCursor(NULL) over the client area while the game
+has focus - borders keep their arrows, an unfocused window keeps a
+pointer to grab. The subclass now installs unconditionally (it was
+always behavior-gated inside; only BackgroundRender's rewrites test the
+flag), because the cursor is every install's problem. Works with ANY
+input wrapper, which is the point: a fix that lives in a vendored binary
+is a fix that leaves when the binary does.
+
+Matrix row 26. The Sanjuro-floating report from the same session is
+still open - not shim-related on its face (shims touch input and
+rendering, not object placement) and awaiting a repro answer.
+
+---
+
+## 0.10.97 — 2026-09-03
+
+**a dry shotgun commits to its reload, and the release carries verified shims**
+
+THE CLICK LOOP. The 0.10.5x held-trigger latch stopped a HELD trigger
+eating each shell as it landed - and left clicks as the intended panic
+interrupt, every click being a fresh 'pulled since the reload started'.
+From a DRY magazine that interrupt is a degenerate loop, not a panic
+shot: bang, load one, bang, the reserve draining a round at a time while
+the magazine never climbs. Found in SP play 2026-09-03, clicking through
+an empty shotgun - the natural pump rhythm.
+
+The rule that keeps the feature and kills the loop: a shell reload that
+BEGAN at clip 0 is committed - you ran it dry, you pump the tube back
+full. A top-up stays click-interruptible, which is the case the
+interrupt was built for: firing shells you already had when caught
+loading. One flag per side, same test in both break-outs
+(CWeaponModel::UpdateFiring, CWeapon::Fire), because client and server
+disagreeing about whether a reload may end is the desync class this
+file has already paid for.
+
+Also in this release: the Redist compatibility shims refreshed to
+digest-verified official builds (dinputto8 v1.1.100.0, dgVoodoo 2.87.4,
+boot-verified in SP and MP - matrix row 24 PASSED), and the changelog
+backfilled 153 releases from their own commit messages.
+
+---
+
 ## 0.10.96 — 2026-09-03
 
 **FreshSrv learns to check in with shogoservers.com**
