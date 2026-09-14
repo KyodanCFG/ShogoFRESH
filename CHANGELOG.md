@@ -14,6 +14,32 @@ server (`FreshSrv.exe`), and the launcher.
 
 ---
 
+## 0.12.2 — 2026-09-14
+
+**the release zip stops carrying its own false alarms**
+
+The two third-party wrappers (dinputto8, dgVoodoo2) were the zip's
+entire anti-virus false-positive surface - an input wrapper named
+dinput.dll is exactly the shape a "keylogger" heuristic looks for, and
+the 0.10.96 zip collected ~24 generic VirusTotal verdicts on the pair.
+They no longer ship. Setup downloads each from its author's official
+release at install time, verifies every byte against pinned SHA256
+digests, and caches the result; a populated Redist folder still
+outranks the download, which is the offline path. The packaging gate
+now refuses a zip that carries a wrapper binary, and preflight asserts
+the pins in code and the human-auditable table in Redist/README.md
+agree.
+
+One discovery reshaped the design mid-build: Defender quarantines the
+OFFICIAL dgVoodoo archive the moment it touches disk - a cloud verdict
+on the Glide wrappers we never use - while the extracted DLLs pass
+clean. So the archive is downloaded to memory, verified there, and
+only the five pinned files are ever written. A fetch that saved the
+zip first would have been eaten mid-download on a default Windows
+install, which is worth knowing before anyone builds one.
+
+---
+
 ## 0.12.1 — 2026-09-13
 
 **speedrun support, and the master-server listing becomes one visible click**

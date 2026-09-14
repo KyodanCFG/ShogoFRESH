@@ -153,6 +153,15 @@ Detect / apply / undo for the five things a fresh Shogo install needs:
 The two cards ShogoFRESH itself updates over time float to the top once
 initial setup is done, and detect *updates*, not just presence.
 
+Since 0.12.2 the two third-party wrappers are **not bundled in the
+release zip** — they were its entire anti-virus false-positive surface (an
+input wrapper named `dinput.dll` is exactly the shape a "keylogger"
+heuristic looks for). Setup downloads each from its author's official
+release and verifies every byte against a pinned SHA256 before installing;
+the archive is never even written to disk, because AV heuristics flag the
+official dgVoodoo bundle itself. A populated `Redist\` folder beside the
+launcher still outranks the download — that is the offline path.
+
 ### 1.7 Update notice
 
 Checks GitHub Releases; a dismissible banner above the tabs.

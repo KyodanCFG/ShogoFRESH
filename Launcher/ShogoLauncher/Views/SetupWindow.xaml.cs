@@ -21,10 +21,10 @@ public partial class SetupWindow : Window
         UpdateDirectPlayUi();
     }
 
-    private void ApplyFix_Click(object sender, RoutedEventArgs e)
+    private async void ApplyFix_Click(object sender, RoutedEventArgs e)
     {
         if ((sender as FrameworkElement)?.DataContext is MainViewModel.FixRow row)
-            _vm.ApplyFix(row);
+            await _vm.ApplyFixAsync(row);
     }
 
     private void UndoFix_Click(object sender, RoutedEventArgs e)
@@ -49,10 +49,10 @@ public partial class SetupWindow : Window
         }
     }
 
-    private void EnableAll_Click(object sender, RoutedEventArgs e)
+    private async void EnableAll_Click(object sender, RoutedEventArgs e)
     {
         foreach (var row in _vm.Fixes.Where(f => f.CanApply).ToList())
-            _vm.ApplyFix(row);
+            await _vm.ApplyFixAsync(row);
 
         if (!GameSetupService.IsDirectPlayEnabled())
         {

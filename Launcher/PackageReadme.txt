@@ -45,8 +45,12 @@ WHAT IS IN THIS PACKAGE, AND WHAT IS NOT
     Game content (levels, models, sounds, textures, music)
         None of it is here. ShogoFRESH reads the copy you own.
 
-  The third-party fixes in Redist\ (dinputto8, dgVoodoo2, AM18.dll) are
-  redistributed under their own licences - see Redist\README.md.
+  The two third-party wrappers (dinputto8, dgVoodoo2) are NOT in this
+  zip: Setup downloads them from their authors' official releases and
+  verifies them against pinned digests before installing (details and
+  the offline path in Redist\README.md). That keeps this zip free of
+  the files anti-virus heuristics most often misjudge. AM18.dll ships
+  here under its own licence.
 
 WHAT YOU NEED FIRST
   1. Shogo: Mobile Armor Division installed (Steam or GOG).
@@ -60,9 +64,10 @@ INSTALL
   2. Run ShogoFRESH.exe.
   3. The Game Setup window opens automatically on a fresh install.
      Click "Enable All". This applies, with automatic backups:
-       - dinputto8 (input fix - the game won't start without it)
+       - dinputto8 (input fix - the game won't start without it;
+         downloaded from the official release, digest-verified)
        - dgVoodoo2 (graphics: modern resolutions, windowed/borderless,
-         monitor selection)
+         monitor selection; downloaded and verified the same way)
        - ShogoFRESH mod (widescreen FOV, bug fixes, server rules)
        - Recommended defaults (modern keybinds applied to your live
          bindings, native resolution, Ultra detail, 20/s net rate)

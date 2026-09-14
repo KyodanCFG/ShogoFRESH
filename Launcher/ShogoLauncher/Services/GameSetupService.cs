@@ -129,12 +129,36 @@ public class GameSetupService
         RedistRoot = Path.Combine(AppContext.BaseDirectory, "Redist");
     }
 
+    /// <summary>Can this fix's payload be downloaded from its official
+    /// upstream release when it is not on disk? True for the two wrappers
+    /// (see ShimFetchService) - the release zip stopped bundling them in
+    /// 0.12.2 because they were its entire anti-virus false-positive
+    /// surface.</summary>
+    public static bool IsFetchable(FixDefinition fix) =>
+        ShimFetchService.SourceFor(fix.Id) is not null;
+
     // The "defaults" fix ships in Defaults\ (checked into the repo/package),
     // not in Redist\ (binary payloads populated separately).
-    private string PayloadDir(FixDefinition fix) =>
-        fix.Id == "defaults"
-            ? Path.Combine(AppContext.BaseDirectory, "Defaults")
-            : Path.Combine(RedistRoot, fix.Id);
+    //
+    // For the fetchable wrappers, a populated Redist\<id>\ OUTRANKS the
+    // download cache: it is either a developer's staged copy or the
+    // documented offline drop-in, and both are deliberate acts. The cache
+    // under %AppData% holds only digest-verified fetched copies.
+    private string PayloadDir(FixDefinition fix)
+    {
+        if (fix.Id == "defaults")
+            return Path.Combine(AppContext.BaseDirectory, "Defaults");
+
+        var redist = Path.Combine(RedistRoot, fix.Id);
+
+        var src = ShimFetchService.SourceFor(fix.Id);
+        if (src is not null &&
+            !fix.Files.Where(f => !f.Optional)
+                      .All(f => File.Exists(Path.Combine(redist, f.Name))))
+            return ShimFetchService.CacheDir(src);
+
+        return redist;
+    }
     private string ManifestPath(FixDefinition fix) => Path.Combine(ManifestDir, fix.Id + ".json");
     private string BackupDir(FixDefinition fix) => Path.Combine(GameDir, "ShogoFRESH_Backup", fix.Id);
 

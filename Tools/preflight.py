@@ -2777,6 +2777,59 @@ def check_string_overlay():
                    "one fallback in FreshStrings" % routed)
 
 
+def check_shim_pins():
+    """The shim digests exist in two places on purpose: ShimFetchService.cs
+    is what the launcher ENFORCES, Redist/README.md is what a human AUDITS
+    (it carries the release links and the reasoning). Two copies of a fact
+    drift, and a drifted pin here is not cosmetic - it is either a fetch
+    that rejects the genuine file or a README that vouches for bytes the
+    code no longer accepts. Same rule as everywhere: one fact twice gets a
+    check.
+
+    Compared as SETS of sha256 digests plus the two upstream version
+    strings. The README legitimately repeats the dinput hash (table + flat
+    list), which sets absorb.
+    """
+    import io as _io
+
+    svc = os.path.join(ROOT, 'Launcher', 'ShogoLauncher', 'Services', 'ShimFetchService.cs')
+    readme = os.path.join(ROOT, 'Launcher', 'Redist', 'README.md')
+
+    if not os.path.exists(svc):
+        fails.append("shim pins: ShimFetchService.cs is missing")
+        return
+
+    code = _io.open(svc, encoding='utf-8', errors='replace').read()
+    doc = _io.open(readme, encoding='utf-8', errors='replace').read()
+
+    code_hashes = set(h.lower() for h in re.findall(r'"([0-9a-fA-F]{64})"', code))
+    doc_hashes = set(h.lower() for h in re.findall(r'\b([0-9a-fA-F]{64})\b', doc))
+
+    if code_hashes != doc_hashes:
+        only_code = sorted(code_hashes - doc_hashes)
+        only_doc = sorted(doc_hashes - code_hashes)
+        fails.append("shim pins: code and Redist/README.md disagree "
+                     "(only in code: %s; only in README: %s)"
+                     % (', '.join(h[:12] for h in only_code) or 'none',
+                        ', '.join(h[:12] for h in only_doc) or 'none'))
+        return
+
+    versions = [m.group(1) for m in re.finditer(r'new\("[a-z0-9]+",\s*"([0-9.]+)"', code)]
+    missing = [v for v in versions if v not in doc]
+    if not versions:
+        fails.append("shim pins: no ShimSource versions found in ShimFetchService.cs "
+                     "- the parse the digest check rides on has broken")
+        return
+    if missing:
+        fails.append("shim pins: version(s) %s pinned in code but absent from "
+                     "Redist/README.md" % ', '.join(missing))
+        return
+
+    oks.append("shim pins: %d digests and %d upstream versions agree between "
+               "ShimFetchService.cs and Redist/README.md"
+               % (len(code_hashes), len(versions)))
+
+
 def main():
     for fn in (check_launcher_roundtrip, check_dirty_tracking_covers_tabs,
                check_launcher_defaults_match_game,
@@ -2798,7 +2851,7 @@ def main():
                check_server_driven_projectile, check_mouse_smoothness,
                check_game_mode_extraction, check_game_mode_lists,
                check_fresh_ammo_doctrine, check_squish_trim_gap,
-               check_string_overlay):
+               check_string_overlay, check_shim_pins):
         try:
             fn()
         except Exception as e:

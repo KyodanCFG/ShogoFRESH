@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using ShogoLauncher.Services;
 
 namespace ShogoLauncher.ViewModels;
@@ -45,6 +46,11 @@ public partial class MainViewModel
             GameSetupService.FixStatus.NotInstalled => "Not installed",
             GameSetupService.FixStatus.UpdateAvailable => "Update available",
             GameSetupService.FixStatus.NewerInstalled => "Newer build installed - not overwriting",
+            // The wrappers are not bundled (they were the zip's anti-virus
+            // false-positive surface); Apply downloads them from the
+            // official release and digest-verifies every byte.
+            _ when GameSetupService.IsFetchable(Definition)
+                => "Not installed - downloads from the official release",
             _ => "Payload missing (see Redist\\README.md)",
         };
 
@@ -63,8 +69,12 @@ public partial class MainViewModel
         // NewerInstalled is deliberately absent from CanApply: the whole
         // point is that the button is not there to be clicked. A dialog after
         // the fact is a dialog somebody dismisses mid-playtest.
+        // PayloadMissing joins in only for the fetchable wrappers, where
+        // Apply can go and get the payload itself.
         public bool CanApply => Status is GameSetupService.FixStatus.NotInstalled
-                                       or GameSetupService.FixStatus.UpdateAvailable;
+                                       or GameSetupService.FixStatus.UpdateAvailable
+                                || (Status is GameSetupService.FixStatus.PayloadMissing
+                                    && GameSetupService.IsFetchable(Definition));
         public bool CanUndo => Status is GameSetupService.FixStatus.Installed
                                       or GameSetupService.FixStatus.UpdateAvailable
                                       or GameSetupService.FixStatus.NewerInstalled;
@@ -233,14 +243,29 @@ public partial class MainViewModel
     }
 
 
-    public void ApplyFix(FixRow row)
+    public async Task ApplyFixAsync(FixRow row)
     {
         if (!GameFound) return;
         bool ok = false;
         string error = "";
         try
         {
-            new GameSetupService(GameDir!).Apply(row.Definition);
+            var svc = new GameSetupService(GameDir!);
+
+            // The wrappers are not bundled (the zip's anti-virus surface);
+            // fetch them from the official release, digest-verified, before
+            // applying. Awaited on the UI thread's context so the status
+            // line narrates the download; the fetch itself runs on the pool.
+            if (!svc.HasPayload(row.Definition) && GameSetupService.IsFetchable(row.Definition))
+            {
+                var src = ShimFetchService.SourceFor(row.Definition.Id)!;
+                await ShimFetchService.EnsureAsync(
+                    src,
+                    s => System.Windows.Application.Current?.Dispatcher.Invoke(() => Status = s),
+                    Path.Combine(svc.RedistRoot, row.Definition.Id));
+            }
+
+            svc.Apply(row.Definition);
             ok = true;
         }
         catch (GameSetupService.NewerBuildInstalledException ex)
