@@ -12,6 +12,7 @@ never had.
 **It works with your own Steam or GOG copy. No game files are redistributed.**
 
 → **[Download the latest release](../../releases)**
+→ **[Read the feature tour](Docs/public/FEATURES.md)** — everything it does, on one page
 
 ---
 

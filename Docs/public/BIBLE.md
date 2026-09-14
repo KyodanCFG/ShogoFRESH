@@ -192,10 +192,12 @@ Checks GitHub Releases; a dismissible banner above the tabs.
 
 ### 2.3 Weapons, client side
 
-- **Reload animations, sounds, dips and equip windows.** The PV models
-  disagree on animation name case (`Reload` / `RELOAD` / `reload1`), so the
-  lookups had been silently failing since 1998. `ResolveWeaponAni()` tries the
-  known spellings and reports which answered under `WeaponDebug 1`.
+- **Reload animations, sounds, dips and equip windows.** Some PV models
+  spell their animation names differently (`reload1`, `Selectm`), so those
+  lookups had been silently failing since 1998 — genuine spelling
+  differences, not casing: the engine's lookup turned out to be
+  case-insensitive (fact 4 in §9). `ResolveWeaponAni()` tries the known
+  spellings and reports which answered under `WeaponDebug 1`.
 - Weapons with no reload animation **dip out of frame** instead, so the pause
   is legible rather than a frozen model.
 - **Holster** by key or by volume, with animations, and no phantom firing
