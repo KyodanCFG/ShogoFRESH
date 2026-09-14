@@ -14,6 +14,35 @@ server (`FreshSrv.exe`), and the launcher.
 
 ---
 
+## 0.12.1 — 2026-09-13
+
+**speedrun support, and the master-server listing becomes one visible click**
+
+Two threads' work ships together. The speedrun kit (SpeedrunTimer 1,
+single player): dual clocks drawn top centre - RTA never stops, IGT
+counts only in-world unpaused playing frames, so load times and menus
+cost nothing and runs compare across machines. A run arms at a NEW GAME
+load, splits at every level transition, notes quickloads, is tainted at
+the one choke point every cheat code passes through, and ends at the
+campaign's final world - all appended to a stable append-only log that
+is simultaneously the moderator's validation artifact and a path a
+LiveSplit file-watcher can follow. RestartLevel (registered,
+deliberately unbound) gives instant retries that keep the run clock
+honest. Scoping demo recording also overturned itself: the engine has
+had Record/PlayDemo console commands registered since 1998, apparently
+never typed by anyone - a test protocol now exists.
+
+And the community master server: the check-in format recovered from the
+shipped community server binary two weeks ago is now confirmed against
+the official spec, field-identical, with the boolean spelling aligned to
+what the website displays. The opt-in moves out of the cfg file and onto
+the Host tab - "List on shogoservers.com", beside "List publicly",
+dedicated only, off by default, because this one puts the server's IP on
+a public web page rather than in the in-game browser, and that choice
+should be a visible, informed click.
+
+---
+
 ## 0.12.0 — 2026-09-10
 
 **the AI learns to be somebody: fourteen commits of senses, brains and personality ship together**

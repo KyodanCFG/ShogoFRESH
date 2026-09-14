@@ -89,6 +89,7 @@ public class HostService
         double WorldTimeSpeed = -1.0,   // -1 = day/night cycle off
         string WorldColorNight = "0.5 0.5 0.5",
         bool ListPublicly = true,        // ServerReg: announce to the community browser
+        bool SyncShogoServers = false,   // JSON check-in to the shogoservers.com website; off = IP stays out of the public web page
         int RandomPickups = 0,           // 0 none, 1 weapons, 2 items, 3 both separate, 4 both together
         string BlockedWeapons = "",      // weapon ids banned from spawning, e.g. "5 8"
         string BlockedItems = "",        // item classes banned, e.g. "FirstAid_50 ArmorRepair_500"
@@ -224,6 +225,12 @@ public class HostService
         cfg.Set("WorldColorNight", opt.WorldColorNight);
         cfg.Set("UpdateInfo", 1);
         cfg.Set("ServerReg", opt.ListPublicly ? 1 : 0);
+        // The shogoservers.com JSON check-in (spec from NTDLS, 2026-09-12).
+        // Separate from ServerReg because it is a different exposure: this
+        // one puts the server's IP on a public WEBSITE, so it is its own
+        // checkbox and defaults off. The server reads it live, so it also
+        // remains flippable at the server console mid-session.
+        cfg.Set("SyncShogoServers", opt.SyncShogoServers ? 1 : 0);
         cfg.Set("SaveGameLevels", 1);
 
         // Map rotation: a provided list replaces the stored one wholesale.

@@ -23,6 +23,7 @@ public static class EngineActions
         ("SecondaryHold",   82),   // COMMAND_ID_SECONDARY_HOLD
         ("SecondaryToggle", 83),   // COMMAND_ID_SECONDARY_TOGGLE
         ("QuickMelee",      86),   // COMMAND_ID_QUICKMELEE
+        ("RestartLevel",    100),  // COMMAND_ID_RESTARTLEVEL - speedrun practice; deliberately no default bind
     };
 
     /// <summary>Fallback binding if defkeybd.cfg has none for a new action.</summary>

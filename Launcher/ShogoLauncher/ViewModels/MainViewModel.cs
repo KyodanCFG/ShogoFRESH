@@ -35,6 +35,7 @@ public partial class MainViewModel : INotifyPropertyChanged
     private static readonly HashSet<string> HostProperties = new()
     {
         nameof(HostName), nameof(HostPort), nameof(HostMaxPlayers), nameof(HostBotFill), nameof(HostListPublicly),
+        nameof(HostSyncShogoServers),
         nameof(HostWebRegUrl), nameof(HostPeers),
         nameof(HostTractorBeam), nameof(HostRamming), nameof(HostQuickTurn),
         nameof(HostFallDamage), nameof(HostFallThreshold),

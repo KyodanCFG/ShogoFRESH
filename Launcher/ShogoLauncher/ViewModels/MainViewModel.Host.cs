@@ -224,6 +224,9 @@ public partial class MainViewModel
     private bool _hostListPublicly = true;   // ServerReg: announce to the community browser
     public bool HostListPublicly { get => _hostListPublicly; set => Set(ref _hostListPublicly, value); }
 
+    private bool _hostSyncShogoServers;      // SyncShogoServers: the shogoservers.com website row; off by default (IP on a public page)
+    public bool HostSyncShogoServers { get => _hostSyncShogoServers; set => Set(ref _hostSyncShogoServers, value); }
+
     // Indexes match the RANDOMPICKUPS_* modes the server reads from
     // "RandomPickups": 0 none, 1 weapons, 2 items, 3 both separately,
     // 4 both pooled together.
@@ -525,6 +528,7 @@ public partial class MainViewModel
         HostRamming = cfg.GetInt("RammingDamage", 1) != 0;
         HostQuickTurn = cfg.GetInt("QuickTurn", 0) != 0;
         HostListPublicly = cfg.GetInt("ServerReg", 1) != 0;
+        HostSyncShogoServers = cfg.GetInt("SyncShogoServers", 0) != 0;
         HostRandomPickups = RandomPickupModes[Math.Clamp(cfg.GetInt("RandomPickups", 0), 0, RandomPickupModes.Length - 1)];
         HostBlockedWeapons = BlockablePickups.NormalizeWeapons(cfg.Get("BlockWeapons") ?? "8 21");
         HostBlockedItems = BlockablePickups.NormalizeItems(cfg.Get("BlockItems") ?? "");
@@ -859,6 +863,7 @@ public partial class MainViewModel
             WorldTimeSpeed: HostTimeSpeed,
             WorldColorNight: HostNightColor,
             ListPublicly: HostListPublicly,
+            SyncShogoServers: HostSyncShogoServers,
             RandomPickups: Math.Max(0, Array.IndexOf(RandomPickupModes, HostRandomPickups)),
             BlockedWeapons: HostBlockedWeapons,
             BlockedItems: HostBlockedItems,

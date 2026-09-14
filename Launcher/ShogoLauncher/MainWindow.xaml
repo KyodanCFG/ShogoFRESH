@@ -181,6 +181,10 @@
                                 <Button Content="Allow in Firewall" Width="110" Margin="8,0,0,0" Click="FirewallRule_Click"
                                         ToolTip="Adds an inbound Windows Firewall rule for this UDP port and the query port (port + 149). UAC prompt; re-running updates the rule."/>
                             </StackPanel>
+                            <CheckBox Grid.Row="1" Grid.Column="3" Content="List on shogoservers.com" IsChecked="{Binding HostSyncShogoServers}"
+                                      IsEnabled="{Binding HostIsDedicated}"
+                                      VerticalAlignment="Center" HorizontalAlignment="Left" Margin="12,0,0,0"
+                                      ToolTip="Also list this server on the shogoservers.com website (SyncShogoServers). Your server's IP, name, current map and settings appear on a public web page anyone can browse without the game, and the row stays up while the server keeps checking in. Off by default because it puts your IP on a website, not just in the in-game browser. Dedicated only: the check-in lives in FreshSrv.exe."/>
                             <Label Grid.Row="2" Content="Max players:"/>
                             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
                                 <TextBox Text="{Binding HostMaxPlayers}" VerticalAlignment="Center" Width="60"
