@@ -1,11 +1,14 @@
 # The ShogoFRESH Bible
 
 Everything ShogoFRESH changes, adds or fixes, component by component, with
-the reasoning. `Launcher/PackageReadme.txt` is the short version that ships
-to players.
+the reasoning. [FEATURES.md](FEATURES.md) is the tour;
+`Launcher/PackageReadme.txt` is the short version that ships to players.
 
-**Last full revision at 0.8.15.** The mechanisms described here are stable;
-what later releases added is in their release notes.
+**Last full revision at 0.12.1.** Sections 0–3 describe the foundations,
+which have been stable since 0.8; sections 4–8 cover the systems that
+arrived after them — game modes, the AI overhaul, localization, the
+creative kit, and speedrun support. What individual releases changed is in
+the changelog and the release notes.
 
 ---
 
@@ -72,6 +75,9 @@ so nothing it does is invisible or unreversible by hand.
 - **Bot filter**: all / with real players / no bots / populated. A
   bot-filled server looks busy, which is the point of filling it, but it
   makes "find a game with people in it" hard.
+- **Fleet filter** beside it: everything / ShogoFRESH servers / Classic
+  servers, read from what each server publishes about itself — so a purist
+  and a FRESH player can each see their own scene at a glance.
 - **Players column** shows the total with the bot count in brackets when the
   server reports one, and sorts on the total.
 - Add a server by address, keep favourites (persisted), one-click join.
@@ -199,6 +205,14 @@ Checks GitHub Releases; a dismissible banner above the tabs.
   only a melee weapon, always switches.
 - **Over-the-shoulder chase camera**, with configurable distance and
   rotation.
+- **Zoom sensitivity that scales with magnification** by default, so every
+  weapon's zoom feels like the same mouse — 1998 divided sensitivity by ten
+  for *every* zoom regardless of FOV, the sniper's correct value applied to
+  weapons it was wrong for. A fixed percentage is available for players who
+  want a constant.
+- **View-model nudges**, global and per weapon, added on top of Monolith's
+  own placement table — plus a single off-switch that shows the stock table
+  underneath, for honest A/B comparisons.
 
 ### 2.4 HUD feeds and chat
 
@@ -291,6 +305,20 @@ to delete the debug prints" with a single release decision.
 - Single player: endless starting sidearms, bounded enemy ammo drops, health
   and armour drop chances, reserve ceilings tightened against real magazine
   sizes.
+- **The grenade launcher reworked**: under FRESH it fires a tumbling 3D
+  shell instead of the 1998 sprite, with a real fuse, bounces that bleed
+  speed, and a fairness constant — a grenade that has bounced deals reduced
+  self-damage, always, because fairness rules that vary per server get
+  discovered the hard way.
+- **Thrown mines with a lifecycle**: an arming delay (a mine at your own
+  feet cannot kill you while it settles), a proximity radius deliberately
+  shorter than the blast, a self-destruct fuse counted from landing, and a
+  per-player budget where placing one more detonates your oldest rather
+  than refusing the throw.
+- **Live tuning dials** for throw arcs, fuses, per-weapon fire/equip/reload
+  timing — server variables meant to be dialled in while playing and then
+  retired into the table. None of them apply under the Classic ruleset:
+  Classic is 1998, artwork and stock tables included.
 
 ### 3.2 Damage and scoring
 
@@ -318,6 +346,9 @@ to delete the debug prints" with a single release decision.
   show it even to tools that do not understand the `bots` field.
 - **`BotRemove 1`** clears all; `Players 1` lists everyone with their kick id;
   `Kick <id>` disconnects one.
+- What the bots are like to fight — personas, senses, suppression, the
+  waypoint graph and the route recorder — is §5: the AI overhaul applies
+  to them in full.
 
 ### 3.4 Discovery without a master server
 
@@ -337,6 +368,18 @@ nothing is wrong with them.
 - `WebRegUrl` for master-server registration — **blank by default**, because
   the stock default pointed at shogo-mad.com and spent a request per cycle on
   a host that has not answered for years.
+- **`SyncShogoServers`** checks the server in to shogoservers.com's JSON
+  registration — the format the community master server itself speaks,
+  confirmed against its published spec. A stable per-install identity means
+  restarts *update* the server's row instead of littering new ones. **Off by
+  default**, because it puts the server's address on a public web page
+  rather than in the in-game browser; the launcher's Host tab makes opting
+  in one visible checkbox ("List on shogoservers.com").
+- **A server the master site vouches for can be joined even when its UDP
+  probe goes unanswered.** Joins travel over TCP and queries over UDP, so a
+  server reachable for the one can be silent on the other — a
+  site-heartbeat row is offered for joining instead of being hidden behind
+  a dead probe.
 
 ### 3.5 The query protocol
 
@@ -385,7 +428,11 @@ external tooling; off-the-shelf rcon clients do not speak this protocol
 send a raw UDP string.
 
 A command is `<var> <value>`, which is not a limitation: every
-administrative command in ShogoFRESH is a server console var.
+administrative command in ShogoFRESH is a server console var. That
+includes moderation — `Mute <id> [minutes]` (an expiry, not a flag, so it
+ends on its own; blocks chat commands too, so it cannot be worked around
+with a vote), `Unmute`, `Kick`, and `NextLevel` to end the level now, the
+same lever as the server window's own button so the two cannot drift.
 
 **The password crosses the network in plaintext and always will.** GameSpy v1
 is unencrypted UDP text with nowhere to put a challenge-response, and it has
@@ -464,17 +511,200 @@ Also present, both off by default and both awaiting calibration:
 
 ---
 
-## 4. Engine facts that cost real time to learn
+## 4. Game modes
 
-These are the ones that bit hardest. They are in `CLAUDE.md` in full; this is
-the short list, because every one of them explains a bug that looked
+`GameMode <n>` in the server config, and a rotation entry may be written
+`world:mode` to override it for one map — so one dial covers an all-arena
+server, a mixed rotation, and a one-off.
+
+- **0 — Deathmatch**, unchanged.
+- **1 — TOWs Out.** Every weapon pickup becomes a rocket launcher and
+  everyone spawns holding one. No economy, no tiers, just rockets.
+- **2 — Squishie.** On mech maps, `!squish` in chat respawns you ON FOOT at
+  one-fifth scale; `!mech` climbs back in. Scale, camera offset and gore all
+  travel over stock wires, so **unmodified 1998 clients can play it** — and
+  NPC bots go squishie too. `SquishScale` tunes the size, applied on the
+  next respawn so a value can be tried without a map change; eye height
+  scales with it rather than being a separate dial.
+
+Two supporting mechanisms, both rules-neutral by design:
+
+- **`DeathSpectate`** (default off) gives a dead player a free-fly camera
+  until respawn. Every client is ghosted server-side; only ShogoFRESH
+  clients get the camera, because movement is client-authoritative. It
+  exists as the mechanism queue-style modes need, not as a deathmatch rule.
+- **`StartHolstered`** starts the weapon put away — on a per-level list, or
+  everywhere — but never forced: the player may draw at will.
+
+---
+
+## 5. The AI overhaul
+
+Fourteen commits shipped together in 0.12.0. All of it is FRESH-gated —
+**the Classic ruleset keeps 1998's AI untouched** — and every system has
+its own server switch, so any of it can be turned off per server.
+
+### 5.1 Senses
+
+- **Darkness shortens sight** (`AiLightVision`). The target's lighting
+  scales AI visible range between 12.5% and 100%, so an unlit corner is
+  somewhere to hide. This is **Monolith's own 1998 stealth system**,
+  shipped behind a build flag that was set nowhere — with an averaging bug
+  that read even brightly lit targets as dim, which is likely why it was
+  switched off. Fixed and enabled. It also gates the fire solution: a
+  target lost to darkness is shot at where it was last *lit*, or not at
+  all, instead of being lasered through the dark it is hiding in. Single
+  player + FRESH only: multiplayer bots stand in for players, and a player
+  cannot be blinded by a dark corner.
+- **Fire is heard through walls** (`AiWallHearing`) at half its sound
+  radius — muffled, not mute; a silenced shot carries an eighth. Stock's
+  own comment stated the rule ("can't hear through walls") for weapon fire
+  while the identical check on impact sounds was commented out by Monolith
+  themselves, so explosions always carried; this brings the fire sound to
+  the rule the impact already followed. A heard target still cannot be
+  *shot* through the wall.
+- **Footsteps are heard**, scaled by movement, and multiplayer bots track
+  **scent trails** — a cold trail is followed to where you were, not to
+  where you are.
+
+### 5.2 Behaviour
+
+- **Suppression** (`AiSuppression`): near-miss fire rattles AI — roughly
+  two marksmanship grades of extra scatter plus an immediate dodge,
+  stacking to four seconds. Fed from the one impact site every bullet and
+  blast passes through, shooter exempt from its own noise. Suppressive
+  fire against a dug-in enemy is a real tactic: a rattled expert shoots
+  like a mediocre trooper, not like nobody.
+- **Skilled marksmen lead moving targets**; lower grades shoot where you
+  are and miss where you will be.
+- **Projectile users hold their range band** instead of closing to melee
+  with a rocket launcher; targeting prefers the nearest threat.
+- **Hurt AI self-care**: a bot low on health breaks for a medkit it knows
+  about rather than trading down a lost fight.
+- **Retreats have destinations.** Falling back means falling back *to*
+  somewhere, instead of the stock panic-in-place.
+- **Squad callouts**: bots announce contacts to nearby allies, so one
+  spotting you can mean several converging.
+- **Personas** (multiplayer bots): rushers, snipers, lurkers — each scales
+  aggression, preferred range, and how hard suppression lands, so a full
+  server plays like different people rather than one bot copied twelve
+  times.
+
+### 5.3 The waypoint graph, and teaching it
+
+Bots move on a waypoint graph. On retail maps it is built for them; on any
+map, **the path recorder teaches routes by walking them** — walk the route
+once and bots patrol it. A custom map gets competent bots without anyone
+hand-placing navigation.
+
+Along the way the overhaul closed five stock AI defects, among them the
+metronomic burst cadence (every enemy firing on the same clock), permanent
+panic states, and broken target memory.
+
+---
+
+## 6. Localization
+
+The blocker was never the strings — it was knowing which of the game's
+**two text systems** draws what (engine fact 19). Windows fonts draw the
+HUD, chat, transmissions and briefings, and render accents fine; the 1998
+bitmap strips draw the menus and stop silently at ASCII 126.
+
+What ShogoFRESH does with that:
+
+- **One JSON of every player-visible string.** An export tool generates it
+  from the game's resources; a build tool turns a translated copy back
+  into compilable resources. The English resources stay the source of
+  truth, and an automated check asserts the JSON still describes them and
+  that the round trip is byte-exact.
+- **Language packs are loose text files** in `Custom\Strings\` — no tools,
+  no archives. A pack declares its own language in its first lines, which
+  is also how ownership is decided: applying a new language removes the
+  files the old one owned, including packs it finds rather than installed.
+- **`MenuFont 1`** draws the menus in a Windows font instead of the bitmap
+  strips — Monolith's own localization fallback, taken as an opt-in. It is
+  the only way a menu ever renders an accent. Default off: the 1998 look.
+- **Menu identifiers are accent-folded**, so a translated menu still
+  matches the code that looks items up by name.
+
+English ships; German and Spanish packs are verified in play. The
+contributor guide — export, translate, build, test — is published with the
+creative kit (LOCALIZATION.md there).
+
+---
+
+## 7. Modding and the creative kit
+
+The rule that shapes everything here: **a folder is a mod.** A directory
+mounts into the engine's file tree at the root (engine fact 17), and a
+mounted file overrides the same path inside an archive — verified in play,
+side by side. So a texture, model or sound mod is loose files in
+`Custom\`, and no proprietary tool appears anywhere in the chain:
+
+- **The launcher opens and extracts the game's own `.rez` archives**
+  (Mods tab → Open Archive…), which is how a modder gets reference art
+  out without the SDK tool the licence forbids redistributing.
+- **The texture format is documented** (DTXFORMAT.md) and round-trips
+  through open converters, byte-exact. **The archive format is documented**
+  (REZFORMAT.md) and the release build writes archives with our own
+  writer, verified byte-for-byte against the original tool's output.
+- **Mod manifests** may set gameplay rules (`ModRules`, default on) with a
+  hard boundary: a mod may set *rules*, never the server's identity, its
+  network settings, or its moderation. `FreshMods 0` ignores manifests
+  entirely; `ModDebug` prints found/parsed/applied/refused.
+- Packed mods beat loose files (last-wins), so loose is the easy path,
+  not the winning one — and rez files containing *game code* are flagged
+  in the launcher, because those override ShogoFRESH itself.
+
+**ShogoMAKE** (github.com/KyodanCFG/ShogoMAKE) is the mapping half:
+TrenchBroom configuration for Shogo, the entity definitions, tutorials
+that walk real single-player and multiplayer maps, entity and texture
+checkers that catch mistakes before the compiler does, example maps, and
+a one-command compile-and-launch loop. The format documents above are
+published with it, beside the tools they describe.
+
+---
+
+## 8. Speedrunning and capture
+
+- **`SpeedrunTimer 1`** (single player): LVL / IGT / RTA, top centre. RTA
+  is wall time and never stops; IGT counts only in-world, unpaused,
+  playing frames — loads and menus are free, which is what makes runs
+  comparable across machines. A run arms at a NEW GAME load, splits at
+  every level transition, notes every quickload, is tainted (`*`) at the
+  one choke point every cheat code passes through, and ends at the
+  campaign's final world.
+- **The log** (`%APPDATA%\ShogoFRESH\Logs\speedrun.log`) is append-only at
+  a stable path: simultaneously the validation artifact a moderator reads
+  and a file a LiveSplit watcher can follow.
+- **`RestartLevel`** is a registered, deliberately unbound action —
+  instant retries that reset the level clock and keep the run clock honest
+  about attempts.
+- **Capture**: the engine's F8 screenshot is converted to JPEG in
+  `Save\screenshots` (`ScreenshotJpeg`, quality dial included), and
+  **streamer mode** (§2.6) anonymises a session for broadcast.
+- **Demo recording**: the engine has carried `Record` / `PlayDemo` console
+  commands since 1998, registered and apparently never typed by anyone.
+  Status: honest — untested, with a written test protocol; not yet a
+  supported feature.
+
+---
+
+## 9. Engine facts that cost real time to learn
+
+These are the ones that bit hardest. The full set lives in the project's
+internal engineering notes (twenty-four facts and counting); this is the
+short list, because every one of them explains a bug that looked
 impossible.
 
 1. **The server weapon state machine does not advance for the player** (§3.1).
 2. **`-rez` is last-wins, and game DLLs must be inside a rez.**
 3. **Engine actions come from `AddAction` lines written in 1998.** A key bound
    to an unregistered action fails outright.
-4. **`GetAnimIndex` matches names exactly**, and the models disagree on case.
+4. **`GetAnimIndex` is case-insensitive** — settled by reading the engine's
+   comparator, correcting what this list used to claim. Only genuine
+   spelling differences between the models matter (`Reload` vs `reload1`),
+   and those are what the animation-name resolver exists for.
 5. **There is no animation playback-rate control.** An animation can be cut
    short, never sped up.
 6. **`rand()` is unusable for game logic** — reseeded every shot.
@@ -500,10 +730,30 @@ impossible.
     turned. ShogoFRESH raises its own clients to 30; stock clients stay at 7.
 15. **The engine's window can be subclassed from `CShell.dll`** — this is not
     binary work.
+16. **The engine formats console text TWICE**, so `CPrint("%s", text)` —
+    textbook-correct usage — is still unsafe, and a `%s` typed in chat could
+    crash the server and every client that saw it. Nothing calls the engine's
+    print directly any more; one wrapper strips `%` from anything a player
+    can type, and an automated check keeps it that way.
+17. **A directory mounts like a rez, at the file-tree root.** That is how
+    loose maps have ever reached a client, why custom worlds load by bare
+    name, and why a folder of loose files is a complete mod.
+18. **An object handle outlives the object, and the engine will not say so.**
+    A non-null handle proves nothing; anything held across frames is
+    validated against the live object list or released on destruction. A
+    disconnect crash that struck minutes late taught this one.
+19. **There are two text systems**: Windows fonts draw the HUD, chat and
+    briefings; 1998 bitmap strips draw the menus, and their glyph tables
+    stop at ASCII 126 — a character past that vanishes without a trace.
+    Localization lives or dies on knowing which system draws what (§6).
+20. **1998 had magazines and an automatic reload all along** — the shotgun's
+    pump and the grenade launcher's re-arm ARE reload animations playing
+    after every round. The Classic ruleset's timing is driven by those
+    animations, exactly as stock was, rather than by any modern table.
 
 ---
 
-## 5. Provenance and licence
+## 10. Provenance and licence
 
 Built from Monolith Productions' official Shogo v2.2 source release (March
 1999). Distributed free, as clause 8(c)(v) requires.
