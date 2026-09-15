@@ -18,15 +18,19 @@ word for it: the launcher is open source, and every release zip can be
 checked on VirusTotal before you run anything.
 
 **My antivirus flagged the download.**
-If the zip is v0.12.2 or later, that shouldn't happen anymore — please
-report it. Older zips bundled two third-party compatibility wrappers
-(an input shim named `dinput.dll` and the dgVoodoo2 graphics wrapper),
-which are exactly the shapes generic AV heuristics misjudge, and they
-collected heuristic flags no matter whose build they were. Current
-releases don't bundle them: Setup downloads each one from its author's
-official release and verifies every byte against a published SHA256
-before installing. What's left in the zip is our own built code and
-text.
+Two causes existed, and both are resolved. Older zips bundled two
+third-party compatibility wrappers (an input shim named `dinput.dll`
+and the dgVoodoo2 graphics wrapper) — exactly the shapes generic AV
+heuristics misjudge. Since v0.12.2 they aren't bundled: Setup downloads
+each from its author's official release and verifies every byte against
+a published SHA256. Separately, one engine's generic "Keylogger"
+signature misread the game's own string-resources DLL, whose
+key-binding vocabulary ("Shift", "Alt"…) resembles a keylogger's
+key-name table to a pattern matcher — a file that imports no input API
+at all. We submitted it to Bitdefender in September 2026; their Malware
+Research Team analyzed it, **confirmed the file clean**, and removed
+the detection. If your scanner still flags a current release, its
+definitions are behind — and we'd still like to hear about it.
 
 **It asks for the .NET Desktop Runtime.**
 The launcher needs the .NET 8 Desktop Runtime (x64), a one-time free
