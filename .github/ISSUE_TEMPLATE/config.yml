@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: FAQ and troubleshooting
+    url: https://github.com/KyodanCFG/ShogoFRESH/blob/main/Docs/public/FAQ.md
+    about: SmartScreen, the .NET runtime, "game won't start", joining and hosting — check here first, it covers the common first-hour problems.
+  - name: Running a server
+    url: https://github.com/KyodanCFG/ShogoFRESH/blob/main/Docs/public/SERVER-GUIDE.md
+    about: Everything an operator meets, in the order they meet it.

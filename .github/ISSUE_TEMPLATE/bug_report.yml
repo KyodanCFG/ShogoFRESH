@@ -1,0 +1,61 @@
+name: Bug report
+description: Something broke, crashed, or behaved wrong
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Two files answer most questions on their own,
+        so the fields below ask for them up front — with them, most bugs are
+        diagnosable without a round trip.
+  - type: input
+    id: version
+    attributes:
+      label: ShogoFRESH version
+      description: Shown in the launcher's title bar and on the game's main menu.
+      placeholder: v0.12.3
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where did it happen?
+      options:
+        - Single player campaign
+        - Multiplayer — joining or playing on a server
+        - Hosting (listen or dedicated server)
+        - The launcher itself
+        - Setup / installation
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What did you do, and what happened?
+      description: >
+        The steps as you'd retrace them, then what you saw. "It crashed when I
+        alt-tabbed during a level load" beats "it crashed". If it's visual, a
+        screenshot (F8 in game) pasted here is worth a paragraph.
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: The newest log file
+      description: >
+        Paste the newest file from %APPDATA%\ShogoFRESH\Logs (open that path in
+        Explorer's address bar). For server problems it's the freshsrv-<date>.log;
+        for speedrun issues, speedrun.log. Drag-and-drop the file itself also works.
+      render: text
+  - type: input
+    id: copy
+    attributes:
+      label: Game copy
+      placeholder: Steam / GOG
+  - type: markdown
+    attributes:
+      value: |
+        If you can reproduce it, the diagnostics in
+        [CONSOLE.md](https://github.com/KyodanCFG/ShogoFRESH/blob/main/Docs/public/CONSOLE.md#diagnostics)
+        turn a report into half a diagnosis — `WeaponDebug 1` for weapon
+        oddities, `serv AiDebug 1` for AI, and paste what they print.
