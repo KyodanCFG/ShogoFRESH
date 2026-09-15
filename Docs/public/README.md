@@ -11,6 +11,8 @@ this tree and published with the kit — one copy, two front doors.
 | Document | For |
 |---|---|
 | [FEATURES.md](FEATURES.md) | The tour: what ShogoFRESH does and why you might care, whichever direction you arrive from |
+| [FAQ.md](FAQ.md) | Troubleshooting, in the order a new player meets it: SmartScreen, setup, joining, hosting |
+| [CONSOLE.md](CONSOLE.md) | Every client console variable, and the weapon tuning dials |
 | [BIBLE.md](BIBLE.md) | The reference: everything ShogoFRESH changes, adds or fixes, component by component, with the reasoning |
 | [SERVER-GUIDE.md](SERVER-GUIDE.md) | Running a server. Everything an operator meets, in the order they meet it |
 

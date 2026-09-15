@@ -138,25 +138,18 @@ IN-GAME
                   moment the mode is off. Off by default
     FovX          horizontal field of view
 
-  Weapon tuning (EXPERIMENTAL - these are being dialled in):
-    These three are SERVER variables, so type them with a "serv"
-    in front - "serv GrenadeVelocity 1200" - in single player or a
-    game you are hosting. On a dedicated server, set them in the
-    server console or over rcon, without the "serv". All three
-    default to 0, which means "leave the weapon alone".
+  The full client-variable reference - camera, view model, speedrun
+  clock, screenshots, diagnostics - is Docs\public\CONSOLE.md, also on
+  the GitHub page. Common questions and fixes: Docs\public\FAQ.md.
 
-    GrenadeVelocity  how hard both grenades are thrown, in units per
-                  second, 100 to 4000. They currently leave at 2000
-                  (energy) and 750 (Kato) - the energy grenade is
-                  travelling as fast as a TOW missile
-    GrenadeAngle  degrees to throw UP, relative to where you are
-                  aiming, -45 to 60. There is no arc at all right now,
-                  which is why a grenade lands near your feet
-    HandgunReload seconds to reload the .45 and the MAC-10, 0.10 to
-                  5.00. Currently 1.10 and 1.25
-
-    If you find numbers that feel right, say so and they become the
-    defaults - at which point these variables go back to doing nothing.
+  Weapon tuning:
+    Per-weapon dials exist for throw arcs, fuses and fire/equip/reload
+    timing (MineVelocity, NadeFuse, Fire<id>, Reload<id> and friends).
+    They are SERVER variables - "serv NadeFuse 2" in single player or a
+    game you host; on a dedicated server use its console or rcon. All
+    of them default to "leave the weapon alone", and NONE apply under
+    the Classic ruleset, where 1998 decides everything. The full table
+    is in Docs\public\CONSOLE.md.
 
 SERVER OPERATORS
   These go in ShogoSrv.cfg or the server console; the Host tab writes

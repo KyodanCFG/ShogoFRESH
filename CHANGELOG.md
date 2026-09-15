@@ -14,6 +14,35 @@ server (`FreshSrv.exe`), and the launcher.
 
 ---
 
+## 0.12.3 — 2026-09-15
+
+**a holster hole closed, two bug reports instrumented, and the docs a new player actually needs**
+
+The holster-after-menu report got its code investigation. Every path
+visible in code recovers correctly, so the "sometimes" lives in runtime
+state - and one provable hole was found beside it: a weapon model
+RE-CREATED while holstered (server auto-switch on a pickup, out-of-ammo
+auto-select) was born visible, sidestepping the guard that vets showing.
+Create now hides when holstered, and the menu open/close seam dumps the
+full weapon-model state under WeaponDebug, so the next reproduction
+names the mechanism instead of restarting the argument.
+
+The squishie clipping report got the same treatment: the dims machinery
+is proven single-sourced and correct on both sides, which narrows the
+field to pose-vs-box disagreement (one ShowDims session separates it)
+and the engine's absolute collision tolerances, which at one-fifth
+scale are five times too generous. The decision tree is in the bug
+ledger.
+
+And two public documents: an FAQ that walks the whole first-hour funnel
+- SmartScreen, the .NET runtime, setup, joining, hosting - and a
+console-variable reference covering every client setting plus the
+weapon tuning dials, which until now lived only in internal notes. The
+in-zip readme's tuning section was a month stale (it still named dials
+from before the August rename) and now points at the real table.
+
+---
+
 ## 0.12.2 — 2026-09-14
 
 **the release zip stops carrying its own false alarms**
