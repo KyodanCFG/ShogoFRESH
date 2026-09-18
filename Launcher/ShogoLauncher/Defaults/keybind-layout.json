@@ -49,6 +49,7 @@
     "FragCount",
     "QuickSave",
     "QuickLoad",
+    "RestartLevel",
     "ScreenShot",
     "InterfaceToggle"
   ],
@@ -66,6 +67,7 @@
     "ChaseView": "1st/3rd Person view (toggle)",
     "QuickSave": "Quick save (single player)",
     "QuickLoad": "Quick load (single player)",
+    "RestartLevel": "Restart level (speedrun practice, single player)",
     "Fire": "Primary Fire",
     "SecondaryHold": "Secondary Fire/Zoom (hold)",
     "SecondaryToggle": "Secondary Fire/Zoom (toggle)"

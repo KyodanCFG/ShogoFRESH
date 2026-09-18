@@ -1456,6 +1456,47 @@ def check_keybind_rows():
         oks.append("every bindable action appears in the launcher's keybind layout (%d)"
                    % len(names))
 
+    # The FRESH-added actions are a THIRD copy of the fact, and the third
+    # copy is the one that drifted: RestartLevel shipped (0.12.1) in
+    # EngineActions.Required and nowhere else the player could reach - not
+    # in the layout (no Keybinds row, so matrix row 52's own instruction
+    # was impossible) and not in InitFreshActions (so an install whose
+    # launcher never ran EnsureRegistered could not bind it at all). Found
+    # by the owner trying to follow row 52. So: every action the launcher
+    # registers must be in the layout AND registered at game boot, with
+    # the same id in both places.
+    #
+    # To break this on purpose: add an action to EngineActions.Required
+    # and nothing else.
+
+    ea = read(r'Launcher/ShogoLauncher/Services/EngineActions.cs')
+    req_block = re.search(r'Required\s*=\s*\{(.*?)\};', ea, re.S)
+    required = re.findall(r'\("(\w+)",\s*(\d+)\)', req_block.group(1)) if req_block else []
+
+    if not required:
+        fails.append("could not parse EngineActions.Required - the FRESH-action "
+                     "agreement check has nothing to check")
+        return
+
+    startup = read(r'ClientShellDLL/RiotStartup.cpp')
+    boot = dict(re.findall(r'"AddAction (\w+) (\d+)"', startup))
+
+    problems = []
+    for name, nid in required:
+        if name.lower() not in known:
+            problems.append("%s missing from keybind-layout.json" % name)
+        if name not in boot:
+            problems.append("%s not registered in InitFreshActions" % name)
+        elif boot[name] != nid:
+            problems.append("%s id disagrees: launcher %s vs game boot %s"
+                            % (name, nid, boot[name]))
+
+    if problems:
+        fails.append("FRESH actions out of agreement: " + '; '.join(problems))
+    else:
+        oks.append("FRESH actions agree across launcher registry, game boot and "
+                   "keybind layout (%d actions)" % len(required))
+
 
 def check_localisation():
     """The English JSON must still describe the English resources.

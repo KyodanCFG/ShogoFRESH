@@ -28,9 +28,11 @@ signature misread the game's own string-resources DLL, whose
 key-binding vocabulary ("Shift", "Alt"…) resembles a keylogger's
 key-name table to a pattern matcher — a file that imports no input API
 at all. We submitted it to Bitdefender in September 2026; their Malware
-Research Team analyzed it, **confirmed the file clean**, and removed
-the detection. If your scanner still flags a current release, its
-definitions are behind — and we'd still like to hear about it.
+Research Team analyzed it and **confirmed the file clean**. A follow-up
+covering the game's data archive (which carries the same strings) is
+working through the same process. If your scanner flags a release,
+that's the state of that vendor's definitions, not of the code — the
+whole history is public here, and we'd still like to hear about it.
 
 **It asks for the .NET Desktop Runtime.**
 The launcher needs the .NET 8 Desktop Runtime (x64), a one-time free
